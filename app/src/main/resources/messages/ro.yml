@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Salut!* Urmăresc zilele de naștere și nu pierd niciodată o dată importantă."
+    - ""
+    - "Setează-ți data nașterii și voi trimite numărătoarea inversă și felicitarea fix la timp, în fusul tău orar și în limba ta."
+  help:
+    - "*Ce știu să fac*"
+    - ""
+    - "/date: setează sau schimbă data nașterii"
+    - "/notify: pornește sau oprește mementourile"
+    - "/daysto: zile până la ziua ta"
+    - "/dayssince: zile de la naștere"
+    - "/time: ora mementoului"
+    - "/zone: fus orar"
+    - "/lang: limbă"
+    - "/settings: toate setările deodată"
+    - ""
+    - "Mementourile ajung zilnic la ora aleasă, iar în ziua propriu-zisă primești felicitarea. Nu se pierde nimic, nici după repornire."
+  prompt:
+    date:
+      - "Introdu data nașterii în orice format comod:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5 martie 1998`, `1998-03-05`"
+      - ""
+      - "Anul este opțional, dar fără el nu pot calcula vârsta. Anulare: /cancel"
+    time:
+      - "Introdu ora mementoului, de exemplu `12:00` sau `18`. Anulare: /cancel"
+    zone:
+      - "Introdu fusul orar, de exemplu `Europe/Bucharest` sau `UTC+3`. Anulare: /cancel"
+  date:
+    set:
+      - "Salvat: *{date}*"
+      - ""
+      - "Au mai rămas {days} {days|plural:one=zi|few=zile|other=de zile} până la ziua ta. Mementourile vor ajunge la {time} în fusul tău {zone}."
+    invalid:
+      - "Nu am putut citi data. Exemple: `05.03.1998`, `05.03`, `5 martie 1998`, `1998-03-05`. Mai încearcă."
+  time:
+    set:
+      - "Ora mementoului: *{time}* (ora ta locală)"
+    invalid:
+      - "Asta nu arată a oră. Exemple: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Alege fusul tău din listă sau scrie-l pe al tău:"
+    set:
+      - "Fus orar: *{zone}*. Programul a fost recalculat."
+    invalid:
+      - "Nu cunosc acest fus. Exemple: `Europe/Bucharest`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Mementourile sunt *pornite*. Voi scrie conform programului."
+    "off": "Mementourile sunt *oprite*. Pornește-le din nou cu butonul sau cu /notify."
+  answer:
+    days_to: "Au mai rămas {days} {days|plural:one=zi|few=zile|other=de zile} până la ziua ta. Felicitarea ajunge pe {date} la {time} în fusul tău {zone}."
+    days_since: "Au trecut {days} {days|plural:one=zi|few=zile|other=de zile} de la nașterea ta. Ai {age} {age|plural:one=an|few=ani|other=de ani}."
+    days_since_last: "Au trecut {days} {days|plural:one=zi|few=zile|other=de zile} de la ultima ta zi de naștere."
+    no_year: "Data nu are an, deci numărul total de zile de la naștere nu poate fi calculat. Numărătoarea de la ultima zi de naștere funcționează și fără an: butonul de mai jos o face. Adaugă un an pentru a vedea și vârsta: /date"
+    not_set: "Încă nu există o dată de naștere. Începem? /date"
+  settings:
+    view:
+      - "*Setările tale*"
+      - ""
+      - "Data nașterii: {date}"
+      - "Ora mementoului: {time}"
+      - "Fus orar: {zone}"
+      - "Mementouri: {notify}"
+      - "Limbă: {lang}"
+    not_set: "nesetat"
+    "on": "pornite"
+    "off": "oprite"
+  lang:
+    choose: "Alege limba:"
+    set: "Limba a fost schimbată: {lang}"
+  cancelled: "Anulat. Nicio setare nu a fost atinsă."
+  reloaded: "Mesajele și tastaturile au fost recitite din YAML."
+  perm:
+    not: "Această comandă este doar pentru proprietar."
+
+  delete:
+    confirm:
+      - "Șterg toate datele tale (data, setările, istoricul mementourilor)?"
+      - ""
+      - "Este ireversibil: profilul și jurnalul de livrări vor fi șterse."
+    done: "Date șterse. Revino prin /start"
+  pointer:
+    dm: "Am răspuns în mesaje directe"
+  flood: "Prea repede. Încearcă peste câteva secunde."
+  about:
+    - "*Birthday Bot* este dezvoltat deschis: codul sursă este public."
+    - ""
+    - "Codul sursă este pe GitHub: {url}"
+    - "Dezvolt singur acest proiect și aș aprecia o stea. Este și portofoliul meu pentru admiterea la IT Management."
+    - ""
+    - "Mulțumesc că îl folosești."
+
+reminder:
+  countdown:
+    - "Au mai rămas {days} {days|plural:one=zi|few=zile|other=de zile} până la ziua ta!"
+    - ""
+    - "Felicitarea ajunge pe {date} la {time} în fusul tău {zone}. O zi bună!"
+  birthday:
+    - "*La mulți ani!* Împlinești {age} {age|plural:one=an|few=ani|other=de ani}."
+    - ""
+    - "O zi bună și un an excelent."
+  birthday.no_year:
+    - "*La mulți ani!* Azi este ziua ta."
+    - ""
+    - "O zi bună și un an excelent."
+
+webapp:
+  title: "Ziua mea de naștere"
+  date: "Data nașterii"
+  time: "Ora mementoului"
+  zone: "Fus orar"
+  lang: "Limbă"
+  notify: "Trimite mementouri"
+  save: "Salvează"
+  saved: "Salvat"
+  opensource: "Cod deschis"
+  star: "Stea pe GitHub"
+  star_note: "Codul sursă este deschis: urmărește depozitul și lasă o stea. Îl dezvolt singur și este portofoliul meu pentru admiterea la universitate (IT Management)."
+  delete: "Șterge-mi datele"
+  preview: "Acesta este un previzualizare a interfeței: datele profilului sunt disponibile doar în interiorul messengerului."
+  api_error: "API-ul nu răspunde: pagina este deschisă fără serverul botului."
+  auth_error: "Este nevoie de autorizarea messengerului: deschide aplicația din butonul botului."
+  delete_confirm: "Șterg toate datele tale?"
+  days_left: "zile rămase"
+
+button:
+  set_date: "Schimbă data"
+  notify_on: "Pornește mementourile"
+  notify_off: "Oprește mementourile"
+  days_to: "Zile până la"
+  days_since: "Zile de la"
+  days_since_last: "De la ultima zi de naștere"
+  days_since_total: "De la naștere"
+  settings: "Setări"
+  back: "Înapoi"
+  time: "Ora"
+  zone: "Fus"
+  zone_manual: "Alt fus orar"
+  language: "Limbă"
+  about: "Despre"
+  github: "Stea pe GitHub"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Șterge datele"
+  delete_yes: "Da, șterge"
+  delete_no: "Anulează"
+  webapp: "Aplicație"
+
+command:
+  desc:
+    start: "Începe să folosești botul"
+    help: "Ajutor"
+    date: "Setează data nașterii"
+    notify: "Comută mementourile"
+    daysto: "Zile până la ziua ta"
+    dayssince: "Zile de la ziua ta"
+    settings: "Setările profilului"
+    lang: "Limbă"
+    time: "Ora mementoului"
+    zone: "Fus orar"
+    about: "Despre proiect"
+    delete: "Șterge-mi datele"
+    cancel: "Anulează introducerea în curs"
+    reload: "Recitește mesajele (proprietar)"

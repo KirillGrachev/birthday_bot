@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Bongu!* Inżomm għajn fuq il-jiem tat-twelid u qatt ma nitlif data importanti."
+    - ""
+    - "Agħti d-data tat-twelid tiegħek u jien nibgħat l-għadd lura u l-awgurji eżatt fil-ħin, fiż-żona tal-ħin tiegħek u bil-lingwa tiegħek."
+  help:
+    - "*X'nista' nagħmel*"
+    - ""
+    - "/date: issettja jew biddel id-data tat-twelid"
+    - "/notify: xgħel jew itfi t-tfakkiriet"
+    - "/daysto: jiem sal-jiem tat-twelid"
+    - "/dayssince: jiem mit-twelid"
+    - "/time: il-ħin tat-tfakkira"
+    - "/zone: żona tal-ħin"
+    - "/lang: lingwa"
+    - "/settings: l-issettjar kollu f'daqqa"
+    - ""
+    - "It-tfakkiriet jaslu kuljum fil-ħin magħżul, u fil-jum innifsu tirċievi l-awgurji. Xejn ma jintilef, anke wara restart."
+  prompt:
+    date:
+      - "Daħħal id-data tat-twelid tiegħek fi kwalunkwe format:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5 ta' Marzu 1998`, `1998-03-05`"
+      - ""
+      - "Is-sena hija fakultattiva, iżda mingħajrha ma nistax nikkalkula l-età. Ikkanċella: /cancel"
+    time:
+      - "Daħħal il-ħin tat-tfakkira, eż. `12:00` jew `18`. Ikkanċella: /cancel"
+    zone:
+      - "Daħħal iż-żona tal-ħin, eż. `Europe/Malta` jew `UTC+3`. Ikkanċella: /cancel"
+  date:
+    set:
+      - "Salvata: *{date}*"
+      - ""
+      - "Fadal {days} {days|plural:one=jum|few=jiem|many=jum|other=jum} sal-jiem tat-twelid. It-tfakkiriet jaslu fis-{time} fiż-żona {zone}."
+    invalid:
+      - "Ma stajtx naqra d-data. Eżempji: `05.03.1998`, `05.03`, `5 ta' Marzu 1998`, `1998-03-05`. Erġa' pprova."
+  time:
+    set:
+      - "Il-ħin tat-tfakkira: *{time}* (il-ħin lokali tiegħek)"
+    invalid:
+      - "Dan ma jidhirx ħin. Eżempji: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Agħżel iż-żona tiegħek mil-lista jew daħħal waħda tiegħek:"
+    set:
+      - "Żona tal-ħin: *{zone}*. L-iskeda ġiet ikkalkulata mill-ġdid."
+    invalid:
+      - "Ma nafx dik iż-żona. Eżempji: `Europe/Malta`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "It-tfakkiriet *mixgħula*. Nikteb skont l-iskeda."
+    "off": "It-tfakkiriet *mitfija*. Xgħelhom mill-ġdid bil-buttuna jew bi /notify."
+  answer:
+    days_to: "Fadal {days} {days|plural:one=jum|few=jiem|many=jum|other=jum} sal-jiem tat-twelid. L-awgurji jaslu fid-{date} fis-{time} fiż-żona {zone}."
+    days_since: "Għaddew {days} {days|plural:one=jum|few=jiem|many=jum|other=jum} mit-twelid tiegħek. Għandek {age} {age|plural:one=sena|few=snin|many=sena|other=sena}."
+    days_since_last: "Għaddew {days} {days|plural:one=jum|few=jiem|many=jum|other=jum} mill-aħħar jum tat-twelid tiegħek."
+    no_year: "Id-data m'għandha sena, għalhekk l-għadd totali ta' jiem mit-twelid ma jistax jiġi kkalkulat. L-għadd mill-aħħar jum tat-twelid jaħdem mingħajr sena: il-buttuna t'hawn taħt tagħmlu. Żid sena biex tara l-età wkoll: /date"
+    not_set: "Għad m'hemm data tat-twelid. Nibdew? /date"
+  settings:
+    view:
+      - "*L-issettjar tiegħek*"
+      - ""
+      - "Data tat-twelid: {date}"
+      - "Ħin tat-tfakkira: {time}"
+      - "Żona tal-ħin: {zone}"
+      - "Tfakkiriet: {notify}"
+      - "Lingwa: {lang}"
+    not_set: "mhux issettjat"
+    "on": "mixgħula"
+    "off": "mitfija"
+  lang:
+    choose: "Agħżel lingwa:"
+    set: "Il-lingwa nbidlet: {lang}"
+  cancelled: "Ikkanċellat. Ebda settagg ma ntmiss."
+  reloaded: "Il-messaġġi u t-tastieri nqraw mill-ġdid mill-YAML."
+  perm:
+    not: "Dan il-kmand huwa biss għas-sid."
+
+  delete:
+    confirm:
+      - "Nħassar id-data kollha tiegħek (data, issettjar, storja tat-tfakkiriet)?"
+      - ""
+      - "Ma jistax jitreġġa' lura: il-profil u l-ġurnal tal-konsenji jitħassru."
+    done: "Id-data tħassret. Erġa' lura permezz ta' /start"
+  pointer:
+    dm: "Weġibt f'messaġġi diretti"
+  flood: "Mgħaġġel wisq. Ipprova f'ftit sekondi."
+  about:
+    - "*Birthday Bot* jiġi żviluppat b'mod miftuħ: il-kodiċi tas-sors huwa pubbliku."
+    - ""
+    - "Il-kodiċi tas-sors qiegħed fuq GitHub: {url}"
+    - "Niżviluppa dan il-proġett waħdi u nkun grat għal stilla. Huwa wkoll il-portafoll tiegħi għall-applikazzjoni għal IT Management."
+    - ""
+    - "Grazzi li tużah."
+
+reminder:
+  countdown:
+    - "Fadal {days} {days|plural:one=jum|few=jiem|many=jum|other=jum} sal-jiem tat-twelid tiegħek!"
+    - ""
+    - "L-awgurji jaslu fid-{date} fis-{time} fiż-żona {zone}. Jum tajjeb!"
+  birthday:
+    - "*Prosit tal-jiem tat-twelid!* Qed tagħlaq {age} {age|plural:one=sena|few=snin|many=sena|other=sena}."
+    - ""
+    - "Jum tajjeb u sena eċċellenti."
+  birthday.no_year:
+    - "*Prosit tal-jiem tat-twelid!* Illum huwa jumek."
+    - ""
+    - "Jum tajjeb u sena eċċellenti."
+
+webapp:
+  title: "Il-jum tat-twelid tiegħi"
+  date: "Data tat-twelid"
+  time: "Ħin tat-tfakkira"
+  zone: "Żona tal-ħin"
+  lang: "Lingwa"
+  notify: "Ibgħat tfakkiriet"
+  save: "Salva"
+  saved: "Salvat"
+  opensource: "Kodiċi miftuħ"
+  star: "Stilla fuq GitHub"
+  star_note: "Il-kodiċi tas-sors huwa miftuħ: issegwi r-repo u ħalli stilla. Niżviluppah waħdi, u huwa l-portafoll tiegħi għall-ammissjoni fl-università (IT Management)."
+  delete: "Ħassar id-data tiegħi"
+  preview: "Din hija preview tal-interface: id-data tal-profil tinsab biss ġewwa l-messenger."
+  api_error: "L-API ma weġibx: il-paġna miftuħa mingħajr is-server tal-bot."
+  auth_error: "Tinħtieġ awtorizzazzjoni tal-messenger: iftaħ l-app mill-buttuna tal-bot."
+  delete_confirm: "Nħassar id-data kollha tiegħek?"
+  days_left: "jiem fadal"
+
+button:
+  set_date: "Biddel id-data"
+  notify_on: "Xgħel it-tfakkiriet"
+  notify_off: "Itfi t-tfakkiriet"
+  days_to: "Jiem sal"
+  days_since: "Jiem mill"
+  days_since_last: "Mill-aħħar jum tat-twelid"
+  days_since_total: "Mit-twelid"
+  settings: "Issettjar"
+  back: "Lura"
+  time: "Ħin"
+  zone: "Żona"
+  zone_manual: "Żona oħra"
+  language: "Lingwa"
+  about: "Dwar"
+  github: "Stilla fuq GitHub"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Ħassar id-data"
+  delete_yes: "Iva, ħassar"
+  delete_no: "Ikkanċella"
+  webapp: "App"
+
+command:
+  desc:
+    start: "Ibda tuża l-bot"
+    help: "Għajnuna"
+    date: "Issettja d-data tat-twelid"
+    notify: "Xgħel jew itfi t-tfakkiriet"
+    daysto: "Jiem sal-jiem tat-twelid"
+    dayssince: "Jiem mill-jiem tat-twelid"
+    settings: "Issettjar tal-profil"
+    lang: "Lingwa"
+    time: "Ħin tat-tfakkira"
+    zone: "Żona tal-ħin"
+    about: "Dwar il-proġett"
+    delete: "Ħassar id-data tiegħi"
+    cancel: "Ikkanċella d-daħla kurrenti"
+    reload: "Erġa' għabbi l-messaġġi (sid)"

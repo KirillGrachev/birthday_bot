@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Birthday</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Product design tokens: background #050505, panel #111111/#161616,
+     item #1a1a1a/#252525, border rgba(255,255,255,.05-.3), Inter,
+     rounded 12/16/24, primary = white with black text. */
+  :root {
+    color-scheme: dark;
+    --background-primary: #050505;
+    --background-secondary: #0a0a0a;
+    --panel-primary: #111111;
+    --panel-secondary: #161616;
+    --panel-tertiary: #222222;
+    --item-primary: #1a1a1a;
+    --item-secondary: #252525;
+    --border-light: rgba(255, 255, 255, 0.05);
+    --border-medium: rgba(255, 255, 255, 0.1);
+    --border-focus: rgba(255, 255, 255, 0.3);
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    margin: 0;
+    background: var(--background-primary);
+    color: #fff;
+    font: 400 15px/1.5 Inter, sans-serif;
+    padding: 20px 16px 32px;
+  }
+
+  h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin: 0; }
+
+  .sub { color: #9ca3af; font-size: 13px; font-weight: 500; margin: 4px 0 18px; }
+
+  .card {
+    background: var(--panel-primary);
+    border: 1px solid var(--border-medium);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+
+  .hero {
+    background: var(--background-secondary);
+    border: 1px solid var(--border-medium);
+    border-radius: 24px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .hero .num { font-size: 56px; font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
+
+  .hero .cap { color: #6b7280; font-size: 13px; font-weight: 500; margin-top: 6px; }
+
+  label {
+    display: block;
+    color: #9ca3af;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin: 16px 0 6px;
+  }
+
+  input {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border-medium);
+    background: var(--item-primary);
+    color: #fff;
+    font: 500 14px Inter, sans-serif;
+    outline: none;
+    transition: border-color .2s, background .2s;
+  }
+
+  input:focus {
+    background: var(--item-secondary);
+    border-color: var(--border-focus);
+  }
+
+  .row { display: flex; gap: 10px; }
+  .row > div { flex: 1; min-width: 0; }
+
+  .switch { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; }
+  .switch span { font-size: 14px; font-weight: 500; color: #d1d5db; }
+
+  .toggle {
+    width: 44px; height: 24px; flex-shrink: 0;
+    border-radius: 999px; padding: 0;
+    background: rgba(255, 255, 255, .1);
+    border: 1px solid rgba(255, 255, 255, .1);
+    position: relative; cursor: pointer;
+    transition: background .2s, border-color .2s;
+  }
+  .toggle .knob {
+    position: absolute; top: 2px; left: 2px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #9ca3af; transition: left .2s, background .2s;
+  }
+  .toggle.on { background: #fff; border-color: #fff; }
+  .toggle.on .knob { left: 22px; background: #000; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 100%; height: 48px; padding: 0 24px;
+    border: 1px solid transparent; border-radius: 12px;
+    font: 700 14px Inter, sans-serif;
+    text-decoration: none;
+    white-space: nowrap; cursor: pointer;
+    transition: background .2s, border-color .2s, color .2s;
+  }
+
+  .btn-primary { background: #fff; color: #000; margin-top: 20px; }
+  .btn-primary:hover { background: #e5e7eb; }
+
+  .btn-soft {
+    background: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 255, 255, .1);
+    color: #fff;
+  }
+  .btn-soft:hover { background: rgba(255, 255, 255, .2); border-color: rgba(255, 255, 255, .3); }
+
+  .btn-ghost {
+    background: transparent; color: #9ca3af;
+    height: 40px; font-size: 12.5px; margin-top: 8px;
+  }
+  .btn-ghost:hover { color: #f87171; background: rgba(255, 255, 255, .05); }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .pill {
+    padding: 8px 16px; border-radius: 12px;
+    background: rgba(255, 255, 255, .1);
+    border: 1px solid rgba(255, 255, 255, .1);
+    color: #d1d5db; font-size: 12px; font-weight: 700;
+    cursor: pointer; transition: background .2s, color .2s;
+  }
+  .pill:hover { background: rgba(255, 255, 255, .2); }
+  .pill.on { background: #fff; border-color: #fff; color: #000; }
+
+  /* Custom timezone dropdown: the native select does not fit this design */
+  .tz { position: relative; }
+
+  .tz-btn {
+    width: 100%; height: 48px; padding: 0 38px 0 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border-medium);
+    background: var(--item-primary);
+    color: #fff; font: 500 14px Inter, sans-serif;
+    text-align: left; cursor: pointer;
+    transition: border-color .2s, background .2s;
+    display: flex; align-items: center;
+    white-space: nowrap; overflow: hidden;
+  }
+
+  .tz-btn:hover { background: var(--item-secondary); }
+  .tz-btn.open { border-color: var(--border-focus); background: var(--item-secondary); }
+
+  .tz-btn .caret {
+    position: absolute; right: 14px; top: 50%;
+    width: 8px; height: 8px;
+    border-right: 1.5px solid #9ca3af;
+    border-bottom: 1.5px solid #9ca3af;
+    transform: translateY(-70%) rotate(45deg);
+    transition: transform .2s;
+  }
+  .tz-btn.open .caret { transform: translateY(-30%) rotate(-135deg); }
+
+  .tz-list {
+    position: absolute; z-index: 20;
+    left: 0; right: 0; top: calc(100% + 6px);
+    max-height: 264px; overflow-y: auto;
+    background: var(--panel-secondary);
+    border: 1px solid var(--border-medium);
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .6);
+    padding: 4px;
+  }
+
+  .tz-list::-webkit-scrollbar { width: 8px; }
+  .tz-list::-webkit-scrollbar-track { background: transparent; }
+  .tz-list::-webkit-scrollbar-thumb {
+    background: var(--item-secondary);
+    border-radius: 8px;
+    border: 2px solid var(--panel-secondary);
+  }
+
+  .tz-group {
+    position: sticky; top: 0;
+    padding: 8px 12px 4px;
+    color: #6b7280; font-size: 10.5px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+    background: var(--panel-secondary);
+  }
+
+  .tz-item {
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: #d1d5db; font-size: 13.5px; font-weight: 500;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .tz-item:hover { background: var(--panel-tertiary); color: #fff; }
+  .tz-item.on { background: var(--item-secondary); color: #fff; }
+  .tz-item.on::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #9ca3af; flex: none; }
+
+  .gh { display: flex; gap: 14px; align-items: center; }
+  .gh .body { flex: 1; min-width: 0; }
+  .gh .t { font-weight: 700; font-size: 14px; }
+  .gh .n { color: #9ca3af; font-size: 12.5px; font-weight: 500; margin-top: 4px; }
+  .gh .btn { width: auto; height: 40px; padding: 0 18px; font-size: 12.5px; flex-shrink: 0; }
+
+  .err { color: #f87171; font-size: 13px; font-weight: 500; margin-top: 10px; min-height: 18px; }
+
+  .note { color: #6b7280; font-size: 13px; text-align: center; margin-top: 18px; }
+</style>
+</head>
+<body>
+<h1 id="t-title">My birthday</h1>
+<div class="sub" id="subtitle">Birthday Bot</div>
+
+<div class="hero" id="hero" hidden>
+  <div class="num" id="days">…</div>
+  <div class="cap" id="t-days-left">days left</div>
+</div>
+
+<div class="card">
+  <label id="t-date">Birth date</label>
+  <input id="date" inputmode="text" placeholder="05.03.1998" autocomplete="off">
+
+  <div class="row">
+    <div>
+      <label id="t-time">Reminder time</label>
+      <input id="time" inputmode="numeric" placeholder="12:00" autocomplete="off">
+    </div>
+    <div>
+      <label id="t-zone">Timezone</label>
+      <div class="tz">
+        <button type="button" class="tz-btn" id="zone-btn" aria-haspopup="listbox" aria-expanded="false">
+          <span id="zone-label">UTC</span>
+          <span class="caret"></span>
+        </button>
+        <div class="tz-list" id="zone-list" role="listbox" hidden></div>
+      </div>
+    </div>
+  </div>
+
+  <label id="t-lang">Language</label>
+  <div class="pills" id="lang"></div>
+
+  <div class="switch">
+    <span id="t-notify">Send reminders</span>
+    <button type="button" class="toggle on" id="notify" aria-pressed="true"><span class="knob"></span></button>
+  </div>
+
+  <div class="err" id="err"></div>
+  <button class="btn btn-primary" id="save">Save</button>
+  <button class="btn btn-ghost" id="del">Delete my data</button>
+</div>
+
+<div class="card gh" id="gh" hidden>
+  <div class="body">
+    <div class="t" id="t-opensource">Open source</div>
+    <div class="n" id="t-star-note"></div>
+  </div>
+  <a class="btn btn-soft" id="gh-link" href="#" target="_blank" rel="noopener">Star on GitHub</a>
+</div>
+
+<p class="note" id="note" hidden></p>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+(function () {
+  var tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
+  if (tg) { tg.ready(); tg.expand(); }
+
+  var initData = tg ? tg.initData : '';
+  var currentLang = null;
+  var notifyOn = true;
+  var currentZone = 'UTC';
+  var i18n = {};
+
+  var zoneBtn = document.getElementById('zone-btn');
+  var zoneList = document.getElementById('zone-list');
+  var zoneLabel = document.getElementById('zone-label');
+
+  function api(method, body) {
+    return fetch('/api/profile', {
+      method: method,
+      headers: { 'Content-Type': 'application/json', 'X-Telegram-Init-Data': initData },
+      body: body ? JSON.stringify(body) : undefined
+    }).then(function (r) {
+      var type = r.headers.get('content-type') || '';
+      if (type.indexOf('json') < 0) { throw new Error('API_NOT_JSON'); }
+      return r.json().then(function (json) {
+        if (!r.ok) { throw new Error(json.error || String(r.status)); }
+        return json;
+      });
+    });
+  }
+
+  function loadI18n(lang) {
+    return fetch('/api/i18n?lang=' + encodeURIComponent(lang))
+      .then(function (r) { return r.json(); })
+      .then(function (strings) { i18n = strings || {}; applyI18n(); })
+      .catch(function () { });
+  }
+
+  function applyI18n() {
+    function set(id, key) { if (i18n[key]) { document.getElementById(id).textContent = i18n[key]; } }
+    set('t-title', 'webapp.title'); set('t-date', 'webapp.date'); set('t-time', 'webapp.time');
+    set('t-zone', 'webapp.zone'); set('t-lang', 'webapp.lang'); set('t-notify', 'webapp.notify');
+    set('save', 'webapp.save'); set('t-days-left', 'webapp.days_left');
+    set('del', 'webapp.delete');
+    set('t-opensource', 'webapp.opensource'); set('t-star-note', 'webapp.star_note');
+    if (i18n['webapp.star']) { document.getElementById('gh-link').textContent = i18n['webapp.star']; }
+    document.documentElement.lang = currentLang || 'ru';
+  }
+
+  function humanError(message) {
+    if (message === 'API_NOT_JSON') { return i18n['webapp.api_error'] || message; }
+    if (message === 'missing X-Telegram-Init-Data' || message === 'invalid init data') {
+      return i18n['webapp.auth_error'] || message;
+    }
+    return String(message);
+  }
+
+  function fail(message) {
+    var text = humanError(message);
+    document.getElementById('err').textContent = text;
+    if (tg && tg.showAlert) { tg.showAlert(text); }
+  }
+
+  function setLang(lang, supported) {
+    if (currentLang === lang) { return; }
+    currentLang = lang;
+    var pills = document.getElementById('lang');
+    Array.prototype.forEach.call(pills.children, function (child) {
+      child.classList.toggle('on', child.dataset.lang === lang);
+    });
+    loadI18n(lang);
+  }
+
+  function renderLangPills(supported) {
+    var pills = document.getElementById('lang');
+    pills.innerHTML = '';
+    (supported || []).forEach(function (code) {
+      var el = document.createElement('span');
+      el.className = 'pill';
+      el.dataset.lang = code;
+      el.textContent = code.toUpperCase();
+      el.addEventListener('click', function () { setLang(code, supported); });
+      pills.appendChild(el);
+    });
+  }
+
+  function apply(p) {
+    document.getElementById('date').value = p.date || '';
+    document.getElementById('time').value = p.time || '12:00';
+    setNotify(!!p.notify);
+    renderLangPills(p.supported);
+    setZone(p.zone);
+
+    if (!currentLang) {
+      currentLang = p.lang || 'ru';
+      loadI18n(currentLang);
+    }
+    Array.prototype.forEach.call(document.getElementById('lang').children, function (child) {
+      child.classList.toggle('on', child.dataset.lang === currentLang);
+    });
+
+    if (typeof p.daysUntil === 'number') {
+      document.getElementById('hero').hidden = false;
+      document.getElementById('days').textContent = p.daysUntil;
+    }
+
+    if (p.github) {
+      document.getElementById('gh').hidden = false;
+      document.getElementById('gh-link').href = p.github;
+    }
+  }
+
+  function setNotify(on) {
+    notifyOn = on;
+    var toggle = document.getElementById('notify');
+    toggle.classList.toggle('on', on);
+    toggle.setAttribute('aria-pressed', String(on));
+  }
+
+  /* ---------- custom timezone dropdown ---------- */
+
+  var zones = [];
+
+  function fillZones() {
+    try {
+      if (typeof Intl !== 'undefined' && Intl.supportedValuesOf) {
+        zones = Intl.supportedValuesOf('timeZone');
+      }
+    } catch (e) { zones = []; }
+
+    if (!zones.length) {
+      zones = ['UTC', 'Europe/Moscow', 'Europe/Berlin', 'Europe/London',
+               'America/New_York', 'America/Los_Angeles', 'Asia/Almaty', 'Asia/Tashkent'];
+    }
+
+    zoneList.innerHTML = '';
+    var lastGroup = null;
+
+    zones.forEach(function (zone) {
+      var slash = zone.indexOf('/');
+      var group = slash > 0 ? zone.substring(0, slash).replace(/_/g, ' ') : 'UTC';
+
+      if (group !== lastGroup) {
+        var header = document.createElement('div');
+        header.className = 'tz-group';
+        header.textContent = group;
+        zoneList.appendChild(header);
+        lastGroup = group;
+      }
+
+      var item = document.createElement('div');
+      item.className = 'tz-item';
+      item.dataset.zone = zone;
+      item.setAttribute('role', 'option');
+      item.textContent = slash > 0 ? zone.substring(slash + 1).replace(/_/g, ' ') : zone;
+      item.addEventListener('click', function () {
+        setZone(zone);
+        closeZones();
+      });
+      zoneList.appendChild(item);
+    });
+  }
+
+  function setZone(zone) {
+    if (!zone) {
+      try { zone = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) { zone = 'UTC'; }
+    }
+    currentZone = zone;
+    zoneLabel.textContent = zone;
+    Array.prototype.forEach.call(zoneList.children, function (child) {
+      if (child.classList.contains('tz-item')) {
+        child.classList.toggle('on', child.dataset.zone === zone);
+      }
+    });
+  }
+
+  function openZones() {
+    zoneList.hidden = false;
+    zoneBtn.classList.add('open');
+    zoneBtn.setAttribute('aria-expanded', 'true');
+    var selected = zoneList.querySelector('.tz-item.on');
+    if (selected) { selected.scrollIntoView({ block: 'nearest' }); }
+  }
+
+  function closeZones() {
+    zoneList.hidden = true;
+    zoneBtn.classList.remove('open');
+    zoneBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  zoneBtn.addEventListener('click', function () {
+    if (zoneList.hidden) { openZones(); } else { closeZones(); }
+  });
+
+  document.addEventListener('click', function (event) {
+    if (!event.target.closest('.tz')) { closeZones(); }
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') { closeZones(); }
+  });
+
+  /* ---------- startup ---------- */
+
+  fillZones();
+
+  if (!initData) {
+    var guessed = (navigator.language || 'ru').split('-')[0];
+    currentLang = guessed;
+    loadI18n(guessed).then(function () {
+      var note = document.getElementById('note');
+      note.hidden = false;
+      note.textContent = i18n['webapp.preview'] || '';
+    });
+  }
+
+  api('GET').then(apply).catch(function (e) {
+    var note = document.getElementById('note');
+    note.hidden = false;
+    note.textContent = humanError(e.message || e);
+  });
+
+  document.getElementById('notify').addEventListener('click', function () {
+    setNotify(!notifyOn);
+  });
+
+  document.getElementById('del').addEventListener('click', function () {
+    var question = i18n['webapp.delete_confirm'] || 'Delete all data?';
+    var promise = tg && tg.showConfirm
+      ? new Promise(function (resolve) { tg.showConfirm(question, resolve); })
+      : Promise.resolve(confirm(question));
+
+    promise.then(function (ok) {
+      if (!ok) { return; }
+      api('POST', { delete: true }).then(function () {
+        document.getElementById('date').value = '';
+        document.getElementById('hero').hidden = true;
+        fail('');
+      }).catch(function (e) { fail(e.message || e); });
+    });
+  });
+
+  document.getElementById('save').addEventListener('click', function () {
+    var body = {
+      date: document.getElementById('date').value.trim(),
+      time: document.getElementById('time').value.trim(),
+      zone: currentZone,
+      lang: currentLang,
+      notify: notifyOn
+    };
+
+    api('POST', body).then(function (p) {
+      apply(p);
+      document.getElementById('err').textContent = '';
+      if (tg && tg.showPopup) { tg.showPopup({ message: i18n['webapp.saved'] || 'Saved' }); }
+    }).catch(function (e) { fail(e.message || e); });
+  });
+})();
+</script>
+</body>
+</html>

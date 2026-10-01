@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Sveiki!* Es sekoju dzimšanas dienām un nekad nepalaižu garām svarīgus datumus."
+    - ""
+    - "Norādi savu dzimšanas datumu, un es sūtīšu dienu skaitīšanu un apsveikumu tieši laikā, tavā laika joslā un tavā valodā."
+  help:
+    - "*Ko es protu*"
+    - ""
+    - "/date: iestati vai maini dzimšanas datumu"
+    - "/notify: ieslēdz vai izslēdz atgādinājumus"
+    - "/daysto: dienas līdz dzimšanas dienai"
+    - "/dayssince: dienas kopš dzimšanas"
+    - "/time: atgādinājuma laiks"
+    - "/zone: laika josla"
+    - "/lang: valoda"
+    - "/settings: visi iestatījumi uzreiz"
+    - ""
+    - "Atgādinājumi pienāk katru dienu izvēlētajā laikā, un pašā dienā saņem apsveikumu. Nekas netiek palaists garām, pat pēc pārstartēšanas."
+  prompt:
+    date:
+      - "Ievadi dzimšanas datumu jebkurā ērtā formātā:"
+      - ""
+      - "`05.03.1998`, `05.03`, `1998. gada 5. marts`, `1998-03-05`"
+      - ""
+      - "Gads nav obligāts, bet bez tā nevarēšu aprēķināt vecumu. Atcelt: /cancel"
+    time:
+      - "Ievadi atgādinājuma laiku, piemēram `12:00` vai `18`. Atcelt: /cancel"
+    zone:
+      - "Ievadi laika joslu, piemēram `Europe/Riga` vai `UTC+3`. Atcelt: /cancel"
+  date:
+    set:
+      - "Saglabāts: *{date}*"
+      - ""
+      - "Līdz dzimšanas dienai atlicis {days} {days|plural:one=diena|other=dienas|many=dienu}. Atgādinājumi pienāks {time} tavā joslā {zone}."
+    invalid:
+      - "Neizdevās nolasīt datumu. Piemēri: `05.03.1998`, `05.03`, `1998. gada 5. marts`, `1998-03-05`. Mēģini vēlreiz."
+  time:
+    set:
+      - "Atgādinājuma laiks: *{time}* (tavs vietējais laiks)"
+    invalid:
+      - "Tas neizskatās pēc laika. Piemēri: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Izvēlies joslu no saraksta vai ievadi savu:"
+    set:
+      - "Laika josla: *{zone}*. Grafiks pārrēķināts."
+    invalid:
+      - "Es nepazīstu šādu joslu. Piemēri: `Europe/Riga`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Atgādinājumi ir *ieslēgti*. Es rakstīšu pēc grafika."
+    "off": "Atgādinājumi ir *izslēgti*. Ieslēdz atkal ar pogu vai ar /notify."
+  answer:
+    days_to: "Līdz dzimšanas dienai atlicis {days} {days|plural:one=diena|other=dienas|many=dienu}. Apsveikums pienāks {date} {time} tavā joslā {zone}."
+    days_since: "Kopš dzimšanas pagājušas {days} {days|plural:one=diena|other=dienas|many=dienu}. Tev ir {age} {age|plural:one=gads|other=gadi|many=gadu}."
+    days_since_last: "Kopš pēdējās dzimšanas dienas pagājušas {days} {days|plural:one=diena|other=dienas|many=dienu}."
+    no_year: "Datumā nav gada, tāpēc kopējo dienu skaitu kopš dzimšanas aprēķināt nevar. Skaitīšana no pēdējās dzimšanas dienas strādā arī bez gada: to dara poga zemāk. Pievieno gadu, lai redzētu arī vecumu: /date"
+    not_set: "Dzimšanas datums vēl nav iestatīts. Sākam? /date"
+  settings:
+    view:
+      - "*Tavi iestatījumi*"
+      - ""
+      - "Dzimšanas datums: {date}"
+      - "Atgādinājuma laiks: {time}"
+      - "Laika josla: {zone}"
+      - "Atgādinājumi: {notify}"
+      - "Valoda: {lang}"
+    not_set: "nav iestatīts"
+    "on": "ieslēgti"
+    "off": "izslēgti"
+  lang:
+    choose: "Izvēlies valodu:"
+    set: "Valoda pārslēgta: {lang}"
+  cancelled: "Atcelts. Neviens iestatījums nav aiztikts."
+  reloaded: "Ziņas un tastatūras atkārtoti nolasītas no YAML."
+  perm:
+    not: "Šī komanda ir tikai īpašniekam."
+
+  delete:
+    confirm:
+      - "Dzēst visus tavus datus (datumu, iestatījumus, atgādinājumu vēsturi)?"
+      - ""
+      - "Tas ir neatgriezeniski: profils un piegādes žurnāls tiks dzēsti."
+    done: "Dati dzēsti. Atgriezies ar /start"
+  pointer:
+    dm: "Atbildēju tiešajās ziņās"
+  flood: "Pārāk ātri. Pamēģini pēc dažām sekundēm."
+  about:
+    - "*Birthday Bot* tiek izstrādāts atklāti: pirmkods ir publisks."
+    - ""
+    - "Pirmkods ir vietnē GitHub: {url}"
+    - "Projektu izstrādāju viens un būšu pateicīgs par zvaigznīti. Tas ir arī mans portfelis pieteikumam IT Management."
+    - ""
+    - "Paldies, ka lieto."
+
+reminder:
+  countdown:
+    - "Līdz tavai dzimšanas dienai atlicis {days} {days|plural:one=diena|other=dienas|many=dienu}!"
+    - ""
+    - "Apsveikums pienāks {date} {time} tavā joslā {zone}. Labu dienu!"
+  birthday:
+    - "*Dzimšanas dienā!* Tev paliek {age} {age|plural:one=gads|other=gadi|many=gadu}."
+    - ""
+    - "Labu dienu un lielisku gadu."
+  birthday.no_year:
+    - "*Dzimšanas dienā!* Šodien ir tava diena."
+    - ""
+    - "Labu dienu un lielisku gadu."
+
+webapp:
+  title: "Mana dzimšanas diena"
+  date: "Dzimšanas datums"
+  time: "Atgādinājuma laiks"
+  zone: "Laika josla"
+  lang: "Valoda"
+  notify: "Sūtīt atgādinājumus"
+  save: "Saglabāt"
+  saved: "Saglabāts"
+  opensource: "Atvērts pirmkods"
+  star: "Zvaigznīte vietnē GitHub"
+  star_note: "Pirmkods ir atvērts: seko repozitorijam un atstāj zvaigznīti. To izstrādāju viens, un tas ir mans portfelis uzņemšanai universitātē (IT Management)."
+  delete: "Dzēst manus datus"
+  preview: "Šis ir saskarnes priekšskatījums: profila dati pieejami tikai messenger iekšpusē."
+  api_error: "API neatbildēja: lapa atvērta bez bota servera."
+  auth_error: "Nepieciešama messenger autorizācija: atver lietotni ar bota pogu."
+  delete_confirm: "Dzēst visus tavus datus?"
+  days_left: "dienas atlikušas"
+
+button:
+  set_date: "Mainīt datumu"
+  notify_on: "Ieslēgt atgādinājumus"
+  notify_off: "Izslēgt atgādinājumus"
+  days_to: "Dienas līdz"
+  days_since: "Dienas kopš"
+  days_since_last: "Kopš pēdējās dzimšanas dienas"
+  days_since_total: "Kopš dzimšanas"
+  settings: "Iestatījumi"
+  back: "Atpakaļ"
+  time: "Laiks"
+  zone: "Josla"
+  zone_manual: "Cita josla"
+  language: "Valoda"
+  about: "Par projektu"
+  github: "Zvaigznīte vietnē GitHub"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Dzēst datus"
+  delete_yes: "Jā, dzēst"
+  delete_no: "Atcelt"
+  webapp: "Lietotne"
+
+command:
+  desc:
+    start: "Sākt darbu ar botu"
+    help: "Palīdzība"
+    date: "Norādīt dzimšanas datumu"
+    notify: "Pārslēgt atgādinājumus"
+    daysto: "Dienas līdz dzimšanas dienai"
+    dayssince: "Dienas kopš dzimšanas dienas"
+    settings: "Profila iestatījumi"
+    lang: "Valoda"
+    time: "Atgādinājuma laiks"
+    zone: "Laika josla"
+    about: "Par projektu"
+    delete: "Dzēst manus datus"
+    cancel: "Atcelt notiekošo ievadi"
+    reload: "Pārlādēt ziņas (īpašnieks)"

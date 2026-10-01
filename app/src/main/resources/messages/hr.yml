@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Bok!* Pratim rođendane i nikad ne propustim važan datum."
+    - ""
+    - "Postavi svoj datum rođenja i slat ću odbrojavanje i čestitku točno na vrijeme, u tvojoj vremenskoj zoni i na tvom jeziku."
+  help:
+    - "*Što znam*"
+    - ""
+    - "/date: postavi ili promijeni datum rođenja"
+    - "/notify: uključi ili isključi podsjetnike"
+    - "/daysto: dana do rođendana"
+    - "/dayssince: dana od rođenja"
+    - "/time: vrijeme podsjetnika"
+    - "/zone: vremenska zona"
+    - "/lang: jezik"
+    - "/settings: sve postavke odjednom"
+    - ""
+    - "Podsjetnici stižu svaki dan u odabrano vrijeme, a na sam dan dobivaš čestitku. Ništa se ne propusti, ni nakon ponovnog pokretanja."
+  prompt:
+    date:
+      - "Upiši datum rođenja u bilo kojem obliku:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5. ožujka 1998`, `1998-03-05`"
+      - ""
+      - "Godina nije obavezna, ali bez nje ne mogu izračunati dob. Odustani: /cancel"
+    time:
+      - "Upiši vrijeme podsjetnika, npr. `12:00` ili `18`. Odustani: /cancel"
+    zone:
+      - "Upiši vremensku zonu, npr. `Europe/Zagreb` ili `UTC+3`. Odustani: /cancel"
+  date:
+    set:
+      - "Spremljeno: *{date}*"
+      - ""
+      - "Do rođendana je ostalo {days} {days|plural:one=dan|few=dana|other=dana}. Podsjetnici će stizati u {time} po zoni {zone}."
+    invalid:
+      - "Nisam pročitao datum. Primjeri: `05.03.1998`, `05.03`, `5. ožujka 1998`, `1998-03-05`. Pokušaj ponovno."
+  time:
+    set:
+      - "Vrijeme podsjetnika: *{time}* (tvoje lokalno vrijeme)"
+    invalid:
+      - "To ne izgleda kao vrijeme. Primjeri: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Odaberi svoju zonu s popisa ili upiši svoju:"
+    set:
+      - "Vremenska zona: *{zone}*. Raspored je preračunat."
+    invalid:
+      - "Ne poznajem takvu zonu. Primjeri: `Europe/Zagreb`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Podsjetnici su *uključeni*. Pisat ću po rasporedu."
+    "off": "Podsjetnici su *isključeni*. Vrati ih gumbom ili naredbom /notify."
+  answer:
+    days_to: "Do rođendana je ostalo {days} {days|plural:one=dan|few=dana|other=dana}. Čestitka stiže {date} u {time} po zoni {zone}."
+    days_since: "Od rođenja je prošlo {days} {days|plural:one=dan|few=dana|other=dana}. Imaš {age} {age|plural:one=godinu|few=godine|other=godina}."
+    days_since_last: "Od posljednjeg rođendana prošlo je {days} {days|plural:one=dan|few=dana|other=dana}."
+    no_year: "Datum nema godinu, pa se ukupan broj dana od rođenja ne može izračunati. Brojanje od posljednjeg rođendana radi i bez godine: gumb ispod to radi. Dodaj godinu da vidiš i dob: /date"
+    not_set: "Datum rođenja još nije postavljen. Počinjemo li? /date"
+  settings:
+    view:
+      - "*Tvoje postavke*"
+      - ""
+      - "Datum rođenja: {date}"
+      - "Vrijeme podsjetnika: {time}"
+      - "Vremenska zona: {zone}"
+      - "Podsjetnici: {notify}"
+      - "Jezik: {lang}"
+    not_set: "nije postavljeno"
+    "on": "uključeni"
+    "off": "isključeni"
+  lang:
+    choose: "Odaberi jezik:"
+    set: "Jezik je promijenjen: {lang}"
+  cancelled: "Otkazano. Nijedna postavka nije dirnuta."
+  reloaded: "Poruke i tipkovnice ponovno su učitane iz YAML-a."
+  perm:
+    not: "Ova naredba je samo za vlasnika."
+
+  delete:
+    confirm:
+      - "Obrisati sve tvoje podatke (datum, postavke, povijest podsjetnika)?"
+      - ""
+      - "Nepovratno je: profil i dnevnik dostave bit će obrisani."
+    done: "Podaci obrisani. Vrati se preko /start"
+  pointer:
+    dm: "Odgovorio sam u izravne poruke"
+  flood: "Prebrzo. Pokušaj za nekoliko sekundi."
+  about:
+    - "*Birthday Bot* razvija se otvoreno: izvorni kod je javan."
+    - ""
+    - "Izvorni kod je na GitHubu: {url}"
+    - "Projekt razvijam sam i bit ću zahvalan na zvjezdici. To mi je i portfelj za prijavu na IT Management."
+    - ""
+    - "Hvala ti što ga koristiš."
+
+reminder:
+  countdown:
+    - "Do tvog rođendana ostalo je {days} {days|plural:one=dan|few=dana|other=dana}!"
+    - ""
+    - "Čestitka stiže {date} u {time} po zoni {zone}. Ugodan dan!"
+  birthday:
+    - "*Sretan rođendan!* Puniš {age} {age|plural:one=godinu|few=godine|other=godina}."
+    - ""
+    - "Ugodan dan i odlična godina."
+  birthday.no_year:
+    - "*Sretan rođendan!* Danas je tvoj dan."
+    - ""
+    - "Ugodan dan i odlična godina."
+
+webapp:
+  title: "Moj rođendan"
+  date: "Datum rođenja"
+  time: "Vrijeme podsjetnika"
+  zone: "Vremenska zona"
+  lang: "Jezik"
+  notify: "Šalji podsjetnike"
+  save: "Spremi"
+  saved: "Spremljeno"
+  opensource: "Otvoreni kod"
+  star: "Zvjezdica na GitHubu"
+  star_note: "Izvorni kod je otvoren: prati repozitorij i ostavi zvjezdicu. Razvijam ga sam i to mi je portfelj za upis na fakultet (IT Management)."
+  delete: "Obriši moje podatke"
+  preview: "Ovo je pregled sučelja: podaci profila dostupni su samo unutar messengera."
+  api_error: "API ne odgovara: stranica je otvorena bez poslužitelja bota."
+  auth_error: "Potrebna je autorizacija messengera: otvori aplikaciju gumbom u botu."
+  delete_confirm: "Obrisati sve tvoje podatke?"
+  days_left: "dana preostalo"
+
+button:
+  set_date: "Promijeni datum"
+  notify_on: "Uključi podsjetnike"
+  notify_off: "Isključi podsjetnike"
+  days_to: "Dana do"
+  days_since: "Dana od"
+  days_since_last: "Od posljednjeg rođendana"
+  days_since_total: "Od rođenja"
+  settings: "Postavke"
+  back: "Natrag"
+  time: "Vrijeme"
+  zone: "Zona"
+  zone_manual: "Druga zona"
+  language: "Jezik"
+  about: "O projektu"
+  github: "Zvjezdica na GitHubu"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Obriši podatke"
+  delete_yes: "Da, obriši"
+  delete_no: "Odustani"
+  webapp: "Aplikacija"
+
+command:
+  desc:
+    start: "Počni koristiti bota"
+    help: "Pomoć"
+    date: "Postavi datum rođenja"
+    notify: "Uključi ili isključi podsjetnike"
+    daysto: "Dana do rođendana"
+    dayssince: "Dana od rođendana"
+    settings: "Postavke profila"
+    lang: "Jezik"
+    time: "Vrijeme podsjetnika"
+    zone: "Vremenska zona"
+    about: "O projektu"
+    delete: "Obriši moje podatke"
+    cancel: "Prekini trenutni unos"
+    reload: "Ponovno učitaj poruke (vlasnik)"

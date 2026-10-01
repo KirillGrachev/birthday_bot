@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Salom!* Men tug'ilgan kunlarni kuzataman va muhim sanalarni hech qachon o'tkazib yubormayman."
+    - ""
+    - "Tug'ilgan sanangni ko'rsat, men sanokni va tabrikni ayni vaqtida, o'z vaqt mintaqangda va o'z tilingda yuboraman."
+  help:
+    - "*Nimalarni bilaman*"
+    - ""
+    - "/date: tug'ilgan sanani ko'rsatish yoki o'zgartirish"
+    - "/notify: eslatmalarni yoqish yoki o'chirish"
+    - "/daysto: tug'ilgan kunga qolgan kunlar"
+    - "/dayssince: tug'ilgan kundan o'tgan kunlar"
+    - "/time: eslatma vaqti"
+    - "/zone: vaqt mintaqasi"
+    - "/lang: til"
+    - "/settings: barcha sozlamalar birdaniga"
+    - ""
+    - "Eslatmalar har kuni tanlangan vaqtda keladi, ayni kunda esa tabrik olasiz. Qayta ishga tushirishdan keyin ham hech narsa yo'qolmaydi."
+  prompt:
+    date:
+      - "Tug'ilgan sanangni qulay formatda kiriting:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5-mart, 1998`, `1998-03-05`"
+      - ""
+      - "Yil ixtiyoriy, lekin u bo'lmasa yoshingizni hisoblay olmayman. Bekor qilish: /cancel"
+    time:
+      - "Eslatma vaqtini kiriting, masalan `12:00` yoki `18`. Bekor qilish: /cancel"
+    zone:
+      - "Vaqt mintaqasini kiriting, masalan `Asia/Tashkent` yoki `UTC+3`. Bekor qilish: /cancel"
+  date:
+    set:
+      - "Saqlandi: *{date}*"
+      - ""
+      - "Tug'ilgan kunga {days} {days|plural:one=kun|other=kun} qoldi. Eslatmalar {time} vaqtida {zone} mintaqasida keladi."
+    invalid:
+      - "Sanani o'qiy olmadim. Misollar: `05.03.1998`, `05.03`, `5-mart, 1998`, `1998-03-05`. Yana urinib ko'ring."
+  time:
+    set:
+      - "Eslatma vaqti: *{time}* (sizning mahalliy vaqtingiz)"
+    invalid:
+      - "Bu vaqtga o'xshamaydi. Misollar: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Ro'yxatdan mintaqangni tanla yoki o'zingnikini kirit:"
+    set:
+      - "Vaqt mintaqasi: *{zone}*. Jadval qayta hisoblandi."
+    invalid:
+      - "Bunday mintaqani bilmayman. Misollar: `Asia/Tashkent`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Eslatmalar *yoniq*. Jadval bo'yicha yozaman."
+    "off": "Eslatmalar *o'chiq*. Tugma yoki /notify orqali qayta yoqing."
+  answer:
+    days_to: "Tug'ilgan kunga {days} {days|plural:one=kun|other=kun} qoldi. Tabrik {date} sanasida {time} vaqtida {zone} mintaqasida keladi."
+    days_since: "Tug'ilgan kundan beri {days} {days|plural:one=kun|other=kun} o'tdi. Siz {age} {age|plural:one=yosh|other=yosh}dasiz."
+    days_since_last: "Oxirgi tug'ilgan kundan beri {days} {days|plural:one=kun|other=kun} o'tdi."
+    no_year: "Sanada yil yo'q, shuning uchun tug'ilgan kundan beri jami kunlarni hisoblay olmayman. Oxirgi tug'ilgan kundan sanash yilsiz ham ishlaydi: quyidagi tugma buni bajaradi. Yoshni ham ko'rish uchun yilni qo'shing: /date"
+    not_set: "Tug'ilgan sana hali ko'rsatilmagan. Boshlaymizmi? /date"
+  settings:
+    view:
+      - "*Sizning sozlamalaringiz*"
+      - ""
+      - "Tug'ilgan sana: {date}"
+      - "Eslatma vaqti: {time}"
+      - "Vaqt mintaqasi: {zone}"
+      - "Eslatmalar: {notify}"
+      - "Til: {lang}"
+    not_set: "ko'rsatilmagan"
+    "on": "yoniq"
+    "off": "o'chiq"
+  lang:
+    choose: "Tilni tanlang:"
+    set: "Til almashtirildi: {lang}"
+  cancelled: "Bekor qilindi. Hech qanday sozlama o'zgartirilmadi."
+  reloaded: "Xabarlar va klaviaturalar YAML'dan qayta o'qildi."
+  perm:
+    not: "Bu buyruq faqat bot egasi uchun."
+
+  delete:
+    confirm:
+      - "Barcha ma'lumotlaringiz (sana, sozlamalar, eslatmalar tarixi) o'chirilsinmi?"
+      - ""
+      - "Bu qaytarilmas: profil va yetkazish jurnali o'chiriladi."
+    done: "Ma'lumotlar o'chirildi. /start orqali qayting"
+  pointer:
+    dm: "Shaxsiy xabarlarda javob berdim"
+  flood: "Juda tez. Bir necha soniyadan so'ng urinib ko'ring."
+  about:
+    - "*Birthday Bot* ochiq rivojlanadi: manba kodi ommaviy."
+    - ""
+    - "Manba kod GitHub'da: {url}"
+    - "Loyihani yakkama-yakka rivojlantiraman va yulduzcha uchun minnatdor bo'laman. Bu shuningdek IT Management'ga kirish uchun portfelim."
+    - ""
+    - "Foydalanayotganingiz uchun rahmat."
+
+reminder:
+  countdown:
+    - "Tug'ilgan kuningizga {days} {days|plural:one=kun|other=kun} qoldi!"
+    - ""
+    - "Tabrik {date} sanasida {time} vaqtida {zone} mintaqasida keladi. Xayrli kun!"
+  birthday:
+    - "*Tug'ilgan kuningiz bilan!* Siz {age} {age|plural:one=yosh|other=yosh}ga kirdingiz."
+    - ""
+    - "Xayrli kun va ajoyib yil."
+  birthday.no_year:
+    - "*Tug'ilgan kuningiz bilan!* Bugun sizning kuningiz."
+    - ""
+    - "Xayrli kun va ajoyib yil."
+
+webapp:
+  title: "Mening tug'ilgan kunim"
+  date: "Tug'ilgan sana"
+  time: "Eslatma vaqti"
+  zone: "Vaqt mintaqasi"
+  lang: "Til"
+  notify: "Eslatma yuborish"
+  save: "Saqlash"
+  saved: "Saqlandi"
+  opensource: "Ochiq kod"
+  star: "GitHub'da yulduzcha"
+  star_note: "Manba kod ochiq: repozitoriyaga obuna bo'ling va yulduzcha qoldiring. Men uni yakkama-yakka rivojlantiraman, bu universitetga kirish uchun portfelim (IT Management)."
+  delete: "Ma'lumotlarimni o'chirish"
+  preview: "Bu interfeysning oldindan ko'rinishi: profil ma'lumotlari faqat messenger ichida mavjud."
+  api_error: "API javob bermadi: sahifa bot serverisiz ochilgan."
+  auth_error: "Messenger avtorizatsiyasi kerak: ilovani botdagi tugma orqali oching."
+  delete_confirm: "Barcha ma'lumotlaringiz o'chirilsinmi?"
+  days_left: "kun qoldi"
+
+button:
+  set_date: "Sanani o'zgartirish"
+  notify_on: "Eslatmalarni yoqish"
+  notify_off: "Eslatmalarni o'chirish"
+  days_to: "Kun qoldi"
+  days_since: "Kun o'tdi"
+  days_since_last: "Oxirgi tug'ilgan kundan"
+  days_since_total: "Tug'ilgan kundan"
+  settings: "Sozlamalar"
+  back: "Orqaga"
+  time: "Vaqt"
+  zone: "Mintaqa"
+  zone_manual: "Boshqa mintaqa"
+  language: "Til"
+  about: "Loyiha haqida"
+  github: "GitHub'da yulduzcha"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Ma'lumotlarni o'chirish"
+  delete_yes: "Ha, o'chirilsin"
+  delete_no: "Bekor qilish"
+  webapp: "Ilova"
+
+command:
+  desc:
+    start: "Bot bilan ishlashni boshlash"
+    help: "Yordam"
+    date: "Tug'ilgan sanani ko'rsatish"
+    notify: "Eslatmalarni yoqish yoki o'chirish"
+    daysto: "Tug'ilgan kunga qolgan kunlar"
+    dayssince: "Tug'ilgan kundan o'tgan kunlar"
+    settings: "Profil sozlamalari"
+    lang: "Til"
+    time: "Eslatma vaqti"
+    zone: "Vaqt mintaqasi"
+    about: "Loyiha haqida"
+    delete: "Ma'lumotlarimni o'chirish"
+    cancel: "Joriy kiritishni bekor qilish"
+    reload: "Xabarlarni qayta o'qish (ega)"

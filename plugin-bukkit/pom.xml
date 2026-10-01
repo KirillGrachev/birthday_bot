@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>eu.neydev.birthday</groupId>
+        <artifactId>birthday-bot-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>birthday-plugin-bukkit</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Birthday Bot Plugin: Bukkit launcher</name>
+    <description>
+        A Bukkit plugin that supervises the standalone birthday bot as a child process
+        of the Minecraft server: the plugin jar goes to plugins/, the bot distribution
+        to a folder next to it. No coupling in either direction - the same distribution
+        keeps working from start.bat, start.sh or a service manager.
+    </description>
+
+    <properties>
+        <!-- Minecraft 1.20+ servers run on Java 17+, older API bytecode needlessly limits them -->
+        <maven.compiler.release>17</maven.compiler.release>
+        <!-- The supervisor drives real OS processes and pipes: unit coverage gate does not apply -->
+        <jacoco.skip>true</jacoco.skip>
+        <spigot-api.version>1.20.1-R0.1-SNAPSHOT</spigot-api.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>spigotmc-snapshots</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>${spigot-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>birthday-bot-launcher-plugin</finalName>
+        <resources>
+            <!-- plugin.yml takes its version from this pom -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+</project>

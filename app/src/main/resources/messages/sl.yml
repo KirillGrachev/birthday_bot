@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Živjo!* Spremljam rojstne dneve in nikoli ne zamudim pomembnega datuma."
+    - ""
+    - "Nastavi svoj datum rojstva in pošiljal bom odštevanje ter voščilo točno ob pravem času, v tvojem časovnem pasu in v tvojem jeziku."
+  help:
+    - "*Kaj znam*"
+    - ""
+    - "/date: nastavi ali spremeni datum rojstva"
+    - "/notify: vklopi ali izklopi opomnike"
+    - "/daysto: dni do rojstnega dne"
+    - "/dayssince: dni od rojstva"
+    - "/time: ura opomnika"
+    - "/zone: časovni pas"
+    - "/lang: jezik"
+    - "/settings: vse nastavitve naenkrat"
+    - ""
+    - "Opomniki prihajajo vsak dan ob izbrani uri, na sam dan pa dobiš voščilo. Nič se ne izgubi, tudi po ponovnem zagonu ne."
+  prompt:
+    date:
+      - "Vpiši datum rojstva v poljubni obliki:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5. marec 1998`, `1998-03-05`"
+      - ""
+      - "Leto je neobvezno, a brez njega ne morem izračunati starosti. Preklic: /cancel"
+    time:
+      - "Vpiši uro opomnika, npr. `12:00` ali `18`. Preklic: /cancel"
+    zone:
+      - "Vpiši časovni pas, npr. `Europe/Ljubljana` ali `UTC+3`. Preklic: /cancel"
+  date:
+    set:
+      - "Shranjeno: *{date}*"
+      - ""
+      - "Do rojstnega dne je še {days} {days|plural:one=dan|two=dneva|few=dnevi|other=dni}. Opomniki bodo prihajali ob {time} v tvojem pasu {zone}."
+    invalid:
+      - "Datuma nisem prebral. Primeri: `05.03.1998`, `05.03`, `5. marec 1998`, `1998-03-05`. Poskusi znova."
+  time:
+    set:
+      - "Ura opomnika: *{time}* (tvoj krajevni čas)"
+    invalid:
+      - "To ni videti kot ura. Primeri: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Izberi svoj pas s seznama ali vnesi svojega:"
+    set:
+      - "Časovni pas: *{zone}*. Razpored je preračunan."
+    invalid:
+      - "Takega pasu ne poznam. Primeri: `Europe/Ljubljana`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Opomniki so *vklopljeni*. Pisal bom po razporedu."
+    "off": "Opomniki so *izklopljeni*. Vklopi jih z gumbom ali z /notify."
+  answer:
+    days_to: "Do rojstnega dne je še {days} {days|plural:one=dan|two=dneva|few=dnevi|other=dni}. Voščilo pride {date} ob {time} v tvojem pasu {zone}."
+    days_since: "Od rojstva je minilo {days} {days|plural:one=dan|two=dneva|few=dnevi|other=dni}. Star si {age} {age|plural:one=leto|two=leti|few=leta|other=let}."
+    days_since_last: "Od zadnjega rojstnega dne je minilo {days} {days|plural:one=dan|two=dneva|few=dnevi|other=dni}."
+    no_year: "Datum nima leta, zato skupnega števila dni od rojstva ni mogoče izračunati. Štetje od zadnjega rojstnega dne deluje tudi brez leta: to naredi gumb spodaj. Dodaj leto, da vidiš tudi starost: /date"
+    not_set: "Datuma rojstva še ni. Začnemo? /date"
+  settings:
+    view:
+      - "*Tvoje nastavitve*"
+      - ""
+      - "Datum rojstva: {date}"
+      - "Ura opomnika: {time}"
+      - "Časovni pas: {zone}"
+      - "Opomniki: {notify}"
+      - "Jezik: {lang}"
+    not_set: "ni nastavljeno"
+    "on": "vklopljeni"
+    "off": "izklopljeni"
+  lang:
+    choose: "Izberi jezik:"
+    set: "Jezik je preklopljen: {lang}"
+  cancelled: "Preklicano. Nobena nastavitev ni bila spremenjena."
+  reloaded: "Sporočila in tipkovnice so znova prebrane iz YAML."
+  perm:
+    not: "Ta ukaz je samo za lastnika."
+
+  delete:
+    confirm:
+      - "Ali naj izbrišem vse tvoje podatke (datum, nastavitve, zgodovino opomnikov)?"
+      - ""
+      - "Dejanje je nepovratno: profil in dnevnik dostav bosta izbrisana."
+    done: "Podatki izbrisani. Vrni se prek /start"
+  pointer:
+    dm: "Odgovoril sem v neposredna sporočila"
+  flood: "Prehitro. Poskusi čez nekaj sekund."
+  about:
+    - "*Birthday Bot* nastaja odprto: izvorna koda je javna."
+    - ""
+    - "Izvorna koda je na GitHubu: {url}"
+    - "Projekt razvijam sam in bom vesel zvezdice. Je tudi moj portfelj za prijavo na IT Management."
+    - ""
+    - "Hvala, ker ga uporabljaš."
+
+reminder:
+  countdown:
+    - "Do tvojega rojstnega dne je še {days} {days|plural:one=dan|two=dneva|few=dnevi|other=dni}!"
+    - ""
+    - "Voščilo pride {date} ob {time} v tvojem pasu {zone}. Lep dan!"
+  birthday:
+    - "*Vse najboljše!* Dopoldnjuješ {age} {age|plural:one=leto|two=leti|few=leta|other=let}."
+    - ""
+    - "Lep dan in odlično leto."
+  birthday.no_year:
+    - "*Vse najboljše!* Danes je tvoj dan."
+    - ""
+    - "Lep dan in odlično leto."
+
+webapp:
+  title: "Moj rojstni dan"
+  date: "Datum rojstva"
+  time: "Ura opomnika"
+  zone: "Časovni pas"
+  lang: "Jezik"
+  notify: "Pošiljaj opomnike"
+  save: "Shrani"
+  saved: "Shranjeno"
+  opensource: "Odprta koda"
+  star: "Zvezdica na GitHubu"
+  star_note: "Izvorna koda je odprta: sledi repozitoriju in pusti zvezdico. Razvijam ga sam in je moj portfelj za vpis na univerzo (IT Management)."
+  delete: "Izbriši moje podatke"
+  preview: "To je predogled vmesnika: podatki profila so na voljo samo znotraj messengerja."
+  api_error: "API se ne odzove: stran je odprta brez strežnika bota."
+  auth_error: "Potrebna je avtorizacija messengerja: odpri aplikacijo z gumbom v botu."
+  delete_confirm: "Ali naj izbrišem vse tvoje podatke?"
+  days_left: "dni ostalo"
+
+button:
+  set_date: "Spremeni datum"
+  notify_on: "Vklopi opomnike"
+  notify_off: "Izklopi opomnike"
+  days_to: "Dni do"
+  days_since: "Dni od"
+  days_since_last: "Od zadnjega rojstnega dne"
+  days_since_total: "Od rojstva"
+  settings: "Nastavitve"
+  back: "Nazaj"
+  time: "Ura"
+  zone: "Pas"
+  zone_manual: "Druga cona"
+  language: "Jezik"
+  about: "O projektu"
+  github: "Zvezdica na GitHubu"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Izbriši podatke"
+  delete_yes: "Da, izbriši"
+  delete_no: "Prekliči"
+  webapp: "Aplikacija"
+
+command:
+  desc:
+    start: "Začni uporabljati bota"
+    help: "Pomoč"
+    date: "Nastavi datum rojstva"
+    notify: "Preklopi opomnike"
+    daysto: "Dni do rojstnega dne"
+    dayssince: "Dni od rojstnega dne"
+    settings: "Nastavitve profila"
+    lang: "Jezik"
+    time: "Ura opomnika"
+    zone: "Časovni pas"
+    about: "O projektu"
+    delete: "Izbriši moje podatke"
+    cancel: "Prekliči trenutno vnašanje"
+    reload: "Znova naloži sporočila (lastnik)"

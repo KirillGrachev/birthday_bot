@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Ciao!* Seguo i compleanni e non perdo mai una data importante."
+    - ""
+    - "Imposta la tua data di nascita e invierò il conto alla rovescia e gli auguri puntuali, nel tuo fuso orario e nella tua lingua."
+  help:
+    - "*Cosa so fare*"
+    - ""
+    - "/date: imposta o modifica la data di nascita"
+    - "/notify: accendi o spegni i promemoria"
+    - "/daysto: giorni mancanti al compleanno"
+    - "/dayssince: giorni trascorsi dalla nascita"
+    - "/time: orario del promemoria"
+    - "/zone: fuso orario"
+    - "/lang: lingua"
+    - "/settings: tutte le impostazioni in una volta"
+    - ""
+    - "I promemoria arrivano ogni giorno all'ora scelta, e il giorno stesso ricevi gli auguri. Non si perde nulla, nemmeno dopo un riavvio."
+  prompt:
+    date:
+      - "Inserisci la tua data di nascita nel formato che preferisci:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5 marzo 1998`, `1998-03-05`"
+      - ""
+      - "L'anno è facoltativo, ma senza non posso calcolare la tua età. Annulla: /cancel"
+    time:
+      - "Inserisci l'orario del promemoria, per esempio `12:00` o `18`. Annulla: /cancel"
+    zone:
+      - "Inserisci il fuso orario, per esempio `Europe/Rome` o `UTC+3`. Annulla: /cancel"
+  date:
+    set:
+      - "Salvato: *{date}*"
+      - ""
+      - "Mancano {days} {days|plural:one=giorno|other=giorni} al compleanno. I promemoria arriveranno alle {time} nel tuo fuso {zone}."
+    invalid:
+      - "Non sono riuscito a leggere la data. Esempi: `05.03.1998`, `05.03`, `5 marzo 1998`, `1998-03-05`. Riprova."
+  time:
+    set:
+      - "Orario del promemoria: *{time}* (la tua ora locale)"
+    invalid:
+      - "Non sembra un orario. Esempi: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Scegli il tuo fuso dall'elenco o inserisci il tuo:"
+    set:
+      - "Fuso orario: *{zone}*. Programma ricalcolato."
+    invalid:
+      - "Non conosco questo fuso. Esempi: `Europe/Rome`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "I promemoria sono *attivi*. Scriverò secondo il programma."
+    "off": "I promemoria sono *disattivati*. Riattivali con il pulsante o con /notify."
+  answer:
+    days_to: "Mancano {days} {days|plural:one=giorno|other=giorni} al compleanno. Gli auguri arriveranno il {date} alle {time} nel tuo fuso {zone}."
+    days_since: "Sono passati {days} {days|plural:one=giorno|other=giorni} dalla tua nascita. Hai {age} {age|plural:one=anno|other=anni}."
+    days_since_last: "Sono passati {days} {days|plural:one=giorno|other=giorni} dal tuo ultimo compleanno."
+    no_year: "La data non ha l'anno, quindi il totale dei giorni dalla nascita non si può calcolare. Il conto dall'ultimo compleanno funziona anche senza anno: lo fa il pulsante qui sotto. Aggiungi l'anno per vedere anche l'età: /date"
+    not_set: "Nessuna data di nascita ancora. Cominciamo? /date"
+  settings:
+    view:
+      - "*Le tue impostazioni*"
+      - ""
+      - "Data di nascita: {date}"
+      - "Orario del promemoria: {time}"
+      - "Fuso orario: {zone}"
+      - "Promemoria: {notify}"
+      - "Lingua: {lang}"
+    not_set: "non impostata"
+    "on": "attivi"
+    "off": "disattivati"
+  lang:
+    choose: "Scegli la lingua:"
+    set: "Lingua cambiata: {lang}"
+  cancelled: "Annullato. Nessuna impostazione è stata toccata."
+  reloaded: "Messaggi e tastiere riletti dallo YAML."
+  perm:
+    not: "Questo comando è solo per il proprietario."
+
+  delete:
+    confirm:
+      - "Eliminare tutti i tuoi dati (data, impostazioni, storico dei promemoria)?"
+      - ""
+      - "È irreversibile: profilo e registro delle consegne saranno cancellati."
+    done: "Dati eliminati. Torna con /start"
+  pointer:
+    dm: "Ho risposto nei messaggi diretti"
+  flood: "Troppo veloce. Riprova tra qualche secondo."
+  about:
+    - "*Birthday Bot* è sviluppato apertamente: il codice sorgente è pubblico."
+    - ""
+    - "Il codice sorgente è su GitHub: {url}"
+    - "Sviluppo il progetto da solo e apprezzerei una stella. È anche il mio portfolio per la candidatura a IT Management."
+    - ""
+    - "Grazie per averlo usato."
+
+reminder:
+  countdown:
+    - "Mancano {days} {days|plural:one=giorno|other=giorni} al tuo compleanno!"
+    - ""
+    - "Gli auguri arriveranno il {date} alle {time} nel tuo fuso {zone}. Buona giornata!"
+  birthday:
+    - "*Buon compleanno!* Compi {age} {age|plural:one=anno|other=anni}."
+    - ""
+    - "Buona giornata e ottimo anno."
+  birthday.no_year:
+    - "*Buon compleanno!* Oggi è il tuo giorno."
+    - ""
+    - "Buona giornata e ottimo anno."
+
+webapp:
+  title: "Il mio compleanno"
+  date: "Data di nascita"
+  time: "Orario del promemoria"
+  zone: "Fuso orario"
+  lang: "Lingua"
+  notify: "Invia promemoria"
+  save: "Salva"
+  saved: "Salvato"
+  opensource: "Codice aperto"
+  star: "Stella su GitHub"
+  star_note: "Il codice sorgente è aperto: segui il repository e lascia una stella. Lo sviluppo da solo, ed è il mio portfolio per l'ammissione all'università (IT Management)."
+  delete: "Elimina i miei dati"
+  preview: "Questa è un'anteprima dell'interfaccia: i dati del profilo sono disponibili solo dentro il messenger."
+  api_error: "L'API non risponde: la pagina è aperta senza il server del bot."
+  auth_error: "Serve l'autorizzazione del messenger: apri l'app dal pulsante nel bot."
+  delete_confirm: "Eliminare tutti i tuoi dati?"
+  days_left: "giorni rimasti"
+
+button:
+  set_date: "Modifica data"
+  notify_on: "Attiva promemoria"
+  notify_off: "Disattiva promemoria"
+  days_to: "Giorni a"
+  days_since: "Giorni da"
+  days_since_last: "Dall'ultimo compleanno"
+  days_since_total: "Dalla nascita"
+  settings: "Impostazioni"
+  back: "Indietro"
+  time: "Orario"
+  zone: "Fuso"
+  zone_manual: "Inserisci un fuso"
+  language: "Lingua"
+  about: "Informazioni"
+  github: "Stella su GitHub"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Elimina i dati"
+  delete_yes: "Sì, elimina"
+  delete_no: "Annulla"
+  webapp: "App"
+
+command:
+  desc:
+    start: "Inizia a usare il bot"
+    help: "Guida"
+    date: "Imposta la data di nascita"
+    notify: "Attiva o disattiva i promemoria"
+    daysto: "Giorni al compleanno"
+    dayssince: "Giorni dal compleanno"
+    settings: "Impostazioni del profilo"
+    lang: "Lingua"
+    time: "Orario del promemoria"
+    zone: "Fuso orario"
+    about: "Informazioni sul progetto"
+    delete: "Elimina i miei dati"
+    cancel: "Annulla l'inserimento in corso"
+    reload: "Rileggi i messaggi (proprietario)"

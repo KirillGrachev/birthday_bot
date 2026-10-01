@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Cześć!* Pilnuję urodzin i nigdy nie przegapiam ważnej daty."
+    - ""
+    - "Ustaw swoją datę urodzenia, a będę wysyłać odliczanie i życzenia dokładnie na czas, w Twojej strefie czasowej i w Twoim języku."
+  help:
+    - "*Co potrafię*"
+    - ""
+    - "/date: ustaw lub zmień datę urodzenia"
+    - "/notify: włącz lub wyłącz przypomnienia"
+    - "/daysto: dni do urodzin"
+    - "/dayssince: dni od urodzenia"
+    - "/time: godzina przypomnienia"
+    - "/zone: strefa czasowa"
+    - "/lang: język"
+    - "/settings: wszystkie ustawienia naraz"
+    - ""
+    - "Przypomnienia przychodzą codziennie o wybranej godzinie, a w sam dzień urodzin dostajesz życzenia. Nic nie ginie, nawet po restarcie."
+  prompt:
+    date:
+      - "Wpisz datę urodzenia w dowolnym formacie:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5 marca 1998`, `1998-03-05`"
+      - ""
+      - "Rok jest opcjonalny, ale bez niego nie policzę wieku. Anulowanie: /cancel"
+    time:
+      - "Wpisz godzinę przypomnienia, np. `12:00` lub `18`. Anulowanie: /cancel"
+    zone:
+      - "Wpisz strefę czasową, np. `Europe/Warsaw` lub `UTC+3`. Anulowanie: /cancel"
+  date:
+    set:
+      - "Zapisano: *{date}*"
+      - ""
+      - "Do urodzin zostało {days} {days|plural:one=dzień|few=dni|many=dni}. Przypomnienia będą przychodzić o {time} w Twojej strefie {zone}."
+    invalid:
+      - "Nie przeczytałem daty. Przykłady: `05.03.1998`, `05.03`, `5 marca 1998`, `1998-03-05`. Spróbuj ponownie."
+  time:
+    set:
+      - "Godzina przypomnienia: *{time}* (Twój czas lokalny)"
+    invalid:
+      - "To nie wygląda na godzinę. Przykłady: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Wybierz swoją strefę z listy lub wpisz własną:"
+    set:
+      - "Strefa czasowa: *{zone}*. Harmonogram przeliczony."
+    invalid:
+      - "Nie znam takiej strefy. Przykłady: `Europe/Warsaw`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Przypomnienia są *włączone*. Będę pisać zgodnie z harmonogramem."
+    "off": "Przypomnienia są *wyłączone*. Włącz je ponownie przyciskiem lub komendą /notify."
+  answer:
+    days_to: "Do urodzin zostało {days} {days|plural:one=dzień|few=dni|many=dni}. Życzenia przyjdą {date} o {time} w Twojej strefie {zone}."
+    days_since: "Od urodzenia minęło {days} {days|plural:one=dzień|few=dni|many=dni}. Masz {age} {age|plural:one=rok|few=lata|many=lat}."
+    days_since_last: "Od ostatnich urodzin minęło {days} {days|plural:one=dzień|few=dni|many=dni}."
+    no_year: "Data nie ma roku, więc nie policzę łącznej liczby dni od urodzenia. Liczenie od ostatnich urodzin działa bez roku: robi to przycisk poniżej. Dodaj rok, aby widzieć też wiek: /date"
+    not_set: "Nie ma jeszcze daty urodzenia. Zaczynamy? /date"
+  settings:
+    view:
+      - "*Twoje ustawienia*"
+      - ""
+      - "Data urodzenia: {date}"
+      - "Godzina przypomnienia: {time}"
+      - "Strefa czasowa: {zone}"
+      - "Przypomnienia: {notify}"
+      - "Język: {lang}"
+    not_set: "nie ustawiono"
+    "on": "włączone"
+    "off": "wyłączone"
+  lang:
+    choose: "Wybierz język:"
+    set: "Język przełączony: {lang}"
+  cancelled: "Anulowano. Nie tknąłem żadnych ustawień."
+  reloaded: "Wiadomości i klawiatury wczytane ponownie z YAML."
+  perm:
+    not: "Ta komenda jest tylko dla właściciela."
+
+  delete:
+    confirm:
+      - "Usunąć wszystkie Twoje dane (datę, ustawienia, historię przypomnień)?"
+      - ""
+      - "To nieodwracalne: profil i dziennik dostarczeń zostaną skasowane."
+    done: "Dane usunięte. Wróć przez /start"
+  pointer:
+    dm: "Odpowiedziałem w wiadomościach prywatnych"
+  flood: "Za szybko. Spróbuj za kilka sekund."
+  about:
+    - "*Birthday Bot* powstaje w otwarty sposób: kod źródłowy jest publiczny."
+    - ""
+    - "Kod źródłowy jest na GitHubie: {url}"
+    - "Rozwijam ten projekt sam i będę wdzięczny za gwiazdkę. To też moje portfolio przy rekrutacji na IT Management."
+    - ""
+    - "Dziękuję za korzystanie."
+
+reminder:
+  countdown:
+    - "Do Twoich urodzin zostało {days} {days|plural:one=dzień|few=dni|many=dni}!"
+    - ""
+    - "Życzenia przyjdą {date} o {time} w Twojej strefie {zone}. Miłego dnia!"
+  birthday:
+    - "*Wszystkiego najlepszego z okazji urodzin!* Kończysz {age} {age|plural:one=rok|few=lata|many=lat}."
+    - ""
+    - "Miłego dnia i wspaniałego roku."
+  birthday.no_year:
+    - "*Wszystkiego najlepszego z okazji urodzin!* Dziś jest Twój dzień."
+    - ""
+    - "Miłego dnia i wspaniałego roku."
+
+webapp:
+  title: "Moje urodziny"
+  date: "Data urodzenia"
+  time: "Godzina przypomnienia"
+  zone: "Strefa czasowa"
+  lang: "Język"
+  notify: "Wysyłaj przypomnienia"
+  save: "Zapisz"
+  saved: "Zapisano"
+  opensource: "Otwarty kod"
+  star: "Gwiazdka na GitHubie"
+  star_note: "Kod źródłowy jest otwarty: obserwuj repozytorium i zostaw gwiazdkę. Rozwijam go sam, to moje portfolio przy rekrutacji na studia (IT Management)."
+  delete: "Usuń moje dane"
+  preview: "To podgląd interfejsu: dane profilu są dostępne tylko wewnątrz komunikatora."
+  api_error: "API nie odpowiada: strona otwarta bez serwera bota."
+  auth_error: "Wymagana autoryzacja komunikatora: otwórz aplikację przyciskiem w bocie."
+  delete_confirm: "Usunąć wszystkie Twoje dane?"
+  days_left: "dni zostało"
+
+button:
+  set_date: "Zmień datę"
+  notify_on: "Włącz przypomnienia"
+  notify_off: "Wyłącz przypomnienia"
+  days_to: "Dni do"
+  days_since: "Dni od"
+  days_since_last: "Od ostatnich urodzin"
+  days_since_total: "Od urodzenia"
+  settings: "Ustawienia"
+  back: "Wstecz"
+  time: "Godzina"
+  zone: "Strefa"
+  zone_manual: "Własna strefa"
+  language: "Język"
+  about: "O projekcie"
+  github: "Gwiazdka na GitHubie"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Usuń dane"
+  delete_yes: "Tak, usuń"
+  delete_no: "Anuluj"
+  webapp: "Aplikacja"
+
+command:
+  desc:
+    start: "Rozpocznij korzystanie z bota"
+    help: "Pomoc"
+    date: "Ustaw datę urodzenia"
+    notify: "Przełącz przypomnienia"
+    daysto: "Dni do urodzin"
+    dayssince: "Dni od urodzin"
+    settings: "Ustawienia profilu"
+    lang: "Język"
+    time: "Godzina przypomnienia"
+    zone: "Strefa czasowa"
+    about: "O projekcie"
+    delete: "Usuń moje dane"
+    cancel: "Anuluj bieżące wprowadzanie"
+    reload: "Wczytaj wiadomości ponownie (właściciel)"

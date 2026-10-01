@@ -1,0 +1,4 @@
+button:
+  back: "Back"
+  page_prev: "←"
+  page_next: "→"

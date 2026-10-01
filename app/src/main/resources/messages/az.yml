@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Salam!* Mən ad günlərini izləyirəm və vacib bir tarixi heç vaxt qaçırmıram."
+    - ""
+    - "Doğum tarixini göstər, mən geri sayımı və təbriki tam vaxtında, öz saat qurşağında və öz dilində göndərim."
+  help:
+    - "*Nə bacarıram*"
+    - ""
+    - "/date: doğum tarixini qur və ya dəyiş"
+    - "/notify: xatırlatmaları aç və ya söndür"
+    - "/daysto: ad gününə qalan günlər"
+    - "/dayssince: doğumdan bəri günlər"
+    - "/time: xatırlatma vaxtı"
+    - "/zone: saat qurşağı"
+    - "/lang: dil"
+    - "/settings: bütün parametrlər bir yerdə"
+    - ""
+    - "Xatırlatmalar hər gün seçdiyin vaxtda gəlir, elə günün özündə isə təbrik alırsan. Yenidən başlatmadan sonra da heç nə itmir."
+  prompt:
+    date:
+      - "Doğum tarixini istədiyin formatda yaz:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5 mart 1998`, `1998-03-05`"
+      - ""
+      - "İl isteğe bağlıdır, amma onsuz yaşını hesablaya bilmərem. Ləğv: /cancel"
+    time:
+      - "Xatırlatma vaxtını yaz, məsələn `12:00` və ya `18`. Ləğv: /cancel"
+    zone:
+      - "Saat qurşağını yaz, məsələn `Asia/Baku` və ya `UTC+3`. Ləğv: /cancel"
+  date:
+    set:
+      - "Yadda saxlanıldı: *{date}*"
+      - ""
+      - "Ad gününə {days} {days|plural:one=gün|other=gün} qalıb. Xatırlatmalar {time} vaxtında {zone} qurşağında gələcək."
+    invalid:
+      - "Tarixi oxuya bilmədim. Misallar: `05.03.1998`, `05.03`, `5 mart 1998`, `1998-03-05`. Yenə cəhd et."
+  time:
+    set:
+      - "Xatırlatma vaxtı: *{time}* (sənin yerli vaxtın)"
+    invalid:
+      - "Bu vaxta oxşamır. Misallar: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Siyahıdan qurşağını seç və ya özünkünü yaz:"
+    set:
+      - "Saat qurşağı: *{zone}*. Cədvəl yenidən hesablandı."
+    invalid:
+      - "Belə qurşağı bilmirəm. Misallar: `Asia/Baku`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Xatırlatmalar *açıqdır*. Cədvəl üzrə yazacağam."
+    "off": "Xatırlatmalar *sönülüdür*. Düymə və ya /notify ilə yenidən aç."
+  answer:
+    days_to: "Ad gününə {days} {days|plural:one=gün|other=gün} qalıb. Təbrik {date} tarixində {time} vaxtında {zone} qurşağında gələcək."
+    days_since: "Doğumdan bəri {days} {days|plural:one=gün|other=gün} keçib. Sən {age} {age|plural:one=yaş|other=yaş}ındasan."
+    days_since_last: "Son ad günündən bəri {days} {days|plural:one=gün|other=gün} keçib."
+    no_year: "Tarixdə il yoxdur, ona görə doğumdan bəri ümumi günləri hesablaya bilmirəm. Son ad günündən saymaq ilsiz də işləyir: aşağıdakı düymə bunu edir. Yaşı da görmək üçün il əlavə et: /date"
+    not_set: "Hələ doğum tarixi yoxdur. Başlayırıq? /date"
+  settings:
+    view:
+      - "*Sənin parametrlərin*"
+      - ""
+      - "Doğum tarixi: {date}"
+      - "Xatırlatma vaxtı: {time}"
+      - "Saat qurşağı: {zone}"
+      - "Xatırlatmalar: {notify}"
+      - "Dil: {lang}"
+    not_set: "qurulmayıb"
+    "on": "açıq"
+    "off": "sönülü"
+  lang:
+    choose: "Dil seç:"
+    set: "Dil dəyişdirildi: {lang}"
+  cancelled: "Ləğv olundu. Heç bir parametrə toxunulmadı."
+  reloaded: "Mesajlar və klaviaturalar YAML-dan yenidən oxundu."
+  perm:
+    not: "Bu əmr yalnız botun sahibinindir."
+
+  delete:
+    confirm:
+      - "Bütün məlumatların (tarix, parametrlər, xatırlatma tarixçəsi) silinsin?"
+      - ""
+      - "Bu geri qaytarılmaz: profil və çatdırılma jurnalı silinəcək."
+    done: "Məlumatlar silindi. /start ilə qayıt"
+  pointer:
+    dm: "Birbaşa mesajlarda cavabladım"
+  flood: "Çox sürətli. Bir neçə saniyədən sonra cəhd et."
+  about:
+    - "*Birthday Bot* açıq şəkildə hazırlanır: mənbə kodu ictimaidir."
+    - ""
+    - "Mənbə kodu GitHub-dadır: {url}"
+    - "Layihəni tək inkişaf etdirirəm və ulduz üçün minnətdar olaram. Bu, həm də IT Management-ə qəbul üçün portfoliomdur."
+    - ""
+    - "İstifadə etdiyin üçün təşəkkür."
+
+reminder:
+  countdown:
+    - "Ad gününə {days} {days|plural:one=gün|other=gün} qalıb!"
+    - ""
+    - "Təbrik {date} tarixində {time} vaxtında {zone} qurşağında gələcək. Xoş gün!"
+  birthday:
+    - "*Ad günün mübarək!* Sən {age} {age|plural:one=yaş|other=yaş} tamam edirsən."
+    - ""
+    - "Xoş gün və əla il."
+  birthday.no_year:
+    - "*Ad günün mübarək!* Bu gün sənin gündür."
+    - ""
+    - "Xoş gün və əla il."
+
+webapp:
+  title: "Mənim ad günüm"
+  date: "Doğum tarixi"
+  time: "Xatırlatma vaxtı"
+  zone: "Saat qurşağı"
+  lang: "Dil"
+  notify: "Xatırlatma göndər"
+  save: "Yadda saxla"
+  saved: "Yadda saxlanıldı"
+  opensource: "Açıq kod"
+  star: "GitHub-da ulduz"
+  star_note: "Mənbə kodu açıqdır: reponu izlə və ulduz qoy. Onu tək inkişaf etdirirəm, bu universitetə qəbul üçün portfoliomdur (IT Management)."
+  delete: "Məlumatlarımı sil"
+  preview: "Bu interfeysin önizləməsidir: profil məlumatları yalnız messenger daxilində əlçatandır."
+  api_error: "API cavab vermədi: səhifə bot serveri olmadan açılıb."
+  auth_error: "Messenger icazəsi lazımdır: tətbiqi botdakı düymə ilə aç."
+  delete_confirm: "Bütün məlumatların silinsin?"
+  days_left: "gün qalıb"
+
+button:
+  set_date: "Tarixi dəyiş"
+  notify_on: "Xatırlatmaları aç"
+  notify_off: "Xatırlatmaları söndür"
+  days_to: "Gün qalıb"
+  days_since: "Gün keçib"
+  days_since_last: "Son ad günündən"
+  days_since_total: "Doğumdan bəri"
+  settings: "Parametrlər"
+  back: "Geri"
+  time: "Vaxt"
+  zone: "Qurşaq"
+  zone_manual: "Başqa qurşaq"
+  language: "Dil"
+  about: "Layihə haqqında"
+  github: "GitHub-da ulduz"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Məlumatları sil"
+  delete_yes: "Bəli, sil"
+  delete_no: "Ləğv et"
+  webapp: "Tətbiq"
+
+command:
+  desc:
+    start: "Botla işə başla"
+    help: "Kömək"
+    date: "Doğum tarixini qur"
+    notify: "Xatırlatmaları aç və ya söndür"
+    daysto: "Ad gününə qalan günlər"
+    dayssince: "Ad günündən bəri günlər"
+    settings: "Profil parametrləri"
+    lang: "Dil"
+    time: "Xatırlatma vaxtı"
+    zone: "Saat qurşağı"
+    about: "Layihə haqqında"
+    delete: "Məlumatlarımı sil"
+    cancel: "Davam edən girişi ləğv et"
+    reload: "Mesajları yenidən oxu (sahib)"

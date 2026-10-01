@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Ahoj!* Strážim narodeniny a nikdy nezmeškám dôležitý dátum."
+    - ""
+    - "Nastav si dátum narodenia a ja budem posielať odpočítavanie a blahoželanie presne na čas, v tvojom časovom pásme a v tvojom jazyku."
+  help:
+    - "*Čo viem*"
+    - ""
+    - "/date: nastaviť alebo zmeniť dátum narodenia"
+    - "/notify: zapnúť alebo vypnúť pripomienky"
+    - "/daysto: dni do narodenín"
+    - "/dayssince: dni od narodenia"
+    - "/time: čas pripomienky"
+    - "/zone: časové pásmo"
+    - "/lang: jazyk"
+    - "/settings: všetky nastavenia naraz"
+    - ""
+    - "Pripomienky chodia denne vo zvolený čas a v samotný deň dostaneš blahoželanie. Nič sa nestratí, ani po reštarte."
+  prompt:
+    date:
+      - "Zadaj dátum narodenia v ľubovoľnom formáte:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5. marca 1998`, `1998-03-05`"
+      - ""
+      - "Rok je voliteľný, ale bez niego nevypočítam vek. Zrušenie: /cancel"
+    time:
+      - "Zadaj čas pripomienky, napríklad `12:00` alebo `18`. Zrušenie: /cancel"
+    zone:
+      - "Zadaj časové pásmo, napríklad `Europe/Bratislava` alebo `UTC+3`. Zrušenie: /cancel"
+  date:
+    set:
+      - "Uložené: *{date}*"
+      - ""
+      - "Do narodenín zostáva {days} {days|plural:one=deň|few=dni|many=dní}. Pripomienky budú chodiť o {time} v tvojom pásme {zone}."
+    invalid:
+      - "Dátum som nevedel prečítať. Príklady: `05.03.1998`, `05.03`, `5. marca 1998`, `1998-03-05`. Skús znova."
+  time:
+    set:
+      - "Čas pripomienky: *{time}* (tvoj miestny čas)"
+    invalid:
+      - "Toto nevyzerá ako čas. Príklady: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Vyber si pásmo zo zoznamu, alebo napíš vlastné:"
+    set:
+      - "Časové pásmo: *{zone}*. Rozvrh prepočítaný."
+    invalid:
+      - "Také pásmo nepoznám. Príklady: `Europe/Bratislava`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Pripomienky sú *zapnuté*. Budem písať podľa rozvrhu."
+    "off": "Pripomienky sú *vypnuté*. Zapni ich znova tlačidlom alebo príkazom /notify."
+  answer:
+    days_to: "Do narodenín zostáva {days} {days|plural:one=deň|few=dni|many=dní}. Blahoželanie príde {date} o {time} v tvojom pásme {zone}."
+    days_since: "Od narodenia uplynulo {days} {days|plural:one=deň|few=dni|many=dní}. Máš {age} {age|plural:one=rok|few=roky|many=rokov}."
+    days_since_last: "Od posledných narodenín uplynulo {days} {days|plural:one=deň|few=dni|many=dní}."
+    no_year: "Dátum nemá rok, takže celkový počet dní od narodenia sa nedá spočítať. Počítanie od posledných narodenín funguje aj bez roka: tlačidlo nižšie to urobí. Pridaj rok a uvidíš aj vek: /date"
+    not_set: "Dátum narodenia zatiaľ nie je zadaný. Začíname? /date"
+  settings:
+    view:
+      - "*Tvoje nastavenia*"
+      - ""
+      - "Dátum narodenia: {date}"
+      - "Čas pripomienky: {time}"
+      - "Časové pásmo: {zone}"
+      - "Pripomienky: {notify}"
+      - "Jazyk: {lang}"
+    not_set: "nenastavené"
+    "on": "zapnuté"
+    "off": "vypnuté"
+  lang:
+    choose: "Vyber jazyk:"
+    set: "Jazyk prepnutý: {lang}"
+  cancelled: "Zrušené. Žiadneho nastavenia som sa nedotkol."
+  reloaded: "Správy a klávesnice znova načítané z YAML."
+  perm:
+    not: "Tento príkaz je len pre vlastníka."
+
+  delete:
+    confirm:
+      - "Zmazať všetky tvoje údaje (dátum, nastavenia, históriu pripomienok)?"
+      - ""
+      - "Je to nevratné: profil a denník doručenia budú vymazané."
+    done: "Údaje zmazané. Vráť sa cez /start"
+  pointer:
+    dm: "Odpovedal som v priamych správach"
+  flood: "Príliš rýchlo. Skús o pár sekúnd."
+  about:
+    - "*Birthday Bot* vzniká otvorene: zdrojový kód je verejný."
+    - ""
+    - "Zdrojový kód je na GitHube: {url}"
+    - "Projekt vyvíjam sám a budem vďačný za hviezdičku. Je to aj moje portfólio pre prihlášku na IT Management."
+    - ""
+    - "Ďakujem, že to používaš."
+
+reminder:
+  countdown:
+    - "Do tvojich narodenín zostáva {days} {days|plural:one=deň|few=dni|many=dní}!"
+    - ""
+    - "Blahoželanie príde {date} o {time} v tvojom pásme {zone}. Pekný deň!"
+  birthday:
+    - "*Všetko najlepšie k narodeninám!* Máš {age} {age|plural:one=rok|few=roky|many=rokov}."
+    - ""
+    - "Pekný deň a skvelý rok."
+  birthday.no_year:
+    - "*Všetko najlepšie k narodeninám!* Dnes je tvoj deň."
+    - ""
+    - "Pekný deň a skvelý rok."
+
+webapp:
+  title: "Moje narodeniny"
+  date: "Dátum narodenia"
+  time: "Čas pripomienky"
+  zone: "Časové pásmo"
+  lang: "Jazyk"
+  notify: "Posielať pripomienky"
+  save: "Uložiť"
+  saved: "Uložené"
+  opensource: "Otvorený kód"
+  star: "Hviezdička na GitHube"
+  star_note: "Zdrojový kód je otvorený: sleduj repozitár a nechaj hviezdičku. Vyvíjam ho sám a je to moje portfólio pre prijatie na univerzitu (IT Management)."
+  delete: "Zmazať moje údaje"
+  preview: "Toto je náhľad rozhrania: údaje profilu sú dostupné len vnútri messengera."
+  api_error: "API neodpovedá: stránka je otvorená bez servera bota."
+  auth_error: "Treba autorizáciu messengera: otvor aplikáciu tlačidlom v botovi."
+  delete_confirm: "Zmazať všetky tvoje údaje?"
+  days_left: "dní zostáva"
+
+button:
+  set_date: "Zmeniť dátum"
+  notify_on: "Zapnúť pripomienky"
+  notify_off: "Vypnúť pripomienky"
+  days_to: "Dní do"
+  days_since: "Dní od"
+  days_since_last: "Od posledných narodenín"
+  days_since_total: "Od narodenia"
+  settings: "Nastavenia"
+  back: "Späť"
+  time: "Čas"
+  zone: "Pásmo"
+  zone_manual: "Vlastné pásmo"
+  language: "Jazyk"
+  about: "O projekte"
+  github: "Hviezdička na GitHube"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Zmazať údaje"
+  delete_yes: "Áno, zmazať"
+  delete_no: "Zrušiť"
+  webapp: "Aplikácia"
+
+command:
+  desc:
+    start: "Začať s botom"
+    help: "Pomoc"
+    date: "Zadať dátum narodenia"
+    notify: "Prepnúť pripomienky"
+    daysto: "Dni do narodenín"
+    dayssince: "Dni od narodenín"
+    settings: "Nastavenia profilu"
+    lang: "Jazyk"
+    time: "Čas pripomienky"
+    zone: "Časové pásmo"
+    about: "O projekte"
+    delete: "Zmazať moje údaje"
+    cancel: "Zrušiť prebiehajúce zadávanie"
+    reload: "Znova načítať správy (vlastník)"

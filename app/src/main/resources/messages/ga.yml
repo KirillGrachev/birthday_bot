@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Haileo!* Coimeádaim súil ar láethanta breithe agus ní chaillim dáta tábhachtach go deo."
+    - ""
+    - "Cuir síos do dháta breithe agus seolfaidh mé an t-áireamh síos agus beannacht in am trátha, i do chrios ama agus i do theanga féin."
+  help:
+    - "*Cad atá ar mo chumas*"
+    - ""
+    - "/date: socraigh nó athraigh do dháta breithe"
+    - "/notify: cuir meabhrúcháin ar siúl nó as"
+    - "/daysto: laethanta go dtí do bhreithlá"
+    - "/dayssince: laethanta ó do bhreithlá"
+    - "/time: am an mheabhrúcháin"
+    - "/zone: crios ama"
+    - "/lang: teanga"
+    - "/settings: gach socrú in aon chéim amháin"
+    - ""
+    - "Tagann na meabhrúcháin gach lá ag an am a roghnaigh tú, agus ar an lá féin faigheann tú beannacht. Ní chailltear aon rud, fiú tar éis atosaithe."
+  prompt:
+    date:
+      - "Cuir isteach do dháta breithe i bhformáid ar bith:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5 Márta 1998`, `1998-03-05`"
+      - ""
+      - "Tá an bhliain roghnach, ach ina haireoidh mé do aois. Cealú: /cancel"
+    time:
+      - "Cuir isteach am an mheabhrúcháin, m.sh. `12:00` nó `18`. Cealú: /cancel"
+    zone:
+      - "Cuir isteach do chrios ama, m.sh. `Europe/Dublin` nó `UTC+3`. Cealú: /cancel"
+  date:
+    set:
+      - "Sábháilte: *{date}*"
+      - ""
+      - "Tá {days} {days|plural:one=lá|two=lá|few=lá|many=lá|other=lá} fágtha go dtí do bhreithlá. Tiocfaidh na meabhrúcháin ag {time} i do chrios {zone}."
+    invalid:
+      - "Níor éirigh liom an dáta a léamh. Samplaí: `05.03.1998`, `05.03`, `5 Márta 1998`, `1998-03-05`. Bain triail eile as."
+  time:
+    set:
+      - "Am an mheabhrúcháin: *{time}* (do chlog áitiúil)"
+    invalid:
+      - "Ní cosúil le ham é sin. Samplaí: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Roghnaigh do chrios ón liosta nó scríobh ceann féin:"
+    set:
+      - "Crios ama: *{zone}*. Athríomharta an sceideal."
+    invalid:
+      - "Níl a leithéid de chrios ar eolas agam. Samplaí: `Europe/Dublin`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Tá meabhrúcháin *ar siúl*. Scríobhfaidh mé de réir an sceidil."
+    "off": "Tá meabhrúcháin *as*. Cuir ar siúl arís leis an gcnaipe nó le /notify."
+  answer:
+    days_to: "Tá {days} {days|plural:one=lá|two=lá|few=lá|many=lá|other=lá} fágtha go dtí do bhreithlá. Tiocfaidh an bheannacht ar {date} ag {time} i do chrios {zone}."
+    days_since: "Tá {days} {days|plural:one=lá|two=lá|few=lá|many=lá|other=lá} caite ó rugadh thú. Tá tú {age} {age|plural:one=bliain|two=bliain|few=bliana|many=mbliana|other=bliain} d'aois."
+    days_since_last: "Tá {days} {days|plural:one=lá|two=lá|few=lá|many=lá|other=lá} caite ó do bhreithlá deireanach."
+    no_year: "Níl bliain sa dáta, mar sin ní féidir líon iomlán na laethanta ó do bhreith a ríomh. Oibríonn an t-áireamh ó do bhreithlá deireanach gan bhliain: déanann an cnaipe thíos é. Cuir bliain leis chun d'aois a fheiceáil freisin: /date"
+    not_set: "Níl dáta breithe socraithe fós. An dtosaímid? /date"
+  settings:
+    view:
+      - "*Do shocruithe*"
+      - ""
+      - "Dáta breithe: {date}"
+      - "Am an mheabhrúcháin: {time}"
+      - "Crios ama: {zone}"
+      - "Meabhrúcháin: {notify}"
+      - "Teanga: {lang}"
+    not_set: "gan socrú"
+    "on": "ar siúl"
+    "off": "as"
+  lang:
+    choose: "Roghnaigh teanga:"
+    set: "Athraíodh an teanga: {lang}"
+  cancelled: "Cealaithe. Níor baineadh le socrú ar bith."
+  reloaded: "Athléadh teachtaireachtaí agus méarchláir ó YAML."
+  perm:
+    not: "Níl sa chead seo ach ag úinéir an bhot."
+
+  delete:
+    confirm:
+      - "An scriosfar do chuid sonraí go léir (dáta, socruithe, stair na meabhrúchán)?"
+      - ""
+      - "Ní féidir é a chur ar ais: scriosfar an phróifíl agus loga na seachadta."
+    done: "Scriosadh na sonraí. Fill trí /start"
+  pointer:
+    dm: "D'freagair mé i dteachtaireachtaí díreacha"
+  flood: "Róthapa. Bain triail as arís i gceann cúpla soicind."
+  about:
+    - "Forbraítear *Birthday Bot* go hoscailte: tá an cód foinseach poiblí."
+    - ""
+    - "Tá an cód foinseach ar GitHub: {url}"
+    - "Forbraím an tionscadal seo i m'aonar agus bheinn buíoch de réalta. Is cuid de mo phortafóilió é d'iarratas ar IT Management."
+    - ""
+    - "Go raibh maith agat as é a úsáid."
+
+reminder:
+  countdown:
+    - "Tá {days} {days|plural:one=lá|two=lá|few=lá|many=lá|other=lá} fágtha go dtí do bhreithlá!"
+    - ""
+    - "Tiocfaidh an bheannacht ar {date} ag {time} i do chrios {zone}. Lá deas duit!"
+  birthday:
+    - "*Lá breithe sona duit!* Tá tú ag dul {age} {age|plural:one=bliain|two=bliain|few=bliana|many=mbliana|other=bliain} d'aois."
+    - ""
+    - "Lá deas agus bliain iontach duit."
+  birthday.no_year:
+    - "*Lá breithe sona duit!* Is leatsa an lá inniu."
+    - ""
+    - "Lá deas agus bliain iontach duit."
+
+webapp:
+  title: "Mo lá breithe"
+  date: "Dáta breithe"
+  time: "Am an mheabhrúcháin"
+  zone: "Crios ama"
+  lang: "Teanga"
+  notify: "Seol meabhrúcháin"
+  save: "Sábháil"
+  saved: "Sábháilte"
+  opensource: "Cód foinseach oscailte"
+  star: "Réalta ar GitHub"
+  star_note: "Tá an cód foinseach oscailte: lean an stór agus fág réalta. Forbraím i m'aonar é, agus is é mo phortafóilió é don iontráil ollscoile (IT Management)."
+  delete: "Scrios mo chuid sonraí"
+  preview: "Réamhamharc ar an gcomhéadan atá anseo: níl sonraí na próifíle ar fáil ach laistigh den teachtaire."
+  api_error: "Níor fhreagair an API: tá an leathanach oscailte gan freastalaí an bhot."
+  auth_error: "Teastaíonn fíordheimhniú an teachtaire: oscail an aip ó chnaipe an bhot."
+  delete_confirm: "An scriosfar do chuid sonraí go léir?"
+  days_left: "lá fágtha"
+
+button:
+  set_date: "Athraigh an dáta"
+  notify_on: "Cuir meabhrúcháin ar siúl"
+  notify_off: "Cuir meabhrúcháin as"
+  days_to: "Laethanta go dtí"
+  days_since: "Laethanta ó"
+  days_since_last: "Ó do bhreithlá deireanach"
+  days_since_total: "Ó do bhreith"
+  settings: "Socruithe"
+  back: "Siar"
+  time: "Am"
+  zone: "Crios"
+  zone_manual: "Crios eile"
+  language: "Teanga"
+  about: "Faoi"
+  github: "Réalta ar GitHub"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Scrios mo chuid sonraí"
+  delete_yes: "Sea, scrios"
+  delete_no: "Cealaigh"
+  webapp: "Aip"
+
+command:
+  desc:
+    start: "Tosaigh ag úsáid an bhot"
+    help: "Cabhair"
+    date: "Socraigh do dháta breithe"
+    notify: "Cuir meabhrúcháin ar siúl nó as"
+    daysto: "Laethanta go dtí do bhreithlá"
+    dayssince: "Laethanta ó do bhreithlá"
+    settings: "Socruithe próifíle"
+    lang: "Teanga"
+    time: "Am an mheabhrúcháin"
+    zone: "Crios ama"
+    about: "Faoi"
+    delete: "Scrios mo chuid sonraí"
+    cancel: "Cealaigh an t-ionchur reatha"
+    reload: "Athlódáil teachtaireachtaí (úinéir)"

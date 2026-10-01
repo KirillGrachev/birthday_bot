@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Hoi!* Ik houd verjaardagen bij en mis nooit een belangrijke datum."
+    - ""
+    - "Geef je geboortedatum op en ik stuur het aftellen en een felicitatie precies op tijd, in jouw tijdzone en in jouw taal."
+  help:
+    - "*Wat ik kan*"
+    - ""
+    - "/date: stel je geboortedatum in of wijzig deze"
+    - "/notify: herinneringen aan of uit"
+    - "/daysto: dagen tot je verjaardag"
+    - "/dayssince: dagen sinds je geboorte"
+    - "/time: tijdstip van de herinnering"
+    - "/zone: tijdzone"
+    - "/lang: taal"
+    - "/settings: alle instellingen in één keer"
+    - ""
+    - "Herinneringen komen dagelijks op het gekozen tijdstip, en op de dag zelf krijg je een felicitatie. Er gaat niets verloren, ook niet na een herstart."
+  prompt:
+    date:
+      - "Voer je geboortedatum in in een formaat naar keuze:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5 maart 1998`, `1998-03-05`"
+      - ""
+      - "Het jaar is optioneel, maar zonder kan ik je leeftijd niet berekenen. Annuleren: /cancel"
+    time:
+      - "Voer het tijdstip van de herinnering in, bv. `12:00` of `18`. Annuleren: /cancel"
+    zone:
+      - "Voer je tijdzone in, bv. `Europe/Amsterdam` of `UTC+3`. Annuleren: /cancel"
+  date:
+    set:
+      - "Opgeslagen: *{date}*"
+      - ""
+      - "Nog {days} {days|plural:one=dag|other=dagen} tot je verjaardag. Herinneringen komen om {time} in jouw tijdzone {zone}."
+    invalid:
+      - "Ik kon de datum niet lezen. Voorbeelden: `05.03.1998`, `05.03`, `5 maart 1998`, `1998-03-05`. Probeer opnieuw."
+  time:
+    set:
+      - "Tijdstip van de herinnering: *{time}* (jouw lokale tijd)"
+    invalid:
+      - "Dat lijkt geen tijd. Voorbeelden: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Kies je tijdzone uit de lijst of voer een eigen in:"
+    set:
+      - "Tijdzone: *{zone}*. Schema herberekend."
+    invalid:
+      - "Die tijdzone ken ik niet. Voorbeelden: `Europe/Amsterdam`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Herinneringen staan *aan*. Ik schrijf volgens het schema."
+    "off": "Herinneringen staan *uit*. Zet ze weer aan met de knop of /notify."
+  answer:
+    days_to: "Nog {days} {days|plural:one=dag|other=dagen} tot je verjaardag. De felicitatie komt op {date} om {time} in jouw tijdzone {zone}."
+    days_since: "Er zijn {days} {days|plural:one=dag|other=dagen} verstreken sinds je geboorte. Je bent {age} {age|plural:one=jaar|other=jaar} oud."
+    days_since_last: "Er zijn {days} {days|plural:one=dag|other=dagen} verstreken sinds je vorige verjaardag."
+    no_year: "De datum heeft geen jaar, dus het totaal aantal dagen sinds je geboorte kan niet worden berekend. Tellen vanaf je laatste verjaardag werkt wel zonder jaar: de knop hieronder doet dat. Voeg een jaar toe om ook je leeftijd te zien: /date"
+    not_set: "Nog geen geboortedatum. Zullen we beginnen? /date"
+  settings:
+    view:
+      - "*Jouw instellingen*"
+      - ""
+      - "Geboortedatum: {date}"
+      - "Tijdstip herinnering: {time}"
+      - "Tijdzone: {zone}"
+      - "Herinneringen: {notify}"
+      - "Taal: {lang}"
+    not_set: "niet ingesteld"
+    "on": "aan"
+    "off": "uit"
+  lang:
+    choose: "Kies je taal:"
+    set: "Taal gewijzigd: {lang}"
+  cancelled: "Geannuleerd. Er is geen enkele instelling gewijzigd."
+  reloaded: "Berichten en toetsenborden opnieuw gelezen uit YAML."
+  perm:
+    not: "Dit commando is alleen voor de eigenaar."
+
+  delete:
+    confirm:
+      - "Al je gegevens verwijderen (datum, instellingen, herinneringsgeschiedenis)?"
+      - ""
+      - "Dit is onomkeerbaar: profiel en bezorglog worden gewist."
+    done: "Gegevens verwijderd. Kom terug via /start"
+  pointer:
+    dm: "Beantwoord in privéberichten"
+  flood: "Te snel. Probeer het over een paar seconden."
+  about:
+    - "*Birthday Bot* wordt open ontwikkeld: de broncode is openbaar."
+    - ""
+    - "De broncode staat op GitHub: {url}"
+    - "Ik ontwikkel dit project alleen en zou een ster waarderen. Het is ook mijn portfolio voor mijn aanvraag voor IT Management."
+    - ""
+    - "Bedankt voor het gebruik."
+
+reminder:
+  countdown:
+    - "Nog {days} {days|plural:one=dag|other=dagen} tot je verjaardag!"
+    - ""
+    - "De felicitatie komt op {date} om {time} in jouw tijdzone {zone}. Fijne dag!"
+  birthday:
+    - "*Gefeliciteerd met je verjaardag!* Je wordt {age} {age|plural:one=jaar|other=jaar}."
+    - ""
+    - "Fijne dag en een geweldig jaar."
+  birthday.no_year:
+    - "*Gefeliciteerd met je verjaardag!* Vandaag is jouw dag."
+    - ""
+    - "Fijne dag en een geweldig jaar."
+
+webapp:
+  title: "Mijn verjaardag"
+  date: "Geboortedatum"
+  time: "Tijdstip herinnering"
+  zone: "Tijdzone"
+  lang: "Taal"
+  notify: "Herinneringen sturen"
+  save: "Opslaan"
+  saved: "Opgeslagen"
+  opensource: "Open source"
+  star: "Ster op GitHub"
+  star_note: "De broncode is open: volg de repository en laat een ster achter. Ik ontwikkel alleen en het is mijn portfolio voor mijn toelating tot de universiteit (IT Management)."
+  delete: "Mijn gegevens verwijderen"
+  preview: "Dit is een voorbeeld van de interface: profielgegevens zijn alleen binnen de messenger beschikbaar."
+  api_error: "De API reageert niet: de pagina is geopend zonder de botserver."
+  auth_error: "Authenticatie van de messenger vereist: open de app via de knop in de bot."
+  delete_confirm: "Al je gegevens verwijderen?"
+  days_left: "dagen te gaan"
+
+button:
+  set_date: "Datum wijzigen"
+  notify_on: "Herinneringen aan"
+  notify_off: "Herinneringen uit"
+  days_to: "Dagen tot"
+  days_since: "Dagen sinds"
+  days_since_last: "Sinds je vorige verjaardag"
+  days_since_total: "Sinds je geboorte"
+  settings: "Instellingen"
+  back: "Terug"
+  time: "Tijdstip"
+  zone: "Tijdzone"
+  zone_manual: "Eigen tijdzone"
+  language: "Taal"
+  about: "Over"
+  github: "Ster op GitHub"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Gegevens verwijderen"
+  delete_yes: "Ja, verwijderen"
+  delete_no: "Annuleren"
+  webapp: "App"
+
+command:
+  desc:
+    start: "Begin met de bot"
+    help: "Help"
+    date: "Geboortedatum instellen"
+    notify: "Herinneringen aan of uit"
+    daysto: "Dagen tot je verjaardag"
+    dayssince: "Dagen sinds je verjaardag"
+    settings: "Profielinstellingen"
+    lang: "Taal"
+    time: "Tijdstip herinnering"
+    zone: "Tijdzone"
+    about: "Over het project"
+    delete: "Mijn gegevens verwijderen"
+    cancel: "Huidige invoer annuleren"
+    reload: "Berichten herladen (eigenaar)"

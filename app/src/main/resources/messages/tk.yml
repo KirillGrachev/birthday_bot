@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Salam!* Men doglan günleri yzarlaýaryn we möhüm senäni hiç wagt sypdyrmaýaryn."
+    - ""
+    - "Doglan günüňi görkez, men sanawy we gutlagy edil wagtynda, seniň wagt zolagyňda we seniň diliňde ibererin."
+  help:
+    - "*Näme bilýärin*"
+    - ""
+    - "/date: doglan günüňi belle ýa-da üýtget"
+    - "/notify: ýatlatmalary aç ýa-da öçür"
+    - "/daysto: doglan güne çenli günler"
+    - "/dayssince: doglan günden bäri günler"
+    - "/time: ýatlatmanyň wagty"
+    - "/zone: wagt zolagy"
+    - "/lang: dil"
+    - "/settings: ähli sazlamalar birbada"
+    - ""
+    - "Ýatlatmalar saýlan wagtyňda her gün gelýär, we şol günüň özünde gutlag alýarsyň. Gaýtadan goýberilenden soň hem hiç zat ýitmeýär."
+  prompt:
+    date:
+      - "Doglan günüňi islendik amatly görnüşde giriz:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5 mart 1998`, `1998-03-05`"
+      - ""
+      - "Ýyl hökmany däl, ýöne onsuz ýaşyňy hasaplap bilmerin. Ýatyrma: /cancel"
+    time:
+      - "Ýatlatmanyň wagtyny giriz, mysal üçin `12:00` ýa-da `18`. Ýatyrma: /cancel"
+    zone:
+      - "Wagt zolagyny giriz, mysal üçin `Asia/Ashgabat` ýa-da `UTC+3`. Ýatyrma: /cancel"
+  date:
+    set:
+      - "Ýazyldy: *{date}*"
+      - ""
+      - "Doglan güne çenli {days} {days|plural:one=gün|other=gün} galdy. Ýatlatmalar {time} wagtynda {zone} zolagynda geler."
+    invalid:
+      - "Senäni okap bilmedim. Mysallar: `05.03.1998`, `05.03`, `5 mart 1998`, `1998-03-05`. Ýene synanyş."
+  time:
+    set:
+      - "Ýatlatmanyň wagty: *{time}* (seniň ýerli wagtyň)"
+    invalid:
+      - "Bu wagta meňzemeýär. Mysallar: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Sanawdan zolagyňy saýla ýa-da özüňkini giriz:"
+    set:
+      - "Wagt zolagy: *{zone}*. Tertip täzeden hasaplanyldy."
+    invalid:
+      - "Beýle zolagy bilemok. Mysallar: `Asia/Ashgabat`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Ýatlatmalar *açyk*. Tertip boýunça ýazaryn."
+    "off": "Ýatlatmalar *öçük*. Düwme ýa-da /notify bilen täzeden aç."
+  answer:
+    days_to: "Doglan güne çenli {days} {days|plural:one=gün|other=gün} galdy. Gutlag {date} senesinde {time} wagtynda {zone} zolagynda geler."
+    days_since: "Doglan günden bäri {days} {days|plural:one=gün|other=gün} geçdi. Saňa {age} {age|plural:one=ýaş|other=ýaş}."
+    days_since_last: "Soňky doglan günden bäri {days} {days|plural:one=gün|other=gün} geçdi."
+    no_year: "Senelerde ýyl ýok, şonuň üçin doglan günden bäri ähli günleri hasaplap bilmerin. Soňky doglan günden sanaw ýylsyz hem işleýär: aşakdaky düwme şony edýär. Ýaşyňy hem görmek üçin ýyl goş: /date"
+    not_set: "Doglan güni heniz görkezilmedik. Başlaýarysmy? /date"
+  settings:
+    view:
+      - "*Seniň sazlamalaryň*"
+      - ""
+      - "Doglan güni: {date}"
+      - "Ýatlatmanyň wagty: {time}"
+      - "Wagt zolagy: {zone}"
+      - "Ýatlatmalar: {notify}"
+      - "Dil: {lang}"
+    not_set: "görkezilmedik"
+    "on": "açyk"
+    "off": "öçük"
+  lang:
+    choose: "Dil saýla:"
+    set: "Dil çalşyryldy: {lang}"
+  cancelled: "Ýatyryldy. Hiç bir sazlama üýtgedilmedi."
+  reloaded: "Habarlar we klawiaturalar YAML-den täzeden okaldy."
+  perm:
+    not: "Bu buýruk diňe botuň eýesi üçin."
+
+  delete:
+    confirm:
+      - "Ähli maglumatlaryňy (sene, sazlamalar, ýatlatma taryhy) pozmalymy?"
+      - ""
+      - "Bu yzyna gaýtarylsyz: profil we eltip beriş žurnaly pozular."
+    done: "Maglumatlar pozuldy. /start arkaly gaýt."
+  pointer:
+    dm: "Göni habarlarda jogap berdim"
+  flood: "Örän çalt. Birnäçe sekuntdan soň synanyş."
+  about:
+    - "*Birthday Bot* açyk öndürilýär: deslapky kod jemgyýetçilikde."
+    - ""
+    - "Deslapky kod GitHub-da: {url}"
+    - "Taslamany ýeke ösdürýärin we ýyldyz üçin minnetdar bolardym. Bu şeýle hem IT Management-a okuwa girmek üçin portfeliom."
+    - ""
+    - "Ulanyýanyň üçin sag bol."
+
+reminder:
+  countdown:
+    - "Doglan günüňe çenli {days} {days|plural:one=gün|other=gün} galdy!"
+    - ""
+    - "Gutlag {date} senesinde {time} wagtynda {zone} zolagynda geler. Gowy gün!"
+  birthday:
+    - "*Doglan günüň gutly bolsun!* Saňa {age} {age|plural:one=ýaş|other=ýaş} boldy."
+    - ""
+    - "Gowy gün we ajaýyp ýyl."
+  birthday.no_year:
+    - "*Doglan günüň gutly bolsun!* Bu gün seniň günüň."
+    - ""
+    - "Gowy gün we ajaýyp ýyl."
+
+webapp:
+  title: "Meniň doglan günüm"
+  date: "Doglan güni"
+  time: "Ýatlatmanyň wagty"
+  zone: "Wagt zolagy"
+  lang: "Dil"
+  notify: "Ýatlatma iber"
+  save: "Ýaz"
+  saved: "Ýazyldy"
+  opensource: "Açyk kod"
+  star: "GitHub-da ýyldyz"
+  star_note: "Deslapky kod açyk: repozytoriýa eýer we ýyldyz goý. Men ony ýeke ösdürýärin, bu uniwersitete okuwa girmek üçin portfeliom (IT Management)."
+  delete: "Maglumatlarymy poz"
+  preview: "Bu interfeýsiň öňünden syny: profil maglumatlary diňe messengeriň içinde elýeterli."
+  api_error: "API jogap bermedi: sahypa botuň serversiz açyldy."
+  auth_error: "Messenger tassyklamasy gerek: programmany botdaky düwme bilen aç."
+  delete_confirm: "Ähli maglumatlaryňy pozmaly?"
+  days_left: "gün galdy"
+
+button:
+  set_date: "Senäni üýtget"
+  notify_on: "Ýatlatmalary aç"
+  notify_off: "Ýatlatmalary öçür"
+  days_to: "Gün galdy"
+  days_since: "Gün geçdi"
+  days_since_last: "Soňky doglan günden"
+  days_since_total: "Doglan günden"
+  settings: "Sazlamalar"
+  back: "Yzyna"
+  time: "Wagt"
+  zone: "Zolak"
+  zone_manual: "Başga zolak"
+  language: "Dil"
+  about: "Taslama barada"
+  github: "GitHub-da ýyldyz"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Maglumatlary poz"
+  delete_yes: "Hawa, poz"
+  delete_no: "Ýatyr"
+  webapp: "Programma"
+
+command:
+  desc:
+    start: "Bot bilen işe başla"
+    help: "Kömek"
+    date: "Doglan günüňi belle"
+    notify: "Ýatlatmalary aç ýa-da öçür"
+    daysto: "Doglan güne çenli günler"
+    dayssince: "Doglan günden bäri günler"
+    settings: "Profil sazlamalary"
+    lang: "Dil"
+    time: "Ýatlatmanyň wagty"
+    zone: "Wagt zolagy"
+    about: "Taslama barada"
+    delete: "Maglumatlarymy poz"
+    cancel: "Häzirki girizmäni ýatyr"
+    reload: "Habarlary täzeden oka (eýesi)"

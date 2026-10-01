@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Hej!* Jeg holder styr på fødselsdage og misser aldrig en vigtig dato."
+    - ""
+    - "Angiv din fødselsdato, så sender jeg nedtællingen og en fødselsdagshilsen præcis til tiden, i din tidszone og på dit sprog."
+  help:
+    - "*Hvad jeg kan*"
+    - ""
+    - "/date: angiv eller ændr din fødselsdato"
+    - "/notify: slå påmindelser til eller fra"
+    - "/daysto: dage til din fødselsdag"
+    - "/dayssince: dage siden din fødselsdag"
+    - "/time: tidspunkt for påmindelsen"
+    - "/zone: tidszone"
+    - "/lang: sprog"
+    - "/settings: alle indstillinger på én gang"
+    - ""
+    - "Påmindelserne kommer dagligt på det valgte tidspunkt, og på selve dagen får du en hilsen. Intet bliver glemt, heller ikke efter genstart."
+  prompt:
+    date:
+      - "Indtast din fødselsdato i et valgfrit format:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5. marts 1998`, `1998-03-05`"
+      - ""
+      - "Året er valgfrit, men uden det kan jeg ikke beregne din alder. Annuller: /cancel"
+    time:
+      - "Indtast tidspunktet for påmindelsen, fx `12:00` eller `18`. Annuller: /cancel"
+    zone:
+      - "Indtast din tidszone, fx `Europe/Copenhagen` eller `UTC+3`. Annuller: /cancel"
+  date:
+    set:
+      - "Gemt: *{date}*"
+      - ""
+      - "Der er {days} {days|plural:one=dag|other=dage} til din fødselsdag. Påmindelserne kommer kl. {time} i din tidszone {zone}."
+    invalid:
+      - "Jeg kunne ikke læse datoen. Eksempler: `05.03.1998`, `05.03`, `5. marts 1998`, `1998-03-05`. Prøv igen."
+  time:
+    set:
+      - "Tidspunkt for påmindelsen: *{time}* (din lokale tid)"
+    invalid:
+      - "Det ligner ikke et tidspunkt. Eksempler: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Vælg din tidszone fra listen eller indtast din egen:"
+    set:
+      - "Tidszone: *{zone}*. Planen er genberegnet."
+    invalid:
+      - "Den tidszone kender jeg ikke. Eksempler: `Europe/Copenhagen`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Påmindelser er *til*. Jeg skriver efter planen."
+    "off": "Påmindelser er *fra*. Slå dem til igen med knappen eller /notify."
+  answer:
+    days_to: "Der er {days} {days|plural:one=dag|other=dage} til din fødselsdag. Hilsenen kommer {date} kl. {time} i din tidszone {zone}."
+    days_since: "Der er gået {days} {days|plural:one=dag|other=dage} siden din fødsel. Du er {age} {age|plural:one=år|other=år} gammel."
+    days_since_last: "Der er gået {days} {days|plural:one=dag|other=dage} siden din sidste fødselsdag."
+    no_year: "Datoen har ikke noget årstal, så det samlede antal dage siden fødslen kan ikke beregnes. Optællingen fra den sidste fødselsdag virker uden årstal: knappen nedenfor gør det. Tilføj et årstal for også at se din alder: /date"
+    not_set: "Ingen fødselsdato endnu. Skal vi starte? /date"
+  settings:
+    view:
+      - "*Dine indstillinger*"
+      - ""
+      - "Fødselsdato: {date}"
+      - "Tidspunkt for påmindelse: {time}"
+      - "Tidszone: {zone}"
+      - "Påmindelser: {notify}"
+      - "Sprog: {lang}"
+    not_set: "ikke angivet"
+    "on": "til"
+    "off": "fra"
+  lang:
+    choose: "Vælg sprog:"
+    set: "Sproget er skiftet: {lang}"
+  cancelled: "Annulleret. Ingen indstillinger blev ændret."
+  reloaded: "Beskeder og tastaturer er genindlæst fra YAML."
+  perm:
+    not: "Denne kommando er kun for ejeren."
+
+  delete:
+    confirm:
+      - "Slet alle dine data (dato, indstillinger, påmindelseshistorik)?"
+      - ""
+      - "Det kan ikke fortrydes: profil og leveringslog bliver slettet."
+    done: "Data slettet. Kom tilbage via /start"
+  pointer:
+    dm: "Svarede i direkte beskeder"
+  flood: "For hurtigt. Prøv igen om et par sekunder."
+  about:
+    - "*Birthday Bot* udvikles åbent: kildekoden er offentlig."
+    - ""
+    - "Kildekoden ligger på GitHub: {url}"
+    - "Jeg udvikler projektet alene og ville være taknemlig for en stjerne. Det er også mit portfolio til ansøgningen om IT Management."
+    - ""
+    - "Tak fordi du bruger den."
+
+reminder:
+  countdown:
+    - "Der er {days} {days|plural:one=dag|other=dage} til din fødselsdag!"
+    - ""
+    - "Hilsenen kommer {date} kl. {time} i din tidszone {zone}. God dag!"
+  birthday:
+    - "*Tillykke med fødselsdagen!* Du fylder {age} {age|plural:one=år|other=år}."
+    - ""
+    - "God dag og godt år."
+  birthday.no_year:
+    - "*Tillykke med fødselsdagen!* I dag er din dag."
+    - ""
+    - "God dag og godt år."
+
+webapp:
+  title: "Min fødselsdag"
+  date: "Fødselsdato"
+  time: "Tidspunkt for påmindelse"
+  zone: "Tidszone"
+  lang: "Sprog"
+  notify: "Send påmindelser"
+  save: "Gem"
+  saved: "Gemt"
+  opensource: "Åben kildekode"
+  star: "Stjerne på GitHub"
+  star_note: "Kildekoden er åben: følg repositoriet og giv en stjerne. Jeg udvikler det alene, og det er mit portfolio til universitetsoptagelse (IT Management)."
+  delete: "Slet mine data"
+  preview: "Dette er en forhåndsvisning: profildata er kun tilgængelige inde i messengeren."
+  api_error: "API svarer ikke: siden er åbnet uden bottens server."
+  auth_error: "Messenger-login kræves: åbn appen fra knappen i botten."
+  delete_confirm: "Slet alle dine data?"
+  days_left: "dage tilbage"
+
+button:
+  set_date: "Skift dato"
+  notify_on: "Slå påmindelser til"
+  notify_off: "Slå påmindelser fra"
+  days_to: "Dage til"
+  days_since: "Dage siden"
+  days_since_last: "Siden sidste fødselsdag"
+  days_since_total: "Siden fødslen"
+  settings: "Indstillinger"
+  back: "Tilbage"
+  time: "Tidspunkt"
+  zone: "Tidszone"
+  zone_manual: "Egen tidszone"
+  language: "Sprog"
+  about: "Om projektet"
+  github: "Stjerne på GitHub"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Slet mine data"
+  delete_yes: "Ja, slet"
+  delete_no: "Annuller"
+  webapp: "App"
+
+command:
+  desc:
+    start: "Kom i gang med botten"
+    help: "Hjælp"
+    date: "Angiv fødselsdato"
+    notify: "Slå påmindelser til eller fra"
+    daysto: "Dage til fødselsdagen"
+    dayssince: "Dage siden fødselsdagen"
+    settings: "Profilindstillinger"
+    lang: "Sprog"
+    time: "Tidspunkt for påmindelse"
+    zone: "Tidszone"
+    about: "Om projektet"
+    delete: "Slet mine data"
+    cancel: "Annuller igangværende indtastning"
+    reload: "Genindlæs beskeder (ejer)"

@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Ahoj!* Hlídám narozeniny a nikdy nezmeškám důležité datum."
+    - ""
+    - "Nastav si datum narození a já budu posílat odpočet a přání přesně včas, v tvém časovém pásmu a tvém jazyce."
+  help:
+    - "*Co umím*"
+    - ""
+    - "/date: nastavit nebo změnit datum narození"
+    - "/notify: zapnout nebo vypnout připomínky"
+    - "/daysto: kolik dní zbývá do narozenin"
+    - "/dayssince: kolik dní uplynulo od narození"
+    - "/time: čas připomínky"
+    - "/zone: časové pásmo"
+    - "/lang: jazyk"
+    - "/settings: všechny nastavení najednou"
+    - ""
+    - "Připomínky chodí denně v zvolený čas a v samotný den dostaneš přání. Nic se nezmešká, ani po restartu."
+  prompt:
+    date:
+      - "Zadej datum narození v libovolném formátu:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5. března 1998`, `1998-03-05`"
+      - ""
+      - "Rok je volitelný, ale bez něj nespočítám věk. Zrušení: /cancel"
+    time:
+      - "Zadej čas připomínky, například `12:00` nebo `18`. Zrušení: /cancel"
+    zone:
+      - "Zadej časové pásmo, například `Europe/Prague` nebo `UTC+3`. Zrušení: /cancel"
+  date:
+    set:
+      - "Uloženo: *{date}*"
+      - ""
+      - "Do narozenin zbývá {days} {days|plural:one=den|few=dny|many=dnů}. Připomínky budou chodit v {time} ve tvém pásmu {zone}."
+    invalid:
+      - "Datum jsem nepřečetl. Příklady: `05.03.1998`, `05.03`, `5. března 1998`, `1998-03-05`. Zkus to znovu."
+  time:
+    set:
+      - "Čas připomínky: *{time}* (tvůj místní čas)"
+    invalid:
+      - "Tohle nevypadá jako čas. Příklady: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Vyber si pásmo ze seznamu, nebo napiš vlastní:"
+    set:
+      - "Časové pásmo: *{zone}*. Rozvrh přepočítán."
+    invalid:
+      - "Takové pásmo neznám. Příklady: `Europe/Prague`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Připomínky jsou *zapnuté*. Budu psát podle rozvrhu."
+    "off": "Připomínky jsou *vypnuté*. Zapnout je můžeš tlačítkem nebo příkazem /notify."
+  answer:
+    days_to: "Do narozenin zbývá {days} {days|plural:one=den|few=dny|many=dnů}. Přání přijde {date} v {time} ve tvém pásmu {zone}."
+    days_since: "Od narození uplynulo {days} {days|plural:one=den|few=dny|many=dnů}. Je ti {age} {age|plural:one=rok|few=roky|many=let}."
+    days_since_last: "Od posledních narozenin uplynulo {days} {days|plural:one=den|few=dny|many=dnů}."
+    no_year: "Datum nemá rok, takže celkový počet dní od narození spočítat nelze. Počítání od posledních narozenin funguje i bez roku: tlačítko níže to umí. Přidej rok a uvidíš i věk: /date"
+    not_set: "Datum narození zatím není zadané. Začneme? /date"
+  settings:
+    view:
+      - "*Tvoje nastavení*"
+      - ""
+      - "Datum narození: {date}"
+      - "Čas připomínky: {time}"
+      - "Časové pásmo: {zone}"
+      - "Připomínky: {notify}"
+      - "Jazyk: {lang}"
+    not_set: "nenastaveno"
+    "on": "zapnuté"
+    "off": "vypnuté"
+  lang:
+    choose: "Vyber jazyk:"
+    set: "Jazyk přepnut: {lang}"
+  cancelled: "Zrušeno. Žádného nastavení jsem se nedotkl."
+  reloaded: "Zprávy a klávesnice znovu načteny z YAML."
+  perm:
+    not: "Tento příkaz je jen pro vlastníka."
+
+  delete:
+    confirm:
+      - "Smazat všechna tvoje data (datum, nastavení, historii připomínek)?"
+      - ""
+      - "Krok je nevratný: profil i deník doručení budou vymazány."
+    done: "Data smazána. Vrať se přes /start"
+  pointer:
+    dm: "Odpověděl jsem v přímých zprávách"
+  flood: "Příliš rychle. Zkus to za pár sekund."
+  about:
+    - "*Birthday Bot* vzniká otevřeně: zdrojový kód je veřejný."
+    - ""
+    - "Zdrojový kód je na GitHubu: {url}"
+    - "Projekt vyvíjím sám a budu rád za hvězdičku. Je to i moje portfolio pro přihlášku na IT Management."
+    - ""
+    - "Díky, že to používáš."
+
+reminder:
+  countdown:
+    - "Do tvých narozenin zbývá {days} {days|plural:one=den|few=dny|many=dnů}!"
+    - ""
+    - "Přání přijde {date} v {time} ve tvém pásmu {zone}. Hezký den!"
+  birthday:
+    - "*Všechno nejlepší k narozeninám!* Je ti {age} {age|plural:one=rok|few=roky|many=let}."
+    - ""
+    - "Hezký den a skvělý rok."
+  birthday.no_year:
+    - "*Všechno nejlepší k narozeninám!* Dnes je tvůj den."
+    - ""
+    - "Hezký den a skvělý rok."
+
+webapp:
+  title: "Moje narozeniny"
+  date: "Datum narození"
+  time: "Čas připomínky"
+  zone: "Časové pásmo"
+  lang: "Jazyk"
+  notify: "Posílat připomínky"
+  save: "Uložit"
+  saved: "Uloženo"
+  opensource: "Otevřený kód"
+  star: "Hvězdička na GitHubu"
+  star_note: "Zdrojový kód je otevřený: sleduj repozitář a nech hvězdičku. Vyvíjím ho sám a je to moje portfolio pro přijetí na univerzitu (IT Management)."
+  delete: "Smazat moje data"
+  preview: "Toto je náhled rozhraní: data profilu jsou dostupná jen uvnitř messengeru."
+  api_error: "API neodpovídá: stránka je otevřená bez serveru bota."
+  auth_error: "Je potřeba přihlášení messengeru: otevři aplikaci tlačítkem v botovi."
+  delete_confirm: "Smazat všechna tvoje data?"
+  days_left: "dní zbývá"
+
+button:
+  set_date: "Změnit datum"
+  notify_on: "Zapnout připomínky"
+  notify_off: "Vypnout připomínky"
+  days_to: "Dní do"
+  days_since: "Dní od"
+  days_since_last: "Od posledních narozenin"
+  days_since_total: "Od narození"
+  settings: "Nastavení"
+  back: "Zpět"
+  time: "Čas"
+  zone: "Pásmo"
+  zone_manual: "Vlastní pásmo"
+  language: "Jazyk"
+  about: "O projektu"
+  github: "Hvězdička na GitHubu"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Smazat data"
+  delete_yes: "Ano, smazat"
+  delete_no: "Zrušit"
+  webapp: "Aplikace"
+
+command:
+  desc:
+    start: "Začít s botem"
+    help: "Nápověda"
+    date: "Zadat datum narození"
+    notify: "Přepnout připomínky"
+    daysto: "Dní do narozenin"
+    dayssince: "Dní od narození"
+    settings: "Nastavení profilu"
+    lang: "Jazyk"
+    time: "Čas připomínky"
+    zone: "Časové pásmo"
+    about: "O projektu"
+    delete: "Smazat moje data"
+    cancel: "Zrušit probíhající zadávání"
+    reload: "Znovu načíst zprávy (vlastník)"

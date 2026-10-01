@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Hei!* Seuraan syntymäpäiviä enkä koskaan päästä tärkeää päivämäärää karkaamaan."
+    - ""
+    - "Aseta syntymäpäiväsi, niin lähetän päivälaskurin ja onnittelun täsmälleen ajoissa, omalla aikavyöhykkeelläsi ja omalla kielelläsi."
+  help:
+    - "*Mitä osaan*"
+    - ""
+    - "/date: aseta tai vaihda syntymäpäivä"
+    - "/notify: muistutukset päälle tai pois"
+    - "/daysto: päiviä syntymäpäivään"
+    - "/dayssince: päiviä syntymäpäivästä"
+    - "/time: muistutuksen kellonaika"
+    - "/zone: aikavyöhyke"
+    - "/lang: kieli"
+    - "/settings: kaikki asetukset kerralla"
+    - ""
+    - "Muistutukset tulevat päivittäin valitsemanasi aikana, ja itse päivänä saat onnittelun. Mikään ei jää väliin, ei edes uudelleenkäynnistyksen jälkeen."
+  prompt:
+    date:
+      - "Syötä syntymäpäiväsi missä tahansa muodossa:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5. maaliskuuta 1998`, `1998-03-05`"
+      - ""
+      - "Vuosi on valinnainen, mutta ilman sitä en osaa laskea ikääsi. Peruutus: /cancel"
+    time:
+      - "Syötä muistutuksen kellonaika, esim. `12:00` tai `18`. Peruutus: /cancel"
+    zone:
+      - "Syötä aikavyöhyke, esim. `Europe/Helsinki` tai `UTC+3`. Peruutus: /cancel"
+  date:
+    set:
+      - "Tallennettu: *{date}*"
+      - ""
+      - "Syntymäpäivään on {days} {days|plural:one=päivä|other=päivää}. Muistutukset tulevat kello {time} vyöhykkeelläsi {zone}."
+    invalid:
+      - "En saanut päivämäärää selvitettyä. Esimerkkejä: `05.03.1998`, `05.03`, `5. maaliskuuta 1998`, `1998-03-05`. Yritä uudelleen."
+  time:
+    set:
+      - "Muistutuksen kellonaika: *{time}* (oma paikallinen aikasi)"
+    invalid:
+      - "Tuo ei näytä kellonajalta. Esimerkkejä: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Valitse aikavyöhykkeesi listalta tai syötä oma:"
+    set:
+      - "Aikavyöhyke: *{zone}*. Aikataulu laskettu uudelleen."
+    invalid:
+      - "En tunne tuota vyöhykettä. Esimerkkejä: `Europe/Helsinki`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Muistutukset ovat *päällä*. Kirjoitan aikataulun mukaan."
+    "off": "Muistutukset ovat *pois päältä*. Kytke ne takaisin painikkeella tai komennolla /notify."
+  answer:
+    days_to: "Syntymäpäivään on {days} {days|plural:one=päivä|other=päivää}. Onnittelu saapuu {date} kello {time} vyöhykkeelläsi {zone}."
+    days_since: "Syntymästäsi on kulunut {days} {days|plural:one=päivä|other=päivää}. Olet {age} {age|plural:one=vuoden|other=vuotta} vanha."
+    days_since_last: "Viime syntymäpäivästäsi on kulunut {days} {days|plural:one=päivä|other=päivää}."
+    no_year: "Päivämäärässä ei ole vuotta, joten syntymästä kuluneiden päivien kokonaismäärää ei voi laskea. Laskenta viime syntymäpäivästä toimii ilman vuotta: alla oleva painike tekee sen. Lisää vuosi, niin näet myös iän: /date"
+    not_set: "Syntymäpäivää ei ole vielä asetettu. Aloitetaanko? /date"
+  settings:
+    view:
+      - "*Omat asetuksesi*"
+      - ""
+      - "Syntymäpäivä: {date}"
+      - "Muistutuksen kellonaika: {time}"
+      - "Aikavyöhyke: {zone}"
+      - "Muistutukset: {notify}"
+      - "Kieli: {lang}"
+    not_set: "ei asetettu"
+    "on": "päällä"
+    "off": "pois päältä"
+  lang:
+    choose: "Valitse kieli:"
+    set: "Kieli vaihdettu: {lang}"
+  cancelled: "Peruutettu. Mitään asetusta ei muutettu."
+  reloaded: "Viestit ja näppäimistöt luettu uudelleen YAML-tiedostosta."
+  perm:
+    not: "Tämä komento on vain omistajalle."
+
+  delete:
+    confirm:
+      - "Poistetaanko kaikki tietosi (päivämäärä, asetukset, muistutushistoria)?"
+      - ""
+      - "Tämä on peruuttamatonta: profiili ja toimitusloki pyyhitään."
+    done: "Tiedot poistettu. Palaa komennolla /start"
+  pointer:
+    dm: "Vastasin yksityisviestissä"
+  flood: "Liian nopeasti. Yritä muutaman sekunnin kuluttua."
+  about:
+    - "*Birthday Bot* kehittyy avoimesti: lähdekoodi on julkinen."
+    - ""
+    - "Lähdekoodi on GitHubissa: {url}"
+    - "Kehitän projektia yksin ja olisin kiitollinen tähdestä. Se on myös portfolioni IT Management -hakuun."
+    - ""
+    - "Kiitos, että käytät."
+
+reminder:
+  countdown:
+    - "Syntymäpäivääsi on {days} {days|plural:one=päivä|other=päivää}!"
+    - ""
+    - "Onnittelu saapuu {date} kello {time} vyöhykkeelläsi {zone}. Hyvää päivää!"
+  birthday:
+    - "*Onnea syntymäpäivänäsi!* Täytät {age} {age|plural:one=vuoden|other=vuotta}."
+    - ""
+    - "Hyvää päivää ja mainiota vuotta."
+  birthday.no_year:
+    - "*Onnea syntymäpäivänäsi!* Tänään on sinun päiväsi."
+    - ""
+    - "Hyvää päivää ja mainiota vuotta."
+
+webapp:
+  title: "Oma syntymäpäiväni"
+  date: "Syntymäpäivä"
+  time: "Muistutuksen kellonaika"
+  zone: "Aikavyöhyke"
+  lang: "Kieli"
+  notify: "Lähetä muistutukset"
+  save: "Tallenna"
+  saved: "Tallennettu"
+  opensource: "Avoin lähdekoodi"
+  star: "Tähti GitHubissa"
+  star_note: "Lähdekoodi on avoin: seuraa repositoriota ja jätä tähti. Kehitän sitä yksin, ja se on portfolioni yliopistohakuun (IT Management)."
+  delete: "Poista tietoni"
+  preview: "Tämä on käyttöliittymän esikatselu: profiilitiedot ovat saatavilla vain messengerin sisällä."
+  api_error: "API ei vastannut: sivu on auki ilman botin palvelinta."
+  auth_error: "Messengerin tunnistautuminen tarvitaan: avaa sovellus botin painikkeesta."
+  delete_confirm: "Poistetaanko kaikki tietosi?"
+  days_left: "päivää jäljellä"
+
+button:
+  set_date: "Vaihda päivämäärä"
+  notify_on: "Kytke muistutukset päälle"
+  notify_off: "Kytke muistutukset pois"
+  days_to: "Päiviä jäljellä"
+  days_since: "Päiviä kulunut"
+  days_since_last: "Viime syntymäpäivästä"
+  days_since_total: "Syntymästä asti"
+  settings: "Asetukset"
+  back: "Takaisin"
+  time: "Kellonaika"
+  zone: "Vyöhyke"
+  zone_manual: "Oma aikavyöhyke"
+  language: "Kieli"
+  about: "Tietoa projektista"
+  github: "Tähti GitHubissa"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Poista tiedot"
+  delete_yes: "Kyllä, poista"
+  delete_no: "Peruuta"
+  webapp: "Sovellus"
+
+command:
+  desc:
+    start: "Aloita botin käyttö"
+    help: "Ohje"
+    date: "Aseta syntymäpäivä"
+    notify: "Muistutukset päälle tai pois"
+    daysto: "Päiviä syntymäpäivään"
+    dayssince: "Päiviä syntymäpäivästä"
+    settings: "Profiilin asetukset"
+    lang: "Kieli"
+    time: "Muistutuksen kellonaika"
+    zone: "Aikavyöhyke"
+    about: "Tietoa projektista"
+    delete: "Poista tietoni"
+    cancel: "Peruuta meneillään oleva syöttö"
+    reload: "Lataa viestit uudelleen (omistaja)"

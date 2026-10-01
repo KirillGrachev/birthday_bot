@@ -1,0 +1,52 @@
+message:
+  start: "Старт"
+  help: "Справка"
+  countdown: "Осталось {days} {days|plural:one=день|few=дня|many=дней} до {date}"
+  greeting: "Тебе {age} {age|plural:one=год|few=года|many=лет}!"
+  plain: "без плейсхолдеров"
+  prompt:
+    date: "Введи дату"
+  date:
+    set: "Сохранил {date}, осталось {days}"
+    invalid: "Не разобрал"
+  answer:
+    not_set: "Даты нет"
+  settings:
+    view: "Настройки"
+    not_set: "не указана"
+    "on": "включены"
+    "off": "выключены"
+  notify:
+    "on": "Вкл"
+    "off": "Выкл"
+  cancelled: "Отменил"
+  reloaded: "Перечитал"
+  about: "About {url}"
+  perm:
+    not: "Нельзя"
+  flood: "Слишком часто!"
+  delete:
+    confirm: "confirm"
+    done: "done"
+reminder:
+  countdown: "До дня рождения {days} {days|plural:one=день|few=дня|many=дней}"
+  birthday: "С днём рождения, {age}!"
+  birthday.no_year: "С днём рождения!"
+button:
+  about: "About"
+  github: "GitHub"
+  set_date: "Дата"
+  notify_on: "Включить"
+  notify_off: "Выключить"
+  days_to: "Дней до"
+  days_since: "Дней со"
+  settings: "Настройки"
+  back: "Назад"
+  time: "Время"
+  zone: "Пояс"
+  zone_manual: "Ввести свой пояс"
+  language: "Язык"
+  delete: "Удалить данные"
+  delete_yes: "Да, удалить"
+  delete_no: "Отмена"
+  webapp: "Приложение"

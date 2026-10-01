@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Szia!* Én követem a születésnapokat, és sosem hagyok ki egy fontos dátumot sem."
+    - ""
+    - "Add meg a születésnapodat, és én időben elküldöm a visszaszámlálást és a köszöntést, a te időzónádban és a te nyelveden."
+  help:
+    - "*Mit tudok*"
+    - ""
+    - "/date: születésnap megadása vagy módosítása"
+    - "/notify: emlékeztetők be- vagy kikapcsolása"
+    - "/daysto: napok a születésnapig"
+    - "/dayssince: napok a születésnap óta"
+    - "/time: emlékeztető ideje"
+    - "/zone: időzóna"
+    - "/lang: nyelv"
+    - "/settings: minden beállítás egyszerre"
+    - ""
+    - "Az emlékeztetők minden nap a választott időpontban érkeznek, magán a napon pedig köszöntést kapsz. Semmi sem marad ki, még újraindítás után sem."
+  prompt:
+    date:
+      - "Írd be a születésnapodat bármilyen formátumban:"
+      - ""
+      - "`05.03.1998`, `05.03`, `1998. március 5.`, `1998-03-05`"
+      - ""
+      - "Az év opcionális, de nélküle nem tudom kiszámolni a korodat. Mégse: /cancel"
+    time:
+      - "Írd be az emlékeztető idejét, például `12:00` vagy `18`. Mégse: /cancel"
+    zone:
+      - "Írd be az időzónádat, például `Europe/Budapest` vagy `UTC+3`. Mégse: /cancel"
+  date:
+    set:
+      - "Elmentve: *{date}*"
+      - ""
+      - "{days} {days|plural:one=nap|other=nap} van hátra a születésnapodig. Az emlékeztetők {time} órakor érkeznek a te zónádban: {zone}."
+    invalid:
+      - "Nem sikerült beolvasni a dátumot. Példák: `05.03.1998`, `05.03`, `1998. március 5.`, `1998-03-05`. Próbáld újra."
+  time:
+    set:
+      - "Emlékeztető ideje: *{time}* (a te helyi időddel)"
+    invalid:
+      - "Ez nem hasonlít időpontra. Példák: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Válaszd ki a zónádat a listából, vagy add meg a sajátot:"
+    set:
+      - "Időzóna: *{zone}*. A menetrend újraszámolva."
+    invalid:
+      - "Nem ismerem ezt a zónát. Példák: `Europe/Budapest`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Az emlékeztetők *bekapcsolva*. Menetrend szerint fogok írni."
+    "off": "Az emlékeztetők *kikapcsolva*. A gombbal vagy a /notify paranccsal visszakapcsolhatod."
+  answer:
+    days_to: "{days} {days|plural:one=nap|other=nap} van hátra a születésnapodig. A köszöntés {date} érkezik {time} órakor a te zónádban: {zone}."
+    days_since: "A születésed óta {days} {days|plural:one=nap|other=nap} telt el. {age} {age|plural:one=éves|other=éves} vagy."
+    days_since_last: "Az utolsó születésnapod óta {days} {days|plural:one=nap|other=nap} telt el."
+    no_year: "A dátumban nincs év, így a születés óta eltelt napok teljes száma nem számolható ki. Az utolsó születésnap óta tartott számlálás év nélkül is működik: az alábbi gomb megcsinálja. Add meg az évet is, ha a korodat is látnád: /date"
+    not_set: "Még nincs születésnap megadva. Kezdjük? /date"
+  settings:
+    view:
+      - "*A te beállításaid*"
+      - ""
+      - "Születésnap: {date}"
+      - "Emlékeztető ideje: {time}"
+      - "Időzóna: {zone}"
+      - "Emlékeztetők: {notify}"
+      - "Nyelv: {lang}"
+    not_set: "nincs megadva"
+    "on": "bekapcsolva"
+    "off": "kikapcsolva"
+  lang:
+    choose: "Válassz nyelvet:"
+    set: "Nyelv átváltva: {lang}"
+  cancelled: "Megszakítva. Egy beállítást sem módosítottam."
+  reloaded: "Az üzenetek és billentyűzetek újraolvasva a YAML-ból."
+  perm:
+    not: "Ez a parancs csak a tulajdonosé."
+
+  delete:
+    confirm:
+      - "Töröljem minden adatodat (dátum, beállítások, emlékeztető-előzmények)?"
+      - ""
+      - "Visszavonhatatlan: a profil és a kézbesítési napló törlődik."
+    done: "Adatok törölve. Gyere vissza a /start paranccsal"
+  pointer:
+    dm: "Közvetlen üzenetben válaszoltam"
+  flood: "Túl gyorsan. Próbáld újra pár másodperc múlva."
+  about:
+    - "A *Birthday Bot* nyíltan fejlődik: a forráskód nyilvános."
+    - ""
+    - "A forráskód a GitHubon van: {url}"
+    - "A projektet egyedül fejlesztem, és hálás lennék egy csillagért. Ez a portfolióm az IT Management felvételhez is."
+    - ""
+    - "Köszönöm, hogy használod."
+
+reminder:
+  countdown:
+    - "{days} {days|plural:one=nap|other=nap} van hátra a születésnapodig!"
+    - ""
+    - "A köszöntés {date} érkezik {time} órakor a te zónádban: {zone}. Szép napot!"
+  birthday:
+    - "*Boldog születésnapot!* Betöltöd a(z) {age}. {age|plural:one=évedet|other=évedet}."
+    - ""
+    - "Szép napot és remek évet."
+  birthday.no_year:
+    - "*Boldog születésnapot!* Ma a te napod van."
+    - ""
+    - "Szép napot és remek évet."
+
+webapp:
+  title: "A születésnapom"
+  date: "Születésnap"
+  time: "Emlékeztető ideje"
+  zone: "Időzóna"
+  lang: "Nyelv"
+  notify: "Emlékeztetők küldése"
+  save: "Mentés"
+  saved: "Elmentve"
+  opensource: "Nyílt forráskód"
+  star: "Csillag a GitHubon"
+  star_note: "A forráskód nyílt: kövesd a repót és hagyj csillagot. Egyedül fejlesztem, és ez a portfolióm az egyetemi felvételhez (IT Management)."
+  delete: "Adataim törlése"
+  preview: "Ez a felület előnézete: a profiladatok csak a messengeren belül érhetők el."
+  api_error: "Az API nem válaszolt: az oldal a bot szervere nélkül nyílt meg."
+  auth_error: "Messenger-hitelesítés kell: nyisd meg az appot a bot gombjából."
+  delete_confirm: "Töröljem minden adatodat?"
+  days_left: "nap van hátra"
+
+button:
+  set_date: "Dátum módosítása"
+  notify_on: "Emlékeztetők be"
+  notify_off: "Emlékeztetők ki"
+  days_to: "Napok hátra"
+  days_since: "Napok óta"
+  days_since_last: "Az utolsó születésnap óta"
+  days_since_total: "A születés óta"
+  settings: "Beállítások"
+  back: "Vissza"
+  time: "Időpont"
+  zone: "Zóna"
+  zone_manual: "Egyéni zóna"
+  language: "Nyelv"
+  about: "A projektről"
+  github: "Csillag a GitHubon"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Adatok törlése"
+  delete_yes: "Igen, törlés"
+  delete_no: "Mégse"
+  webapp: "Alkalmazás"
+
+command:
+  desc:
+    start: "A bot használatának kezdete"
+    help: "Súgó"
+    date: "Születésnap megadása"
+    notify: "Emlékeztetők átváltása"
+    daysto: "Napok a születésnapig"
+    dayssince: "Napok a születésnap óta"
+    settings: "Profilbeállítások"
+    lang: "Nyelv"
+    time: "Emlékeztető ideje"
+    zone: "Időzóna"
+    about: "A projektről"
+    delete: "Adataim törlése"
+    cancel: "A folyamatban lévő bevitel megszakítása"
+    reload: "Üzenetek újraolvasása (tulajdonos)"

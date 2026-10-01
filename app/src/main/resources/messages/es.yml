@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*¡Hola!* Yo vigilo los cumpleaños y nunca dejo pasar una fecha importante."
+    - ""
+    - "Indica tu fecha de nacimiento, y te enviaré la cuenta regresiva y la felicitación puntualmente, en tu zona horaria y en tu idioma."
+  help:
+    - "*Qué sé hacer*"
+    - ""
+    - "/date: indicar o cambiar la fecha de nacimiento"
+    - "/notify: activar o desactivar los recordatorios"
+    - "/daysto: días hasta tu cumpleaños"
+    - "/dayssince: días desde tu nacimiento"
+    - "/time: hora del recordatorio"
+    - "/zone: zona horaria"
+    - "/lang: idioma"
+    - "/settings: todos los ajustes a la vez"
+    - ""
+    - "Los recordatorios llegan a diario a la hora elegida, y el mismo día recibes una felicitación. No se pierde nada, ni tras un reinicio."
+  prompt:
+    date:
+      - "Escribe tu fecha de nacimiento en cualquier formato:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5 de marzo de 1998`, `1998-03-05`"
+      - ""
+      - "El año es opcional, pero sin él no puedo calcular tu edad. Cancelar: /cancel"
+    time:
+      - "Escribe la hora del recordatorio, p. ej. `12:00` o `18`. Cancelar: /cancel"
+    zone:
+      - "Escribe tu zona horaria, p. ej. `Europe/Madrid` o `UTC+3`. Cancelar: /cancel"
+  date:
+    set:
+      - "Guardado: *{date}*"
+      - ""
+      - "Quedan {days} {days|plural:one=día|other=días} hasta tu cumpleaños. Los recordatorios llegarán a las {time} en tu zona horaria: {zone}."
+    invalid:
+      - "No pude leer la fecha. Ejemplos: `05.03.1998`, `05.03`, `5 de marzo de 1998`, `1998-03-05`. Inténtalo de nuevo."
+  time:
+    set:
+      - "Hora del recordatorio: *{time}* (tu hora local)"
+    invalid:
+      - "Eso no parece una hora. Ejemplos: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Elige tu zona horaria de la lista o escribe la tuya:"
+    set:
+      - "Zona horaria: *{zone}*. Horario recalculado."
+    invalid:
+      - "Zona horaria desconocida. Ejemplos: `Europe/Madrid`, `UTC+3`, `America/Mexico_City`."
+  notify:
+    "on": "Recordatorios *activados*. Escribiré según el horario."
+    "off": "Recordatorios *desactivados*. Vuelve a activarlos con el botón o /notify."
+  answer:
+    days_to: "Quedan {days} {days|plural:one=día|other=días} hasta tu cumpleaños. La felicitación llegará el {date} a las {time} en tu zona horaria: {zone}."
+    days_since: "Han pasado {days} {days|plural:one=día|other=días} desde tu nacimiento. Tienes {age} {age|plural:one=año|other=años}."
+    days_since_last: "Han pasado {days} {days|plural:one=día|other=días} desde tu último cumpleaños."
+    no_year: "La fecha no tiene año, así que no puedo contar el total de días desde tu nacimiento. Contar desde el último cumpleaños funciona sin año: el botón de abajo lo hace. Indica la fecha con año para ver también tu edad: /date"
+    not_set: "Aún no hay fecha de nacimiento. ¿Empezamos? /date"
+  settings:
+    view:
+      - "*Tus ajustes*"
+      - ""
+      - "Fecha de nacimiento: {date}"
+      - "Hora del recordatorio: {time}"
+      - "Zona horaria: {zone}"
+      - "Recordatorios: {notify}"
+      - "Idioma: {lang}"
+    not_set: "sin indicar"
+    "on": "activados"
+    "off": "desactivados"
+  lang:
+    choose: "Elige tu idioma:"
+    set: "Idioma cambiado: {lang}"
+  cancelled: "Cancelado. No toqué ningún ajuste."
+  reloaded: "Mensajes y teclados recargados desde YAML."
+  perm:
+    not: "Este comando es solo para el propietario."
+
+  delete:
+    confirm:
+      - "¿Eliminar todos tus datos (fecha, ajustes, historial de recordatorios)?"
+      - ""
+      - "Es irreversible: se borrarán el perfil y el registro de envíos."
+    done: "Datos eliminados. Vuelve con /start"
+  pointer:
+    dm: "Respondí en mensajes directos"
+  flood: "Demasiado rápido. Inténtalo en unos segundos."
+  about:
+    - "*Birthday Bot* se desarrolla a la vista de todos: su código fuente es público."
+    - ""
+    - "El código fuente está en GitHub: {url}"
+    - "Desarrollo el proyecto yo solo y agradezco una estrella. También es mi portafolio para acceder a IT Management."
+    - ""
+    - "Gracias por usarlo."
+
+reminder:
+  countdown:
+    - "¡Quedan {days} {days|plural:one=día|other=días} hasta tu cumpleaños!"
+    - ""
+    - "La felicitación llegará el {date} a las {time} en tu zona horaria: {zone}. ¡Que tengas un buen día!"
+  birthday:
+    - "*¡Feliz cumpleaños!* Cumples {age} {age|plural:one=año|other=años}."
+    - ""
+    - "Que tengas un buen día y un buen año."
+  birthday.no_year:
+    - "*¡Feliz cumpleaños!* Hoy es tu día."
+    - ""
+    - "Que tengas un buen día y un buen año."
+
+webapp:
+  title: "Mi cumpleaños"
+  date: "Fecha de nacimiento"
+  time: "Hora del recordatorio"
+  zone: "Zona horaria"
+  lang: "Idioma"
+  notify: "Enviar recordatorios"
+  save: "Guardar"
+  saved: "Guardado"
+  opensource: "Código abierto"
+  star: "Estrella en GitHub"
+  star_note: "El código fuente está abierto: sigue el repositorio y deja una estrella. Desarrollo el proyecto yo solo, y es mi portafolio para acceder a IT Management."
+  delete: "Borrar mis datos"
+  preview: "Esta es una vista previa: los datos del perfil solo existen dentro del mensajero."
+  api_error: "El API no respondió: la página está abierta sin el servidor del bot."
+  auth_error: "Se necesita autenticación del mensajero: abre la app desde el botón del bot."
+  delete_confirm: "¿Eliminar todos tus datos?"
+  days_left: "días restantes"
+
+button:
+  set_date: "Cambiar fecha"
+  notify_on: "Activar avisos"
+  notify_off: "Desactivar avisos"
+  days_to: "Días hasta"
+  days_since: "Días desde"
+  days_since_last: "Desde tu último cumpleaños"
+  days_since_total: "Desde tu nacimiento"
+  settings: "Ajustes"
+  back: "Atrás"
+  time: "Hora"
+  zone: "Zona"
+  zone_manual: "Escribir otra zona"
+  language: "Idioma"
+  about: "Acerca del proyecto"
+  github: "Estrella en GitHub"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Borrar mis datos"
+  delete_yes: "Sí, borrar"
+  delete_no: "Cancelar"
+  webapp: "App"
+
+command:
+  desc:
+    start: "Iniciar el bot"
+    help: "Ayuda"
+    date: "Indicar fecha de nacimiento"
+    notify: "Activar o desactivar recordatorios"
+    daysto: "Días hasta tu cumpleaños"
+    dayssince: "Días desde tu nacimiento"
+    settings: "Ajustes del perfil"
+    lang: "Idioma"
+    time: "Hora del recordatorio"
+    zone: "Zona horaria"
+    about: "Acerca del proyecto"
+    delete: "Borrar mis datos"
+    cancel: "Cancelar la entrada"
+    reload: "Recargar mensajes (propietario)"

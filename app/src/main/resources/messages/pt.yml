@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Olá!* Eu acompanho aniversários e nunca perco uma data importante."
+    - ""
+    - "Indica a tua data de nascimento e eu envio a contagem decrescente e os parabéns exatamente a horas, no teu fuso horário e na tua língua."
+  help:
+    - "*O que sei fazer*"
+    - ""
+    - "/date: definir ou alterar a data de nascimento"
+    - "/notify: ativar ou desativar lembretes"
+    - "/daysto: dias até ao teu aniversário"
+    - "/dayssince: dias desde o teu nascimento"
+    - "/time: hora do lembrete"
+    - "/zone: fuso horário"
+    - "/lang: idioma"
+    - "/settings: todas as definições de uma vez"
+    - ""
+    - "Os lembretes chegam todos os dias à hora escolhida, e no próprio dia recebes os parabéns. Nada se perde, mesmo após um reinício."
+  prompt:
+    date:
+      - "Escreve a tua data de nascimento no formato que preferires:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5 de março de 1998`, `1998-03-05`"
+      - ""
+      - "O ano é opcional, mas sem ele não consigo calcular a tua idade. Cancelar: /cancel"
+    time:
+      - "Escreve a hora do lembrete, por exemplo `12:00` ou `18`. Cancelar: /cancel"
+    zone:
+      - "Escreve o teu fuso horário, por exemplo `Europe/Lisbon` ou `UTC+3`. Cancelar: /cancel"
+  date:
+    set:
+      - "Guardado: *{date}*"
+      - ""
+      - "Faltam {days} {days|plural:one=dia|other=dias} para o teu aniversário. Os lembretes chegam às {time} no teu fuso {zone}."
+    invalid:
+      - "Não consegui ler a data. Exemplos: `05.03.1998`, `05.03`, `5 de março de 1998`, `1998-03-05`. Tenta outra vez."
+  time:
+    set:
+      - "Hora do lembrete: *{time}* (a tua hora local)"
+    invalid:
+      - "Isso não parece uma hora. Exemplos: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Escolhe o teu fuso na lista ou escreve o teu:"
+    set:
+      - "Fuso horário: *{zone}*. Calendário recalculado."
+    invalid:
+      - "Não conheço esse fuso. Exemplos: `Europe/Lisbon`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Os lembretes estão *ativados*. Vou escrever conforme o calendário."
+    "off": "Os lembretes estão *desativados*. Volta a ativá-los com o botão ou /notify."
+  answer:
+    days_to: "Faltam {days} {days|plural:one=dia|other=dias} para o teu aniversário. Os parabéns chegam a {date} às {time} no teu fuso {zone}."
+    days_since: "Passaram {days} {days|plural:one=dia|other=dias} desde o teu nascimento. Tens {age} {age|plural:one=ano|other=anos}."
+    days_since_last: "Passaram {days} {days|plural:one=dia|other=dias} desde o teu último aniversário."
+    no_year: "A data não tem ano, por isso o total de dias desde o nascimento não pode ser calculado. A contagem desde o último aniversário funciona sem ano: o botão abaixo faz isso. Acrescenta um ano para veres também a idade: /date"
+    not_set: "Ainda não há data de nascimento. Começamos? /date"
+  settings:
+    view:
+      - "*As tuas definições*"
+      - ""
+      - "Data de nascimento: {date}"
+      - "Hora do lembrete: {time}"
+      - "Fuso horário: {zone}"
+      - "Lembretes: {notify}"
+      - "Idioma: {lang}"
+    not_set: "não definido"
+    "on": "ativados"
+    "off": "desativados"
+  lang:
+    choose: "Escolhe o teu idioma:"
+    set: "Idioma alterado: {lang}"
+  cancelled: "Cancelado. Nenhuma definição foi alterada."
+  reloaded: "Mensagens e teclados relidos do YAML."
+  perm:
+    not: "Este comando é apenas do proprietário."
+
+  delete:
+    confirm:
+      - "Apagar todos os teus dados (data, definições, histórico de lembretes)?"
+      - ""
+      - "É irreversível: o perfil e o registo de entregas serão apagados."
+    done: "Dados apagados. Volta através de /start"
+  pointer:
+    dm: "Respondi em mensagens diretas"
+  flood: "Demasiado depressa. Tenta daqui a uns segundos."
+  about:
+    - "O *Birthday Bot* é desenvolvido às claras: o código-fonte é público."
+    - ""
+    - "O código-fonte está no GitHub: {url}"
+    - "Desenvolvo este projeto sozinho e agradecia uma estrela. É também o meu portefólio para a candidatura a IT Management."
+    - ""
+    - "Obrigado por o usares."
+
+reminder:
+  countdown:
+    - "Faltam {days} {days|plural:one=dia|other=dias} para o teu aniversário!"
+    - ""
+    - "Os parabéns chegam a {date} às {time} no teu fuso {zone}. Bom dia!"
+  birthday:
+    - "*Feliz aniversário!* Fazes {age} {age|plural:one=ano|other=anos}."
+    - ""
+    - "Bom dia e um excelente ano."
+  birthday.no_year:
+    - "*Feliz aniversário!* Hoje é o teu dia."
+    - ""
+    - "Bom dia e um excelente ano."
+
+webapp:
+  title: "O meu aniversário"
+  date: "Data de nascimento"
+  time: "Hora do lembrete"
+  zone: "Fuso horário"
+  lang: "Idioma"
+  notify: "Enviar lembretes"
+  save: "Guardar"
+  saved: "Guardado"
+  opensource: "Código aberto"
+  star: "Estrela no GitHub"
+  star_note: "O código-fonte é aberto: segue o repositório e deixa uma estrela. Desenvolvo-o sozinho, e é o meu portefólio para a admissão na universidade (IT Management)."
+  delete: "Apagar os meus dados"
+  preview: "Isto é uma pré-visualização da interface: os dados do perfil só existem dentro do messenger."
+  api_error: "A API não respondeu: a página está aberta sem o servidor do bot."
+  auth_error: "É necessária autorização do messenger: abre a app pelo botão no bot."
+  delete_confirm: "Apagar todos os teus dados?"
+  days_left: "dias restantes"
+
+button:
+  set_date: "Alterar data"
+  notify_on: "Ativar lembretes"
+  notify_off: "Desativar lembretes"
+  days_to: "Dias até"
+  days_since: "Dias desde"
+  days_since_last: "Desde o último aniversário"
+  days_since_total: "Desde o nascimento"
+  settings: "Definições"
+  back: "Voltar"
+  time: "Hora"
+  zone: "Fuso"
+  zone_manual: "Escrever outro fuso"
+  language: "Idioma"
+  about: "Sobre"
+  github: "Estrela no GitHub"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Apagar os meus dados"
+  delete_yes: "Sim, apagar"
+  delete_no: "Cancelar"
+  webapp: "App"
+
+command:
+  desc:
+    start: "Começar a usar o bot"
+    help: "Ajuda"
+    date: "Definir a data de nascimento"
+    notify: "Ativar ou desativar lembretes"
+    daysto: "Dias até ao aniversário"
+    dayssince: "Dias desde o aniversário"
+    settings: "Definições do perfil"
+    lang: "Idioma"
+    time: "Hora do lembrete"
+    zone: "Fuso horário"
+    about: "Sobre o projeto"
+    delete: "Apagar os meus dados"
+    cancel: "Cancelar a introdução em curso"
+    reload: "Reler mensagens (proprietário)"

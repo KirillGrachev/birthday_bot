@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Hallo!* Ich behalte Geburtstage im Blick und verpasse kein wichtiges Datum."
+    - ""
+    - "Gib dein Geburtsdatum an, ich schicke den Countdown und die Gratulation pünktlich, in deiner Zeitzone und deiner Sprache."
+  help:
+    - "*Was ich kann*"
+    - ""
+    - "/date: Geburtsdatum setzen oder ändern"
+    - "/notify: Erinnerungen ein- oder ausschalten"
+    - "/daysto: Tage bis zum Geburtstag"
+    - "/dayssince: Tage seit der Geburt"
+    - "/time: Erinnerungszeit"
+    - "/zone: Zeitzone"
+    - "/lang: Sprache"
+    - "/settings: alle Einstellungen auf einmal"
+    - ""
+    - "Erinnerungen kommen täglich zur gewählten Zeit, am Geburtstag selbst eine Gratulation. Nichts geht verloren, auch nach einem Neustart."
+  prompt:
+    date:
+      - "Gib dein Geburtsdatum in einem beliebigen Format ein:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5. März 1998`, `1998-03-05`"
+      - ""
+      - "Das Jahr ist optional, ohne es kann ich das Alter nicht berechnen. Abbrechen: /cancel"
+    time:
+      - "Gib die Erinnerungszeit ein, z. B. `12:00` oder `18`. Abbrechen: /cancel"
+    zone:
+      - "Gib deine Zeitzone ein, z. B. `Europe/Berlin` oder `UTC+3`. Abbrechen: /cancel"
+  date:
+    set:
+      - "Gespeichert: *{date}*"
+      - ""
+      - "Noch {days} {days|plural:one=Tag|other=Tage} bis zum Geburtstag. Erinnerungen kommen um {time} in deiner Zeitzone: {zone}."
+    invalid:
+      - "Datum nicht erkannt. Beispiele: `05.03.1998`, `05.03`, `5. März 1998`, `1998-03-05`. Versuch es erneut."
+  time:
+    set:
+      - "Erinnerungszeit: *{time}* (deine Ortszeit)"
+    invalid:
+      - "Das sieht nicht nach einer Zeit aus. Beispiele: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Wähle deine Zeitzone aus der Liste oder gib eine eigene ein:"
+    set:
+      - "Zeitzone: *{zone}*. Zeitplan neu berechnet."
+    invalid:
+      - "Unbekannte Zeitzone. Beispiele: `Europe/Berlin`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Erinnerungen sind *an*. Ich schreibe nach Plan."
+    "off": "Erinnerungen sind *aus*. Wieder einschalten per Button oder /notify."
+  answer:
+    days_to: "Noch {days} {days|plural:one=Tag|other=Tage} bis zum Geburtstag. Die Gratulation kommt am {date} um {time} in deiner Zeitzone: {zone}."
+    days_since: "{days} {days|plural:one=Tag|other=Tage} seit deiner Geburt vergangen. Du bist {age} {age|plural:one=Jahr|other=Jahre} alt."
+    days_since_last: "Seit deinem letzten Geburtstag sind {days} {days|plural:one=Tag|other=Tage} vergangen."
+    no_year: "Das Datum hat kein Jahr, daher kann ich die Tage seit der Geburt nicht insgesamt zählen. Das Zählen seit dem letzten Geburtstag geht auch ohne Jahr: Der Knopf unten macht das. Mit einem Jahr im Datum zeige ich auch das Alter: /date"
+    not_set: "Noch kein Geburtsdatum. Fangen wir an? /date"
+  settings:
+    view:
+      - "*Deine Einstellungen*"
+      - ""
+      - "Geburtsdatum: {date}"
+      - "Erinnerungszeit: {time}"
+      - "Zeitzone: {zone}"
+      - "Erinnerungen: {notify}"
+      - "Sprache: {lang}"
+    not_set: "nicht gesetzt"
+    "on": "an"
+    "off": "aus"
+  lang:
+    choose: "Wähle deine Sprache:"
+    set: "Sprache gewechselt: {lang}"
+  cancelled: "Abgebrochen. Keine Einstellung wurde geändert."
+  reloaded: "Nachrichten und Tastaturen neu aus YAML geladen."
+  perm:
+    not: "Dieser Befehl ist nur für den Besitzer."
+
+  delete:
+    confirm:
+      - "Alle deine Daten löschen (Datum, Einstellungen, Erinnerungshistorie)?"
+      - ""
+      - "Unwiderruflich: Profil und Zustellprotokoll werden gelöscht."
+    done: "Daten gelöscht. Zurück mit /start"
+  pointer:
+    dm: "Antwort in Direktnachrichten"
+  flood: "Zu schnell. Versuch es in ein paar Sekunden erneut."
+  about:
+    - "*Birthday Bot* wird offen entwickelt: der Quellcode ist öffentlich."
+    - ""
+    - "Der Quellcode liegt offen auf GitHub: {url}"
+    - "Ich entwickle das Projekt allein und freue mich über einen Stern. Es dient auch als mein Portfolio für die Bewerbung um IT Management."
+    - ""
+    - "Danke fürs Nutzen."
+
+reminder:
+  countdown:
+    - "Noch {days} {days|plural:one=Tag|other=Tage} bis zu deinem Geburtstag!"
+    - ""
+    - "Die Gratulation kommt am {date} um {time} in deiner Zeitzone: {zone}. Einen schönen Tag!"
+  birthday:
+    - "*Alles Gute zum Geburtstag!* Du wirst {age} {age|plural:one=Jahr|other=Jahre}."
+    - ""
+    - "Einen schönen Tag und ein gutes Jahr."
+  birthday.no_year:
+    - "*Alles Gute zum Geburtstag!* Heute ist dein Tag."
+    - ""
+    - "Einen schönen Tag und ein gutes Jahr."
+
+webapp:
+  title: "Mein Geburtstag"
+  date: "Geburtsdatum"
+  time: "Erinnerungszeit"
+  zone: "Zeitzone"
+  lang: "Sprache"
+  notify: "Erinnerungen senden"
+  save: "Speichern"
+  saved: "Gespeichert"
+  opensource: "Offener Quellcode"
+  star: "Stern auf GitHub"
+  star_note: "Der Quellcode ist offen: folge dem Repository und vergib einen Stern. Ich entwickle das Projekt allein, und es ist mein Portfolio für die Bewerbung um IT Management."
+  delete: "Meine Daten löschen"
+  preview: "Dies ist eine UI-Vorschau: Profildaten gibt es nur im Messenger."
+  api_error: "Keine API-Antwort: die Seite ist ohne Bot-Server geöffnet."
+  auth_error: "Messenger-Auth nötig: öffne die App über den Button im Bot."
+  delete_confirm: "Alle deine Daten löschen?"
+  days_left: "Tage übrig"
+
+button:
+  set_date: "Datum ändern"
+  notify_on: "Erinnerungen an"
+  notify_off: "Erinnerungen aus"
+  days_to: "Tage bis"
+  days_since: "Tage seit"
+  days_since_last: "Seit dem letzten Geburtstag"
+  days_since_total: "Seit deiner Geburt"
+  settings: "Einstellungen"
+  back: "Zurück"
+  time: "Zeit"
+  zone: "Zeitzone"
+  zone_manual: "Eigene Zone eingeben"
+  language: "Sprache"
+  about: "Über das Projekt"
+  github: "Stern auf GitHub"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Daten löschen"
+  delete_yes: "Ja, löschen"
+  delete_no: "Abbrechen"
+  webapp: "App"
+
+command:
+  desc:
+    start: "Bot starten"
+    help: "Hilfe"
+    date: "Geburtsdatum setzen"
+    notify: "Erinnerungen umschalten"
+    daysto: "Tage bis zum Geburtstag"
+    dayssince: "Tage seit der Geburt"
+    settings: "Profileinstellungen"
+    lang: "Sprache"
+    time: "Erinnerungszeit"
+    zone: "Zeitzone"
+    about: "Über das Projekt"
+    delete: "Meine Daten löschen"
+    cancel: "Eingabe abbrechen"
+    reload: "Nachrichten neu laden (Besitzer)"

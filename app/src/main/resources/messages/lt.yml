@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Labas!* Aš seku gimtadienius ir niekada nepraleidžiu svarbios datos."
+    - ""
+    - "Nurodyk savo gimimo datą, ir aš atsiųsiu dienų skaičiavimą bei sveikinimą lygiai laiku, tavo laiko juostoje ir tavo kalba."
+  help:
+    - "*Ką aš moku*"
+    - ""
+    - "/date: nustatyk arba pakeisk gimimo datą"
+    - "/notify: įjunk arba išjunk priminimus"
+    - "/daysto: kiek dienų iki gimtadienio"
+    - "/dayssince: kiek dienų nuo gimimo"
+    - "/time: priminimo laikas"
+    - "/zone: laiko juosta"
+    - "/lang: kalba"
+    - "/settings: visi nustatymai iš karto"
+    - ""
+    - "Priminimai atkeliauja kasdien pasirinktą valandą, o pačią dieną gauni sveikinimą. Nieko nepraleidžiama net po perkrovimo."
+  prompt:
+    date:
+      - "Įvesk gimimo datą bet kokiu patogiu formatu:"
+      - ""
+      - "`05.03.1998`, `05.03`, `1998 m. kovo 5 d.`, `1998-03-05`"
+      - ""
+      - "Metai nebūtini, bet be jų nesuskaičiuosiu amžiaus. Atšaukti: /cancel"
+    time:
+      - "Įvesk priminimo laiką, pvz. `12:00` arba `18`. Atšaukti: /cancel"
+    zone:
+      - "Įvesk laiko juostą, pvz. `Europe/Vilnius` arba `UTC+3`. Atšaukti: /cancel"
+  date:
+    set:
+      - "Išsaugota: *{date}*"
+      - ""
+      - "Iki gimtadienio liko {days} {days|plural:one=diena|few=dienos|other=dienų}. Priminimai atkeliaus {time} tavo juostoje {zone}."
+    invalid:
+      - "Neperskaičiau datos. Pavyzdžiai: `05.03.1998`, `05.03`, `1998 m. kovo 5 d.`, `1998-03-05`. Bandyk dar kartą."
+  time:
+    set:
+      - "Priminimo laikas: *{time}* (tavo vietiniu laiku)"
+    invalid:
+      - "Tai nepanašu į laiką. Pavyzdžiai: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Pasirink juostą iš sąrašo arba įvesk savo:"
+    set:
+      - "Laiko juosta: *{zone}*. Tvarkaraštis perskaičiuotas."
+    invalid:
+      - "Tokios juostos nežinau. Pavyzdžiai: `Europe/Vilnius`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Priminimai *įjungti*. Rašysiu pagal tvarkaraštį."
+    "off": "Priminimai *išjungti*. Įjunk iš naujo mygtuku arba komanda /notify."
+  answer:
+    days_to: "Iki gimtadienio liko {days} {days|plural:one=diena|few=dienos|other=dienų}. Sveikinimas atkeliaus {date} {time} tavo juostoje {zone}."
+    days_since: "Nuo gimimo praėjo {days} {days|plural:one=diena|few=dienos|other=dienų}. Tau {age} {age|plural:one=metai|few=metai|other=metų}."
+    days_since_last: "Nuo paskutinio gimtadienio praėjo {days} {days|plural:one=diena|few=dienos|other=dienų}."
+    no_year: "Datoje nėra metų, todėl bendro dienų nuo gimimo skaičiaus suskaičiuoti negaliu. Skaičiavimas nuo paskutinio gimtadienio veikia ir be metų: tai padaro mygtukas žemiau. Pridėk metus, kad matytum ir amžių: /date"
+    not_set: "Gimimo datos dar nėra. Pradedam? /date"
+  settings:
+    view:
+      - "*Tavo nustatymai*"
+      - ""
+      - "Gimimo data: {date}"
+      - "Priminimo laikas: {time}"
+      - "Laiko juosta: {zone}"
+      - "Priminimai: {notify}"
+      - "Kalba: {lang}"
+    not_set: "nenustatyta"
+    "on": "įjungti"
+    "off": "išjungti"
+  lang:
+    choose: "Pasirink kalbą:"
+    set: "Kalba perjungta: {lang}"
+  cancelled: "Atšaukta. Nė vienas nustatymas nepakeistas."
+  reloaded: "Žinutės ir klaviatūros iš naujo perskaitytos iš YAML."
+  perm:
+    not: "Ši komanda skirta tik savininkui."
+
+  delete:
+    confirm:
+      - "Ištrinti visus tavo duomenis (datą, nustatymus, priminimų istoriją)?"
+      - ""
+      - "Tai negrįžtama: profilis ir pristatymo žurnalas bus ištrinti."
+    done: "Duomenys ištrinti. Grįžk per /start"
+  pointer:
+    dm: "Atsakiau asmeninėse žinutėse"
+  flood: "Per greitai. Pabandyk po kelių sekundžių."
+  about:
+    - "*Birthday Bot* kuriamas atvirai: pirminis kodas viešas."
+    - ""
+    - "Pirminis kodas yra GitHub: {url}"
+    - "Projektą kuriu vienas ir būčiau dėkingas už žvaigždutę. Tai ir mano portfolijas stojant į IT Management."
+    - ""
+    - "Ačiū, kad naudoji."
+
+reminder:
+  countdown:
+    - "Iki tavo gimtadienio liko {days} {days|plural:one=diena|few=dienos|other=dienų}!"
+    - ""
+    - "Sveikinimas atkeliaus {date} {time} tavo juostoje {zone}. Geros dienos!"
+  birthday:
+    - "*Su gimtadieniu!* Tau sukanka {age} {age|plural:one=metai|few=metai|other=metų}."
+    - ""
+    - "Geros dienos ir puikių metų."
+  birthday.no_year:
+    - "*Su gimtadieniu!* Šiandien tavo diena."
+    - ""
+    - "Geros dienos ir puikių metų."
+
+webapp:
+  title: "Mano gimtadienis"
+  date: "Gimimo data"
+  time: "Priminimo laikas"
+  zone: "Laiko juosta"
+  lang: "Kalba"
+  notify: "Siųsti priminimus"
+  save: "Išsaugoti"
+  saved: "Išsaugota"
+  opensource: "Atviras kodas"
+  star: "Žvaigždutė GitHub"
+  star_note: "Pirminis kodas atviras: sek saugyklą ir palik žvaigždutę. Kuriu vienas, ir tai mano portfolijas stojant į universitetą (IT Management)."
+  delete: "Ištrinti mano duomenis"
+  preview: "Tai sąsajos peržiūra: profilio duomenys pasiekiami tik messenger viduje."
+  api_error: "API neatsakė: puslapis atidarytas be boto serverio."
+  auth_error: "Reikia messenger autorizacijos: atidaryk programėlę boto mygtuku."
+  delete_confirm: "Ištrinti visus tavo duomenis?"
+  days_left: "dienų liko"
+
+button:
+  set_date: "Keisti datą"
+  notify_on: "Įjungti priminimus"
+  notify_off: "Išjungti priminimus"
+  days_to: "Dienos iki"
+  days_since: "Dienos nuo"
+  days_since_last: "Nuo paskutinio gimtadienio"
+  days_since_total: "Nuo gimimo"
+  settings: "Nustatymai"
+  back: "Atgal"
+  time: "Laikas"
+  zone: "Juosta"
+  zone_manual: "Kita juosta"
+  language: "Kalba"
+  about: "Apie projektą"
+  github: "Žvaigždutė GitHub"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Ištrinti duomenis"
+  delete_yes: "Taip, ištrinti"
+  delete_no: "Atšaukti"
+  webapp: "Programėlė"
+
+command:
+  desc:
+    start: "Pradėti darbą su botu"
+    help: "Pagalba"
+    date: "Nurodyti gimimo datą"
+    notify: "Perjungti priminimus"
+    daysto: "Dienos iki gimtadienio"
+    dayssince: "Dienos nuo gimtadienio"
+    settings: "Profilio nustatymai"
+    lang: "Kalba"
+    time: "Priminimo laikas"
+    zone: "Laiko juosta"
+    about: "Apie projektą"
+    delete: "Ištrinti mano duomenis"
+    cancel: "Atšaukti vykstantį įvedimą"
+    reload: "Iš naujo įkelti žinutes (savininkas)"

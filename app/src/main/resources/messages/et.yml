@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Tere!* Ma pean sünnipäevadel silma peal ega maga kunagi olulist kuupäeva maha."
+    - ""
+    - "Määra oma sünnikuupäev ja ma saadan päevade loenduse ning õnnesoovi täpselt õigel ajal, sinu ajavööndis ja sinu keeles."
+  help:
+    - "*Mida ma oskan*"
+    - ""
+    - "/date: määra või muuda sünnikuupäeva"
+    - "/notify: lülita meeldetuletused sisse või välja"
+    - "/daysto: mitu päeva sünnipäevani"
+    - "/dayssince: mitu päeva sünnipäevast möödunud"
+    - "/time: meeldetuletuse kellaaeg"
+    - "/zone: ajavöönd"
+    - "/lang: keel"
+    - "/settings: kõik seaded korraga"
+    - ""
+    - "Meeldetuletused saabuvad iga päev valitud kellaajal ja sünnipäeval endal saad õnnesoovi. Mitte miski ei jää kahe silma vahele, ka pärast taaskäivitust."
+  prompt:
+    date:
+      - "Sisesta sünnikuupäev sobivas vormis:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5. märts 1998`, `1998-03-05`"
+      - ""
+      - "Aasta on vabatahtlik, kuid ilma selleta ei saa ma vanust arvutada. Tühistamine: /cancel"
+    time:
+      - "Sisesta meeldetuletuse kellaaeg, näiteks `12:00` või `18`. Tühistamine: /cancel"
+    zone:
+      - "Sisesta ajavöönd, näiteks `Europe/Tallinn` või `UTC+3`. Tühistamine: /cancel"
+  date:
+    set:
+      - "Salvestatud: *{date}*"
+      - ""
+      - "Sünnipäevani on {days} {days|plural:one=päev|other=päeva}. Meeldetuletused saabuvad kell {time} sinu vööndis {zone}."
+    invalid:
+      - "Ei saanud kuupäevast aru. Näited: `05.03.1998`, `05.03`, `5. märts 1998`, `1998-03-05`. Proovi uuesti."
+  time:
+    set:
+      - "Meeldetuletuse kellaaeg: *{time}* (sinu kohalik aeg)"
+    invalid:
+      - "See ei näe välja nagu kellaaeg. Näited: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Vali oma vöönd loendist või sisesta ise:"
+    set:
+      - "Ajavöönd: *{zone}*. Ajakava arvutati ümber."
+    invalid:
+      - "Sellist vööndit ma ei tea. Näited: `Europe/Tallinn`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Meeldetuletused on *sees*. Kirjutan plaani järgi."
+    "off": "Meeldetuletused on *väljas*. Lülita tagasi nupu või käsuga /notify."
+  answer:
+    days_to: "Sünnipäevani on {days} {days|plural:one=päev|other=päeva}. Õnnesoov saabub {date} kell {time} sinu vööndis {zone}."
+    days_since: "Sünnist on möödunud {days} {days|plural:one=päev|other=päeva}. Sa oled {age} {age|plural:one=aasta|other=aastat} vana."
+    days_since_last: "Viimasest sünnipäevast on möödunud {days} {days|plural:one=päev|other=päeva}."
+    no_year: "Kuupäeval puudub aasta, seega sünnist möödunud päevade koguarvu ei saa arvutada. Viimasest sünnipäevast loendamine töötab ka ilma aastata: allolev nupp teeb seda. Lisa aasta, et näha ka vanust: /date"
+    not_set: "Sünnikuupäeva pole veel. Alustame? /date"
+  settings:
+    view:
+      - "*Sinu seaded*"
+      - ""
+      - "Sünnikuupäev: {date}"
+      - "Meeldetuletuse kellaaeg: {time}"
+      - "Ajavöönd: {zone}"
+      - "Meeldetuletused: {notify}"
+      - "Keel: {lang}"
+    not_set: "määramata"
+    "on": "sees"
+    "off": "väljas"
+  lang:
+    choose: "Vali keel:"
+    set: "Keel vahetatud: {lang}"
+  cancelled: "Tühistatud. Ühtegi seadistust ei muudetud."
+  reloaded: "Sõnumid ja klaviatuurid loeti YAML-ist uuesti."
+  perm:
+    not: "See käsk on ainult omanikule."
+
+  delete:
+    confirm:
+      - "Kas kustutada kõik sinu andmed (kuupäev, seaded, meeldetuletuste ajalugu)?"
+      - ""
+      - "See on pöördumatu: profiil ja saatmislogi kustutatakse."
+    done: "Andmed kustutatud. Tule tagasi läbi /start"
+  pointer:
+    dm: "Vastasin otse sõnumites"
+  flood: "Liiga kiiresti. Proovi paari sekundi pärast."
+  about:
+    - "*Birthday Bot* areneb avalikult: lähtekood on avalik."
+    - ""
+    - "Lähtekood on GitHubis: {url}"
+    - "Arendan projekti üksi ja olen tänulik tähe eest. See on ühtlasi mu portfoolio IT Managementi sisseastumiseks."
+    - ""
+    - "Aitäh, et kasutad."
+
+reminder:
+  countdown:
+    - "Sinu sünnipäevani on {days} {days|plural:one=päev|other=päeva}!"
+    - ""
+    - "Õnnesoov saabub {date} kell {time} sinu vööndis {zone}. Head päeva!"
+  birthday:
+    - "*Palju õnne sünnipäevaks!* Sulle saab {age} {age|plural:one=aasta|other=aastat}."
+    - ""
+    - "Head päeva ja toredat aastat."
+  birthday.no_year:
+    - "*Palju õnne sünnipäevaks!* Täna on sinu päev."
+    - ""
+    - "Head päeva ja toredat aastat."
+
+webapp:
+  title: "Minu sünnipäev"
+  date: "Sünnikuupäev"
+  time: "Meeldetuletuse kellaaeg"
+  zone: "Ajavöönd"
+  lang: "Keel"
+  notify: "Saada meeldetuletusi"
+  save: "Salvesta"
+  saved: "Salvestatud"
+  opensource: "Avatud lähtekood"
+  star: "Täht GitHubis"
+  star_note: "Lähtekood on avatud: jälgi hoidlat ja jäta täht. Arendan seda üksi ja see on mu portfoolio ülikooli sisseastumiseks (IT Management)."
+  delete: "Kustuta minu andmed"
+  preview: "See on liidese eelvaade: profiili andmed on saadaval ainult messengeri sees."
+  api_error: "API ei vastanud: leht on avatud ilma boti serverita."
+  auth_error: "Vaja on messengeri autentimist: ava rakendus boti nupu kaudu."
+  delete_confirm: "Kas kustutada kõik sinu andmed?"
+  days_left: "päeva jäänud"
+
+button:
+  set_date: "Muuda kuupäeva"
+  notify_on: "Lülita meeldetuletused sisse"
+  notify_off: "Lülita meeldetuletused välja"
+  days_to: "Päevadeni"
+  days_since: "Päeva möödunud"
+  days_since_last: "Viimasest sünnipäevast"
+  days_since_total: "Sünnist saadik"
+  settings: "Seaded"
+  back: "Tagasi"
+  time: "Kellaaeg"
+  zone: "Vöönd"
+  zone_manual: "Muu vöönd"
+  language: "Keel"
+  about: "Projektist"
+  github: "Täht GitHubis"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Kustuta andmed"
+  delete_yes: "Jah, kustuta"
+  delete_no: "Tühista"
+  webapp: "Rakendus"
+
+command:
+  desc:
+    start: "Alusta botiga"
+    help: "Abi"
+    date: "Määra sünnikuupäev"
+    notify: "Lülita meeldetuletusi"
+    daysto: "Päevad sünnipäevani"
+    dayssince: "Päevad sünnipäevast"
+    settings: "Profiili seaded"
+    lang: "Keel"
+    time: "Meeldetuletuse kellaaeg"
+    zone: "Ajavöönd"
+    about: "Projektist"
+    delete: "Kustuta minu andmed"
+    cancel: "Tühista pooleliolev sisestus"
+    reload: "Laadi sõnumid uuesti (omanik)"

@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Hej!* Jag håller koll på födelsedagar och missar aldrig ett viktigt datum."
+    - ""
+    - "Ange ditt födelsedatum så skickar jag nedräkningen och en grattishälsning precis i tid, i din tidszon och på ditt språk."
+  help:
+    - "*Vad jag kan*"
+    - ""
+    - "/date: ange eller ändra ditt födelsedatum"
+    - "/notify: slå på eller av påminnelser"
+    - "/daysto: dagar kvar till din födelsedag"
+    - "/dayssince: dagar sedan din födelse"
+    - "/time: tid för påminnelsen"
+    - "/zone: tidszon"
+    - "/lang: språk"
+    - "/settings: alla inställningar på en gång"
+    - ""
+    - "Påminnelserna kommer dagligen vid vald tid, och på själva dagen får du en grattishälsning. Inget glöms bort, inte ens efter en omstart."
+  prompt:
+    date:
+      - "Skriv in ditt födelsedatum i valfritt format:"
+      - ""
+      - "`05.03.1998`, `05.03`, `5 mars 1998`, `1998-03-05`"
+      - ""
+      - "Året är valfritt, men utan det kan jag inte räkna ut din ålder. Avbryt: /cancel"
+    time:
+      - "Skriv in tiden för påminnelsen, t.ex. `12:00` eller `18`. Avbryt: /cancel"
+    zone:
+      - "Skriv in din tidszon, t.ex. `Europe/Stockholm` eller `UTC+3`. Avbryt: /cancel"
+  date:
+    set:
+      - "Sparat: *{date}*"
+      - ""
+      - "Det är {days} {days|plural:one=dag|other=dagar} kvar till din födelsedag. Påminnelserna kommer klockan {time} i din tidszon {zone}."
+    invalid:
+      - "Jag kunde inte läsa datumet. Exempel: `05.03.1998`, `05.03`, `5 mars 1998`, `1998-03-05`. Försök igen."
+  time:
+    set:
+      - "Tid för påminnelsen: *{time}* (din lokala tid)"
+    invalid:
+      - "Det där ser inte ut som en tid. Exempel: `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Välj din tidszon från listan eller ange din egen:"
+    set:
+      - "Tidszon: *{zone}*. Schemat omräknat."
+    invalid:
+      - "Den tidszonen känner jag inte till. Exempel: `Europe/Stockholm`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Påminnelser är *på*. Jag skriver enligt schemat."
+    "off": "Påminnelser är *av*. Slå på dem igen med knappen eller /notify."
+  answer:
+    days_to: "Det är {days} {days|plural:one=dag|other=dagar} kvar till din födelsedag. Hälsningen kommer {date} klockan {time} i din tidszon {zone}."
+    days_since: "Det har gått {days} {days|plural:one=dag|other=dagar} sedan din födelse. Du är {age} {age|plural:one=år|other=år} gammal."
+    days_since_last: "Det har gått {days} {days|plural:one=dag|other=dagar} sedan din senaste födelsedag."
+    no_year: "Datumet har inget år, så det totala antalet dagar sedan födelsen kan inte räknas ut. Räkningen från den senaste födelsedagen fungerar utan år: knappen nedan gör den. Lägg till ett år för att också se din ålder: /date"
+    not_set: "Inget födelsedatum ännu. Ska vi börja? /date"
+  settings:
+    view:
+      - "*Dina inställningar*"
+      - ""
+      - "Födelsedatum: {date}"
+      - "Tid för påminnelse: {time}"
+      - "Tidszon: {zone}"
+      - "Påminnelser: {notify}"
+      - "Språk: {lang}"
+    not_set: "inte angivet"
+    "on": "på"
+    "off": "av"
+  lang:
+    choose: "Välj språk:"
+    set: "Språket bytt: {lang}"
+  cancelled: "Avbrutet. Inga inställningar ändrades."
+  reloaded: "Meddelanden och tangentbord återinlästa från YAML."
+  perm:
+    not: "Detta kommando är bara för ägaren."
+
+  delete:
+    confirm:
+      - "Radera alla dina uppgifter (datum, inställningar, påminnelsehistorik)?"
+      - ""
+      - "Det går inte att ångra: profilen och leveransloggen raderas."
+    done: "Uppgifter raderade. Kom tillbaka via /start"
+  pointer:
+    dm: "Svarade i direktmeddelanden"
+  flood: "För snabbt. Försök igen om några sekunder."
+  about:
+    - "*Birthday Bot* utvecklas öppet: källkoden är publik."
+    - ""
+    - "Källkoden finns på GitHub: {url}"
+    - "Jag utvecklar projektet själv och skulle uppskatta en stjärna. Det är också min portfölj för ansökan till IT Management."
+    - ""
+    - "Tack för att du använder den."
+
+reminder:
+  countdown:
+    - "Det är {days} {days|plural:one=dag|other=dagar} kvar till din födelsedag!"
+    - ""
+    - "Hälsningen kommer {date} klockan {time} i din tidszon {zone}. Ha en bra dag!"
+  birthday:
+    - "*Grattis på födelsedagen!* Du fyller {age} {age|plural:one=år|other=år}."
+    - ""
+    - "Ha en bra dag och ett fint år."
+  birthday.no_year:
+    - "*Grattis på födelsedagen!* I dag är din dag."
+    - ""
+    - "Ha en bra dag och ett fint år."
+
+webapp:
+  title: "Min födelsedag"
+  date: "Födelsedatum"
+  time: "Tid för påminnelse"
+  zone: "Tidszon"
+  lang: "Språk"
+  notify: "Skicka påminnelser"
+  save: "Spara"
+  saved: "Sparat"
+  opensource: "Öppen källkod"
+  star: "Stjärna på GitHub"
+  star_note: "Källkoden är öppen: följ repot och lämna en stjärna. Jag utvecklar det själv och det är min portfölj för antagning till universitetet (IT Management)."
+  delete: "Radera mina uppgifter"
+  preview: "Detta är en förhandsvisning av gränssnittet: profiluppgifter finns bara inuti messengerappen."
+  api_error: "API:t svarar inte: sidan är öppen utan botens server."
+  auth_error: "Messengerinloggning krävs: öppna appen från knappen i botten."
+  delete_confirm: "Radera alla dina uppgifter?"
+  days_left: "dagar kvar"
+
+button:
+  set_date: "Ändra datum"
+  notify_on: "Slå på påminnelser"
+  notify_off: "Slå av påminnelser"
+  days_to: "Dagar till"
+  days_since: "Dagar sedan"
+  days_since_last: "Sedan senaste födelsedagen"
+  days_since_total: "Sedan födelsen"
+  settings: "Inställningar"
+  back: "Tillbaka"
+  time: "Tid"
+  zone: "Zon"
+  zone_manual: "Egen tidszon"
+  language: "Språk"
+  about: "Om projektet"
+  github: "Stjärna på GitHub"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Radera uppgifter"
+  delete_yes: "Ja, radera"
+  delete_no: "Avbryt"
+  webapp: "App"
+
+command:
+  desc:
+    start: "Kom igång med botten"
+    help: "Hjälp"
+    date: "Ange födelsedatum"
+    notify: "Slå på eller av påminnelser"
+    daysto: "Dagar till födelsedagen"
+    dayssince: "Dagar sedan födelsedagen"
+    settings: "Profilinställningar"
+    lang: "Språk"
+    time: "Tid för påminnelse"
+    zone: "Tidszon"
+    about: "Om projektet"
+    delete: "Radera mina uppgifter"
+    cancel: "Avbryt pågående inmatning"
+    reload: "Läs om meddelanden (ägare)"

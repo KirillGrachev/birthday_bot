@@ -1,0 +1,165 @@
+message:
+  start:
+    - "*Salut !* Je suis les anniversaires et ne manque jamais une date importante."
+    - ""
+    - "Indique ta date de naissance et j'enverrai le compte à rebours et un message d'anniversaire pile à l'heure, dans ton fuseau et dans ta langue."
+  help:
+    - "*Ce que je sais faire*"
+    - ""
+    - "/date : définir ou changer ta date de naissance"
+    - "/notify : activer ou désactiver les rappels"
+    - "/daysto : jours restants avant ton anniversaire"
+    - "/dayssince : jours passés depuis ta naissance"
+    - "/time : heure du rappel"
+    - "/zone : fuseau horaire"
+    - "/lang : langue"
+    - "/settings : tous les réglages d'un coup"
+    - ""
+    - "Les rappels arrivent chaque jour à l'heure choisie, et le jour même tu reçois un message. Rien ne se perd, même après un redémarrage."
+  prompt:
+    date:
+      - "Saisis ta date de naissance dans le format de ton choix :"
+      - ""
+      - "`05.03.1998`, `05.03`, `5 mars 1998`, `1998-03-05`"
+      - ""
+      - "L'année est facultative, mais sans elle je ne peux pas calculer ton âge. Annuler : /cancel"
+    time:
+      - "Saisis l'heure du rappel, par exemple `12:00` ou `18`. Annuler : /cancel"
+    zone:
+      - "Saisis ton fuseau horaire, par exemple `Europe/Paris` ou `UTC+3`. Annuler : /cancel"
+  date:
+    set:
+      - "Enregistré : *{date}*"
+      - ""
+      - "Il reste {days} {days|plural:one=jour|other=jours} avant ton anniversaire. Les rappels arriveront à {time} dans ton fuseau {zone}."
+    invalid:
+      - "Je n'ai pas réussi à lire la date. Exemples : `05.03.1998`, `05.03`, `5 mars 1998`, `1998-03-05`. Réessaie."
+  time:
+    set:
+      - "Heure du rappel : *{time}* (ton heure locale)"
+    invalid:
+      - "Cela ne ressemble pas à une heure. Exemples : `12:00`, `18`, `8:05`."
+  zone:
+    choose: "Choisis ton fuseau dans la liste, ou saisis le tien :"
+    set:
+      - "Fuseau horaire : *{zone}*. Planning recalculé."
+    invalid:
+      - "Je ne connais pas ce fuseau. Exemples : `Europe/Paris`, `UTC+3`, `America/New_York`."
+  notify:
+    "on": "Les rappels sont *activés*. J'écrirai selon le planning."
+    "off": "Les rappels sont *désactivés*. Réactive-les avec le bouton ou /notify."
+  answer:
+    days_to: "Il reste {days} {days|plural:one=jour|other=jours} avant ton anniversaire. Le message arrivera le {date} à {time} dans ton fuseau {zone}."
+    days_since: "{days} {days|plural:one=jour|other=jours} se sont écoulés depuis ta naissance. Tu as {age} {age|plural:one=an|other=ans}."
+    days_since_last: "{days} {days|plural:one=jour|other=jours} se sont écoulés depuis ton dernier anniversaire."
+    no_year: "La date n'a pas d'année, donc le total des jours depuis ta naissance est impossible à calculer. Le compte depuis le dernier anniversaire fonctionne sans année : le bouton ci-dessous le fait. Ajoute une année pour voir aussi ton âge : /date"
+    not_set: "Pas encore de date de naissance. On commence ? /date"
+  settings:
+    view:
+      - "*Tes réglages*"
+      - ""
+      - "Date de naissance : {date}"
+      - "Heure du rappel : {time}"
+      - "Fuseau horaire : {zone}"
+      - "Rappels : {notify}"
+      - "Langue : {lang}"
+    not_set: "non défini"
+    "on": "activés"
+    "off": "désactivés"
+  lang:
+    choose: "Choisis ta langue :"
+    set: "Langue changée : {lang}"
+  cancelled: "Annulé. Aucun réglage n'a été modifié."
+  reloaded: "Messages et claviers relus depuis le YAML."
+  perm:
+    not: "Cette commande est réservée au propriétaire."
+
+  delete:
+    confirm:
+      - "Supprimer toutes tes données (date, réglages, historique des rappels) ?"
+      - ""
+      - "C'est irréversible : le profil et le journal des envois seront effacés."
+    done: "Données supprimées. Reviens via /start"
+  pointer:
+    dm: "J'ai répondu en message privé"
+  flood: "Trop vite. Réessaie dans quelques secondes."
+  about:
+    - "*Birthday Bot* est développé au grand jour : le code source est public."
+    - ""
+    - "Le code source est sur GitHub : {url}"
+    - "Je développe ce projet seul et une étoile me ferait très plaisir. C'est aussi mon portfolio pour ma candidature en IT Management."
+    - ""
+    - "Merci de l'utiliser."
+
+reminder:
+  countdown:
+    - "Il reste {days} {days|plural:one=jour|other=jours} avant ton anniversaire !"
+    - ""
+    - "Le message arrivera le {date} à {time} dans ton fuseau {zone}. Bonne journée !"
+  birthday:
+    - "*Joyeux anniversaire !* Tu passes à {age} {age|plural:one=an|other=ans}."
+    - ""
+    - "Bonne journée et excellente année."
+  birthday.no_year:
+    - "*Joyeux anniversaire !* Aujourd'hui, c'est ton jour."
+    - ""
+    - "Bonne journée et excellente année."
+
+webapp:
+  title: "Mon anniversaire"
+  date: "Date de naissance"
+  time: "Heure du rappel"
+  zone: "Fuseau horaire"
+  lang: "Langue"
+  notify: "Envoyer les rappels"
+  save: "Enregistrer"
+  saved: "Enregistré"
+  opensource: "Code ouvert"
+  star: "Étoile sur GitHub"
+  star_note: "Le code source est ouvert : suis le dépôt et laisse une étoile. Je le développe seul, et c'est mon portfolio pour mon admission à l'université (IT Management)."
+  delete: "Supprimer mes données"
+  preview: "Ceci est un aperçu de l'interface : les données du profil ne sont disponibles que dans la messagerie."
+  api_error: "L'API ne répond pas : la page est ouverte sans le serveur du bot."
+  auth_error: "Authentification de la messagerie requise : ouvre l'app depuis le bouton du bot."
+  delete_confirm: "Supprimer toutes tes données ?"
+  days_left: "jours restants"
+
+button:
+  set_date: "Changer la date"
+  notify_on: "Activer les rappels"
+  notify_off: "Désactiver les rappels"
+  days_to: "Jours avant"
+  days_since: "Jours depuis"
+  days_since_last: "Depuis le dernier anniversaire"
+  days_since_total: "Depuis la naissance"
+  settings: "Réglages"
+  back: "Retour"
+  time: "Heure"
+  zone: "Fuseau"
+  zone_manual: "Saisir un autre fuseau"
+  language: "Langue"
+  about: "À propos"
+  github: "Étoile sur GitHub"
+  page_prev: "←"
+  page_next: "→"
+  delete: "Supprimer mes données"
+  delete_yes: "Oui, supprimer"
+  delete_no: "Annuler"
+  webapp: "Application"
+
+command:
+  desc:
+    start: "Commencer avec le bot"
+    help: "Aide"
+    date: "Définir ta date de naissance"
+    notify: "Activer ou désactiver les rappels"
+    daysto: "Jours avant l'anniversaire"
+    dayssince: "Jours depuis l'anniversaire"
+    settings: "Réglages du profil"
+    lang: "Langue"
+    time: "Heure du rappel"
+    zone: "Fuseau horaire"
+    about: "À propos du projet"
+    delete: "Supprimer mes données"
+    cancel: "Annuler la saisie en cours"
+    reload: "Relire les messages (propriétaire)"

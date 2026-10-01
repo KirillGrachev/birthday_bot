@@ -1,0 +1,177 @@
+# =============================================================================
+#  Birthday Bot — default configuration.
+#
+#  An external config/application.yml (if present) overrides this file entirely.
+#  Secrets are NOT stored here: ${VAR:} values come from environment
+#  variables, and when those are missing — from config/.env or .env (see README).
+#  Unknown keys = startup failure (typos become visible immediately).
+# =============================================================================
+
+storage:
+  # sqlite  — file-based storage: WAL mode, HikariCP pool, zero infrastructure.
+  # postgres — for growth: set jdbc-url / username / password.
+  type: sqlite
+  sqlite-path: data/birthday.db
+  # jdbc-url: jdbc:postgresql://localhost:5432/birthday
+  # username: ${DB_USER:}
+  # password: ${DB_PASSWORD:}
+  pool-size: 8
+
+scheduler:
+  # Scheduler tick period: a batch of due profiles is selected this often.
+  tick-interval: 30s
+  batch-size: 500
+  # How many times delivery is retried within a day before the day is skipped.
+  max-attempts: 5
+  retry-backoff: 20s
+  # Reminders missed during downtime: SEND_ONCE | SKIP.
+  catch-up-policy: SEND_ONCE
+  # 0 = countdown every day; N = start N days before the date.
+  countdown-start-days-before: 0
+  default-notify-time: "12:00"
+  default-zone: Europe/Moscow
+  # February 29 in a non-leap year: last-of-february | first-of-march.
+  leap-day-policy: last-of-february
+  # Rows of delivery_log older than this are pruned once a day. The log is the
+  # deduplication key (user, kind, local date), so a year plus a margin is enough.
+  # 0 = keep forever (the table then grows without bound).
+  delivery-log-retention: 400d
+
+pipeline:
+  inbound-queue-capacity: 10000
+  worker-threads: 16
+  # Per-user anti-flood: at most N inbound events per 10-second window.
+  inbound-per-user-per-window: 8
+  outbound-workers-per-platform: 4
+  # Global platform rate limit (messages/sec) and per-chat window (messages/min).
+  outbound-global-per-second: 24
+  outbound-per-chat-per-minute: 18
+  send-timeout: 15s
+
+webapp:
+  # Embedded HTTP server: Mini App, /metrics, /healthz and platform webhooks.
+  # public-url — external HTTPS address (reverse proxy or tunnel); it is also
+  # used for the Telegram menu_button and for webhook registration.
+  enabled: false
+  bind-host: 127.0.0.1
+  port: 8080
+  # public-url: https://birthday.example.com
+  init-data-max-age: 24h
+  # Protects /metrics (query ?token=... or "Authorization: Bearer ..."). Empty = open.
+  # Set it whenever bind-host is not loopback: /metrics exposes counters and the
+  # state of every platform to whoever can reach the port.
+  metrics-token: ${METRICS_TOKEN:}
+
+status:
+  # Observability without an open port - what a game-server host or a container
+  # supervisor can actually see.
+  # One line with the key counters (uptime, platform state, inbound/outbound,
+  # profiles) every N. The line goes to the bot log and touches the liveness file;
+  # the Minecraft launcher plugin reads it from the child console to tell a live
+  # bot from a hung one, yet echoes it to the server console only when a platform
+  # changes state, so a quiet bot keeps the host log quiet. Keep the interval well
+  # below the plugin's stale threshold of 15 minutes.
+  heartbeat-interval: 5m
+  # Touched on every heartbeat; a container HEALTHCHECK looks at its mtime.
+  # Relative to the working directory. Empty = do not write the file.
+  liveness-file: data/bot.liveness
+
+community:
+  # Public repository: /about, the "Star on GitHub" button, Mini App card.
+  # Empty — the block is hidden.
+  github-url: ${GITHUB_URL:https://github.com/KirillGrachev/birthday_bot}
+
+locale:
+  default: ru
+  # The list order defines the button order in the language picker: the picker is
+  # paginated (ten languages per page), so the order also decides what shares a page.
+  # All EU official languages plus the CIS language family ship a message bundle.
+  supported: [ru, uk, be, en, de, es, fr, it, pt, pl, cs, sk, bg, hr, sl,
+              nl, da, sv, fi, et, lv, lt, ro, hu, el, ga, mt,
+              kk, ky, tg, tk, uz, az, ka, hy]
+  # Button captions for the language picker, each language in its own script.
+  # Every code must be listed in `supported` (anything else fails the startup);
+  # a supported language without a caption shows its code on the button.
+  display-names:
+    ru: Русский
+    uk: Українська
+    be: Беларуская
+    en: English
+    de: Deutsch
+    es: Español
+    fr: Français
+    it: Italiano
+    pt: Português
+    pl: Polski
+    cs: Čeština
+    sk: Slovenčina
+    bg: Български
+    hr: Hrvatski
+    sl: Slovenščina
+    nl: Nederlands
+    da: Dansk
+    sv: Svenska
+    fi: Suomi
+    et: Eesti
+    lv: Latviešu
+    lt: Lietuvių
+    ro: Română
+    hu: Magyar
+    el: Ελληνικά
+    ga: Gaeilge
+    mt: Malti
+    kk: Қазақша
+    ky: Кыргызча
+    tg: Тоҷикӣ
+    tk: Türkmençe
+    uz: Oʻzbekcha
+    az: Azərbaycanca
+    ka: ქართული
+    hy: Հայերեն
+
+platforms:
+  telegram:
+    enabled: true
+    token: ${TELEGRAM_BOT_TOKEN:}
+    # Proxy for api.telegram.org — needed where Telegram is blocked or throttled
+    # (Connection timed out at startup). Empty = direct connection. Accepted forms:
+    #   socks5://127.0.0.1:9050                          an open SOCKS5 proxy (Tor)
+    #   socks5://203.0.113.7:1080:LOGIN:PASSWORD     SOCKS5 with a login, the form
+    #                                                    proxy sellers print in their lists
+    #   socks5://LOGIN:PASSWORD@203.0.113.7:1080     the same login in URL form
+    #   http://203.0.113.9:8080 or http://LOGIN:PASSWORD@203.0.113.9:8080
+    #   203.0.113.7:1080:LOGIN:PASSWORD              no scheme, but a login - SOCKS5
+    #   203.0.113.9:8080                                     no scheme, no login - HTTP
+    # One host, one port: host:port:port is rejected at startup, not silently half-parsed.
+    # The password never reaches the logs; a rejected login stops the platform with an
+    # explicit error instead of endless retries.
+    # Example in config/.env: TELEGRAM_PROXY=socks5://203.0.113.7:1080:LOGIN:PASSWORD
+    proxy: ${TELEGRAM_PROXY:}
+  vk:
+    enabled: false
+    # VK_GROUP_TOKEN must be a community access token of the group (Manage -> VK API ->
+    # Access tokens, right "messages"); VK_GROUP_ID is the numeric group id. A user OAuth
+    # token gives "error 15: Access denied ... current scopes" on groups.getLongPollServer.
+    # Long Poll API has to be enabled in the group: Manage -> Messages -> Long Poll API.
+    token: ${VK_GROUP_TOKEN:}
+    id: ${VK_GROUP_ID:}
+  discord:
+    enabled: false
+    token: ${DISCORD_BOT_TOKEN:}
+  slack:
+    enabled: false
+    token: ${SLACK_BOT_TOKEN:}
+    id: ${SLACK_APP_TOKEN:}
+  whatsapp:
+    enabled: false
+    token: ${WHATSAPP_TOKEN:}
+    # phoneId:verifyToken[:appSecret]; appSecret enables Meta signature checks.
+    id: ${WHATSAPP_PHONE_ID:}
+    secret: ${WEBHOOK_SECRET:}
+  viber:
+    enabled: false
+    token: ${VIBER_BOT_TOKEN:}
+    secret: ${WEBHOOK_SECRET:}
+
+# Owner keys in platform:id format — for /reload and admin actions.
+owners: []

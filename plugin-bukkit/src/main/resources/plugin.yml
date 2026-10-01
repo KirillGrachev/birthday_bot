@@ -1,0 +1,15 @@
+name: BirthdayBotLauncher
+main: eu.neydev.birthday.plugin.bukkit.BirthdayBotPlugin
+version: ${project.version}
+api-version: '1.20'
+description: Supervises the standalone birthday bot as a child process of this server.
+author: neydev
+commands:
+  birthdaybot:
+    description: Control the birthday bot child process
+    usage: /birthdaybot status|start|stop|restart
+    permission: birthdaybotlauncher.admin
+permissions:
+  birthdaybotlauncher.admin:
+    description: Start, stop and inspect the birthday bot child process
+    default: op
