@@ -55,7 +55,8 @@ message:
     days_since_last: "Od ostatnich urodzin minęło {days} {days|plural:one=dzień|few=dni|many=dni}."
     no_year:
       - "Data nie ma roku, więc nie policzę łącznej liczby dni od urodzenia. Liczenie od ostatnich urodzin działa bez roku: robi to przycisk poniżej."
-      - "  Dodaj rok, aby widzieć też wiek: /date"
+      - ""
+      - "Dodaj rok, aby widzieć też wiek: /date"
     not_set: "Nie ma jeszcze daty urodzenia. Zaczynamy? /date"
   settings:
     view:

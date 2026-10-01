@@ -55,7 +55,8 @@ message:
     days_since_last: "Det har gått {days} {days|plural:one=dag|other=dagar} sedan din senaste födelsedag."
     no_year:
       - "Datumet har inget år, så det totala antalet dagar sedan födelsen kan inte räknas ut. Räkningen från den senaste födelsedagen fungerar utan år: knappen nedan gör den."
-      - "  Lägg till ett år för att också se din ålder: /date"
+      - ""
+      - "Lägg till ett år för att också se din ålder: /date"
     not_set: "Inget födelsedatum ännu. Ska vi börja? /date"
   settings:
     view:

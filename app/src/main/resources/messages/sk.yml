@@ -55,7 +55,8 @@ message:
     days_since_last: "Od posledných narodenín uplynulo {days} {days|plural:one=deň|few=dni|many=dní}."
     no_year:
       - "Dátum nemá rok, takže celkový počet dní od narodenia sa nedá spočítať. Počítanie od posledných narodenín funguje aj bez roka: tlačidlo nižšie to urobí."
-      - "  Pridaj rok a uvidíš aj vek: /date"
+      - ""
+      - "Pridaj rok a uvidíš aj vek: /date"
     not_set: "Dátum narodenia zatiaľ nie je zadaný. Začíname? /date"
   settings:
     view:

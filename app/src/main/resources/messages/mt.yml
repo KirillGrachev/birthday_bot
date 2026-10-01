@@ -55,7 +55,8 @@ message:
     days_since_last: "Għaddew {days} {days|plural:one=jum|few=jiem|many=jum|other=jum} mill-aħħar jum tat-twelid tiegħek."
     no_year:
       - "Id-data m'għandha sena, għalhekk l-għadd totali ta' jiem mit-twelid ma jistax jiġi kkalkulat. L-għadd mill-aħħar jum tat-twelid jaħdem mingħajr sena: il-buttuna t'hawn taħt tagħmlu."
-      - "  Żid sena biex tara l-età wkoll: /date"
+      - ""
+      - "Żid sena biex tara l-età wkoll: /date"
     not_set: "Għad m'hemm data tat-twelid. Nibdew? /date"
   settings:
     view:

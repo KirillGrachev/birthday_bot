@@ -55,7 +55,8 @@ message:
     days_since_last: "{days} {days|plural:one=day|other=days} have passed since your last birthday."
     no_year:
       - "The date has no year, so the total count of days since your birth is impossible. Counting from the last birthday works without a year: the button below does it."
-      - "  Add a year to see your age too: /date"
+      - ""
+      - "Add a year to see your age too: /date"
     not_set: "No birthdate yet. Shall we start? /date"
   settings:
     view:

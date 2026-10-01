@@ -55,7 +55,8 @@ message:
     days_since_last: "Od zadnjega rojstnega dne je minilo {days} {days|plural:one=dan|two=dneva|few=dnevi|other=dni}."
     no_year:
       - "Datum nima leta, zato skupnega števila dni od rojstva ni mogoče izračunati. Štetje od zadnjega rojstnega dne deluje tudi brez leta: to naredi gumb spodaj."
-      - "  Dodaj leto, da vidiš tudi starost: /date"
+      - ""
+      - "Dodaj leto, da vidiš tudi starost: /date"
     not_set: "Datuma rojstva še ni. Začnemo? /date"
   settings:
     view:

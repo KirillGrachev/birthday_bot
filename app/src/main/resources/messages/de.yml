@@ -55,7 +55,8 @@ message:
     days_since_last: "Seit deinem letzten Geburtstag sind {days} {days|plural:one=Tag|other=Tage} vergangen."
     no_year:
       - "Das Datum hat kein Jahr, daher kann ich die Tage seit der Geburt nicht insgesamt zählen. Das Zählen seit dem letzten Geburtstag geht auch ohne Jahr: Der Knopf unten macht das."
-      - "  Mit einem Jahr im Datum zeige ich auch das Alter: /date"
+      - ""
+      - "Mit einem Jahr im Datum zeige ich auch das Alter: /date"
     not_set: "Noch kein Geburtsdatum. Fangen wir an? /date"
   settings:
     view:

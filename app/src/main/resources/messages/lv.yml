@@ -55,7 +55,8 @@ message:
     days_since_last: "Kopš pēdējās dzimšanas dienas pagājušas {days} {days|plural:one=diena|other=dienas|many=dienu}."
     no_year:
       - "Datumā nav gada, tāpēc kopējo dienu skaitu kopš dzimšanas aprēķināt nevar. Skaitīšana no pēdējās dzimšanas dienas strādā arī bez gada: to dara poga zemāk."
-      - "  Pievieno gadu, lai redzētu arī vecumu: /date"
+      - ""
+      - "Pievieno gadu, lai redzētu arī vecumu: /date"
     not_set: "Dzimšanas datums vēl nav iestatīts. Sākam? /date"
   settings:
     view:

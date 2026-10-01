@@ -55,7 +55,8 @@ message:
     days_since_last: "Sono passati {days} {days|plural:one=giorno|other=giorni} dal tuo ultimo compleanno."
     no_year:
       - "La data non ha l'anno, quindi il totale dei giorni dalla nascita non si può calcolare. Il conto dall'ultimo compleanno funziona anche senza anno: lo fa il pulsante qui sotto."
-      - "  Aggiungi l'anno per vedere anche l'età: /date"
+      - ""
+      - "Aggiungi l'anno per vedere anche l'età: /date"
     not_set: "Nessuna data di nascita ancora. Cominciamo? /date"
   settings:
     view:

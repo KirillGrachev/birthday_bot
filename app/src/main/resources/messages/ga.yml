@@ -55,7 +55,8 @@ message:
     days_since_last: "Tá {days} {days|plural:one=lá|two=lá|few=lá|many=lá|other=lá} caite ó do bhreithlá deireanach."
     no_year:
       - "Níl bliain sa dáta, mar sin ní féidir líon iomlán na laethanta ó do bhreith a ríomh. Oibríonn an t-áireamh ó do bhreithlá deireanach gan bhliain: déanann an cnaipe thíos é."
-      - "  Cuir bliain leis chun d'aois a fheiceáil freisin: /date"
+      - ""
+      - "Cuir bliain leis chun d'aois a fheiceáil freisin: /date"
     not_set: "Níl dáta breithe socraithe fós. An dtosaímid? /date"
   settings:
     view:

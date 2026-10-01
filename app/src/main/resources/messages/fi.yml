@@ -55,7 +55,8 @@ message:
     days_since_last: "Viime syntymäpäivästäsi on kulunut {days} {days|plural:one=päivä|other=päivää}."
     no_year:
       - "Päivämäärässä ei ole vuotta, joten syntymästä kuluneiden päivien kokonaismäärää ei voi laskea. Laskenta viime syntymäpäivästä toimii ilman vuotta: alla oleva painike tekee sen."
-      - "  Lisää vuosi, niin näet myös iän: /date"
+      - ""
+      - "Lisää vuosi, niin näet myös iän: /date"
     not_set: "Syntymäpäivää ei ole vielä asetettu. Aloitetaanko? /date"
   settings:
     view:

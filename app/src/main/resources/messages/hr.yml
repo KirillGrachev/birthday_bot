@@ -55,7 +55,8 @@ message:
     days_since_last: "Od posljednjeg rođendana prošlo je {days} {days|plural:one=dan|few=dana|other=dana}."
     no_year:
       - "Datum nema godinu, pa se ukupan broj dana od rođenja ne može izračunati. Brojanje od posljednjeg rođendana radi i bez godine: gumb ispod to radi."
-      - "  Dodaj godinu da vidiš i dob: /date"
+      - ""
+      - "Dodaj godinu da vidiš i dob: /date"
     not_set: "Datum rođenja još nije postavljen. Počinjemo li? /date"
   settings:
     view:

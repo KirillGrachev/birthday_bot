@@ -55,7 +55,8 @@ message:
     days_since_last: "{days} {days|plural:one=jour|other=jours} se sont écoulés depuis ton dernier anniversaire."
     no_year:
       - "La date n'a pas d'année, donc le total des jours depuis ta naissance est impossible à calculer. Le compte depuis le dernier anniversaire fonctionne sans année : le bouton ci-dessous le fait."
-      - "  Ajoute une année pour voir aussi ton âge : /date"
+      - ""
+      - "Ajoute une année pour voir aussi ton âge : /date"
     not_set: "Pas encore de date de naissance. On commence ? /date"
   settings:
     view:

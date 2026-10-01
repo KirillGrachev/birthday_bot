@@ -55,7 +55,8 @@ message:
     days_since_last: "Oxirgi tug'ilgan kundan beri {days} {days|plural:one=kun|other=kun} o'tdi."
     no_year:
       - "Sanada yil yo'q, shuning uchun tug'ilgan kundan beri jami kunlarni hisoblay olmayman. Oxirgi tug'ilgan kundan sanash yilsiz ham ishlaydi: quyidagi tugma buni bajaradi."
-      - "  Yoshni ham ko'rish uchun yilni qo'shing: /date"
+      - ""
+      - "Yoshni ham ko'rish uchun yilni qo'shing: /date"
     not_set: "Tug'ilgan sana hali ko'rsatilmagan. Boshlaymizmi? /date"
   settings:
     view:

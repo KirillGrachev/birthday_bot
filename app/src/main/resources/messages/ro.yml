@@ -55,7 +55,8 @@ message:
     days_since_last: "Au trecut {days} {days|plural:one=zi|few=zile|other=de zile} de la ultima ta zi de naștere."
     no_year:
       - "Data nu are an, deci numărul total de zile de la naștere nu poate fi calculat. Numărătoarea de la ultima zi de naștere funcționează și fără an: butonul de mai jos o face."
-      - "  Adaugă un an pentru a vedea și vârsta: /date"
+      - ""
+      - "Adaugă un an pentru a vedea și vârsta: /date"
     not_set: "Încă nu există o dată de naștere. Începem? /date"
   settings:
     view:

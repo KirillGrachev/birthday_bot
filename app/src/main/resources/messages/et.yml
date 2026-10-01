@@ -55,7 +55,8 @@ message:
     days_since_last: "Viimasest sünnipäevast on möödunud {days} {days|plural:one=päev|other=päeva}."
     no_year:
       - "Kuupäeval puudub aasta, seega sünnist möödunud päevade koguarvu ei saa arvutada. Viimasest sünnipäevast loendamine töötab ka ilma aastata: allolev nupp teeb seda."
-      - "  Lisa aasta, et näha ka vanust: /date"
+      - ""
+      - "Lisa aasta, et näha ka vanust: /date"
     not_set: "Sünnikuupäeva pole veel. Alustame? /date"
   settings:
     view:

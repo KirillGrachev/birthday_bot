@@ -55,7 +55,8 @@ message:
     days_since_last: "Son ad günündən bəri {days} {days|plural:one=gün|other=gün} keçib."
     no_year:
       - "Tarixdə il yoxdur, ona görə doğumdan bəri ümumi günləri hesablaya bilmirəm. Son ad günündən saymaq ilsiz də işləyir: aşağıdakı düymə bunu edir."
-      - "  Yaşı da görmək üçün il əlavə et: /date"
+      - ""
+      - "Yaşı da görmək üçün il əlavə et: /date"
     not_set: "Hələ doğum tarixi yoxdur. Başlayırıq? /date"
   settings:
     view:

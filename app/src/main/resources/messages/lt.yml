@@ -55,7 +55,8 @@ message:
     days_since_last: "Nuo paskutinio gimtadienio praėjo {days} {days|plural:one=diena|few=dienos|other=dienų}."
     no_year:
       - "Datoje nėra metų, todėl bendro dienų nuo gimimo skaičiaus suskaičiuoti negaliu. Skaičiavimas nuo paskutinio gimtadienio veikia ir be metų: tai padaro mygtukas žemiau."
-      - "  Pridėk metus, kad matytum ir amžių: /date"
+      - ""
+      - "Pridėk metus, kad matytum ir amžių: /date"
     not_set: "Gimimo datos dar nėra. Pradedam? /date"
   settings:
     view:

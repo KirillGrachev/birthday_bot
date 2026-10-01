@@ -55,7 +55,8 @@ message:
     days_since_last: "Passaram {days} {days|plural:one=dia|other=dias} desde o teu último aniversário."
     no_year:
       - "A data não tem ano, por isso o total de dias desde o nascimento não pode ser calculado. A contagem desde o último aniversário funciona sem ano: o botão abaixo faz isso."
-      - "  Acrescenta um ano para veres também a idade: /date"
+      - ""
+      - "Acrescenta um ano para veres também a idade: /date"
     not_set: "Ainda não há data de nascimento. Começamos? /date"
   settings:
     view:
