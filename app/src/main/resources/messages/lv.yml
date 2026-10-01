@@ -34,6 +34,7 @@ message:
       - "Līdz dzimšanas dienai atlicis {days} {days|plural:one=diena|other=dienas|many=dienu}. Atgādinājumi pienāks {time} tavā joslā {zone}."
     invalid:
       - "Neizdevās nolasīt datumu. Piemēri: `05.03.1998`, `05.03`, `1998. gada 5. marts`, `1998-03-05`. Mēģini vēlreiz."
+    year_range: "Šis gads izskatās pēc rakstkļūdas: {year}. Pieņemu dzimšanas datumus no 1900. gada līdz šodienai ieskaitot."
   time:
     set:
       - "Atgādinājuma laiks: *{time}* (tavs vietējais laiks)"
@@ -52,7 +53,9 @@ message:
     days_to: "Līdz dzimšanas dienai atlicis {days} {days|plural:one=diena|other=dienas|many=dienu}. Apsveikums pienāks {date} {time} tavā joslā {zone}."
     days_since: "Kopš dzimšanas pagājušas {days} {days|plural:one=diena|other=dienas|many=dienu}. Tev ir {age} {age|plural:one=gads|other=gadi|many=gadu}."
     days_since_last: "Kopš pēdējās dzimšanas dienas pagājušas {days} {days|plural:one=diena|other=dienas|many=dienu}."
-    no_year: "Datumā nav gada, tāpēc kopējo dienu skaitu kopš dzimšanas aprēķināt nevar. Skaitīšana no pēdējās dzimšanas dienas strādā arī bez gada: to dara poga zemāk. Pievieno gadu, lai redzētu arī vecumu: /date"
+    no_year:
+      - "Datumā nav gada, tāpēc kopējo dienu skaitu kopš dzimšanas aprēķināt nevar. Skaitīšana no pēdējās dzimšanas dienas strādā arī bez gada: to dara poga zemāk."
+      - "  Pievieno gadu, lai redzētu arī vecumu: /date"
     not_set: "Dzimšanas datums vēl nav iestatīts. Sākam? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Atgādinājumi: {notify}"
       - "Valoda: {lang}"
     not_set: "nav iestatīts"
-    "on": "ieslēgti"
-    "off": "izslēgti"
+    "on": "Ieslēgti"
+    "off": "Izslēgti"
   lang:
     choose: "Izvēlies valodu:"
     set: "Valoda pārslēgta: {lang}"

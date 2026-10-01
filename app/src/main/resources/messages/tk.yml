@@ -34,6 +34,7 @@ message:
       - "Doglan güne çenli {days} {days|plural:one=gün|other=gün} galdy. Ýatlatmalar {time} wagtynda {zone} zolagynda geler."
     invalid:
       - "Senäni okap bilmedim. Mysallar: `05.03.1998`, `05.03`, `5 mart 1998`, `1998-03-05`. Ýene synanyş."
+    year_range: "Ol ýyl ýalňyşa meňzeýär: {year}. Doglan günleri 1900-dan şu güne çenli kabul edýärin."
   time:
     set:
       - "Ýatlatmanyň wagty: *{time}* (seniň ýerli wagtyň)"
@@ -52,7 +53,9 @@ message:
     days_to: "Doglan güne çenli {days} {days|plural:one=gün|other=gün} galdy. Gutlag {date} senesinde {time} wagtynda {zone} zolagynda geler."
     days_since: "Doglan günden bäri {days} {days|plural:one=gün|other=gün} geçdi. Saňa {age} {age|plural:one=ýaş|other=ýaş}."
     days_since_last: "Soňky doglan günden bäri {days} {days|plural:one=gün|other=gün} geçdi."
-    no_year: "Senelerde ýyl ýok, şonuň üçin doglan günden bäri ähli günleri hasaplap bilmerin. Soňky doglan günden sanaw ýylsyz hem işleýär: aşakdaky düwme şony edýär. Ýaşyňy hem görmek üçin ýyl goş: /date"
+    no_year:
+      - "Senelerde ýyl ýok, şonuň üçin doglan günden bäri ähli günleri hasaplap bilmerin. Soňky doglan günden sanaw ýylsyz hem işleýär: aşakdaky düwme şony edýär."
+      - "  Ýaşyňy hem görmek üçin ýyl goş: /date"
     not_set: "Doglan güni heniz görkezilmedik. Başlaýarysmy? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Ýatlatmalar: {notify}"
       - "Dil: {lang}"
     not_set: "görkezilmedik"
-    "on": "açyk"
-    "off": "öçük"
+    "on": "Açyk"
+    "off": "Öçük"
   lang:
     choose: "Dil saýla:"
     set: "Dil çalşyryldy: {lang}"

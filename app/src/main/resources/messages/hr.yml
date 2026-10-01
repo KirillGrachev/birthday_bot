@@ -34,6 +34,7 @@ message:
       - "Do rođendana je ostalo {days} {days|plural:one=dan|few=dana|other=dana}. Podsjetnici će stizati u {time} po zoni {zone}."
     invalid:
       - "Nisam pročitao datum. Primjeri: `05.03.1998`, `05.03`, `5. ožujka 1998`, `1998-03-05`. Pokušaj ponovno."
+    year_range: "Ta godina izgleda kao tipfeler: {year}. Prihvaćam datume rođenja od 1900. do danas uključivo."
   time:
     set:
       - "Vrijeme podsjetnika: *{time}* (tvoje lokalno vrijeme)"
@@ -52,7 +53,9 @@ message:
     days_to: "Do rođendana je ostalo {days} {days|plural:one=dan|few=dana|other=dana}. Čestitka stiže {date} u {time} po zoni {zone}."
     days_since: "Od rođenja je prošlo {days} {days|plural:one=dan|few=dana|other=dana}. Imaš {age} {age|plural:one=godinu|few=godine|other=godina}."
     days_since_last: "Od posljednjeg rođendana prošlo je {days} {days|plural:one=dan|few=dana|other=dana}."
-    no_year: "Datum nema godinu, pa se ukupan broj dana od rođenja ne može izračunati. Brojanje od posljednjeg rođendana radi i bez godine: gumb ispod to radi. Dodaj godinu da vidiš i dob: /date"
+    no_year:
+      - "Datum nema godinu, pa se ukupan broj dana od rođenja ne može izračunati. Brojanje od posljednjeg rođendana radi i bez godine: gumb ispod to radi."
+      - "  Dodaj godinu da vidiš i dob: /date"
     not_set: "Datum rođenja još nije postavljen. Počinjemo li? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Podsjetnici: {notify}"
       - "Jezik: {lang}"
     not_set: "nije postavljeno"
-    "on": "uključeni"
-    "off": "isključeni"
+    "on": "Uključeni"
+    "off": "Isključeni"
   lang:
     choose: "Odaberi jezik:"
     set: "Jezik je promijenjen: {lang}"

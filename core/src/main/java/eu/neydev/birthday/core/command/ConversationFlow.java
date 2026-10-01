@@ -61,18 +61,29 @@ public record ConversationFlow(ConversationStore store, ProfileService profileSe
 
     public List<OutboundMessage> applyDate(Profile profile, String text) {
 
-        Optional<BirthDate> parsed = DateParsers.parseBirthDateInAnyLanguage(
-                text, profile.locale(), profileService.localeResolver().supported());
+        DateParsers.BirthDateParse parsed = DateParsers.parseBirthDateInAnyLanguage(
+                text, profile.locale(), profileService.localeResolver().supported(),
+                profile.todayAt(replies.clock().instant()));
 
-        if (parsed.isEmpty()) {
+        if (!parsed.parsed()) {
+
+            // "I cannot read this" and "I can read it, but 1889 is not a birth year"
+            // are different sentences: the second one names the year and the window.
+            if (parsed.yearOutOfRange() != null) {
+                return List.of(replies.send(profile, "message.date.year_range",
+                        Map.of("year", parsed.yearOutOfRange()), replies.none()));
+            }
+
             return List.of(replies.send(profile, "message.date.invalid", Map.of(), replies.none()));
+
         }
 
+        BirthDate date = parsed.date();
         store.clear(profile.user());
-        Profile updated = profileService.setBirthDate(profile, parsed.get());
+        Profile updated = profileService.setBirthDate(profile, date);
 
         return List.of(replies.send(updated, "message.date.set",
-                replies.dateSetParams(updated, parsed.get()), replies.mainMenu(updated)));
+                replies.dateSetParams(updated, date), replies.mainMenu(updated)));
 
     }
 

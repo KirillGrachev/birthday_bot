@@ -82,6 +82,31 @@ public final class MessageBundle {
 
     }
 
+    /**
+     * Like {@link #load}, but a language without a file simply stays absent instead of
+     * failing the startup: reference catalogs (city names) ship for the languages that
+     * need them and fall back per key at read time.
+     */
+    public static MessageBundle loadPresent(@NotNull String resourceBase,
+                                            Path externalDir,
+                                            @NotNull Set<String> languages) {
+
+        Map<String, Map<String, String>> result = new HashMap<>();
+
+        for (String language : languages) {
+
+            Map<String, String> messages = loadLanguage(resourceBase, externalDir, language);
+
+            if (!messages.isEmpty()) {
+                result.put(language, messages);
+            }
+
+        }
+
+        return new MessageBundle(result);
+
+    }
+
     private static Map<String, String> loadLanguage(String resourceBase, Path externalDir, String language) {
 
         Map<?, ?> raw = null;

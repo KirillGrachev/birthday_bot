@@ -34,6 +34,7 @@ message:
       - "Noch {days} {days|plural:one=Tag|other=Tage} bis zum Geburtstag. Erinnerungen kommen um {time} in deiner Zeitzone: {zone}."
     invalid:
       - "Datum nicht erkannt. Beispiele: `05.03.1998`, `05.03`, `5. März 1998`, `1998-03-05`. Versuch es erneut."
+    year_range: "Das Jahr sieht wie ein Tippfehler aus: {year}. Ich unterstütze Geburtsdaten von 1900 bis einschließlich heute."
   time:
     set:
       - "Erinnerungszeit: *{time}* (deine Ortszeit)"
@@ -52,7 +53,9 @@ message:
     days_to: "Noch {days} {days|plural:one=Tag|other=Tage} bis zum Geburtstag. Die Gratulation kommt am {date} um {time} in deiner Zeitzone: {zone}."
     days_since: "{days} {days|plural:one=Tag|other=Tage} seit deiner Geburt vergangen. Du bist {age} {age|plural:one=Jahr|other=Jahre} alt."
     days_since_last: "Seit deinem letzten Geburtstag sind {days} {days|plural:one=Tag|other=Tage} vergangen."
-    no_year: "Das Datum hat kein Jahr, daher kann ich die Tage seit der Geburt nicht insgesamt zählen. Das Zählen seit dem letzten Geburtstag geht auch ohne Jahr: Der Knopf unten macht das. Mit einem Jahr im Datum zeige ich auch das Alter: /date"
+    no_year:
+      - "Das Datum hat kein Jahr, daher kann ich die Tage seit der Geburt nicht insgesamt zählen. Das Zählen seit dem letzten Geburtstag geht auch ohne Jahr: Der Knopf unten macht das."
+      - "  Mit einem Jahr im Datum zeige ich auch das Alter: /date"
     not_set: "Noch kein Geburtsdatum. Fangen wir an? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Erinnerungen: {notify}"
       - "Sprache: {lang}"
     not_set: "nicht gesetzt"
-    "on": "an"
-    "off": "aus"
+    "on": "An"
+    "off": "Aus"
   lang:
     choose: "Wähle deine Sprache:"
     set: "Sprache gewechselt: {lang}"

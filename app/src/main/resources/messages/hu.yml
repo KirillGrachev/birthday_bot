@@ -34,6 +34,7 @@ message:
       - "{days} {days|plural:one=nap|other=nap} van hátra a születésnapodig. Az emlékeztetők {time} órakor érkeznek a te zónádban: {zone}."
     invalid:
       - "Nem sikerült beolvasni a dátumot. Példák: `05.03.1998`, `05.03`, `1998. március 5.`, `1998-03-05`. Próbáld újra."
+    year_range: "Az év gépelési hibának tűnik: {year}. 1900-tól maig bezárólag fogadok el születési dátumot."
   time:
     set:
       - "Emlékeztető ideje: *{time}* (a te helyi időddel)"
@@ -52,7 +53,9 @@ message:
     days_to: "{days} {days|plural:one=nap|other=nap} van hátra a születésnapodig. A köszöntés {date} érkezik {time} órakor a te zónádban: {zone}."
     days_since: "A születésed óta {days} {days|plural:one=nap|other=nap} telt el. {age} {age|plural:one=éves|other=éves} vagy."
     days_since_last: "Az utolsó születésnapod óta {days} {days|plural:one=nap|other=nap} telt el."
-    no_year: "A dátumban nincs év, így a születés óta eltelt napok teljes száma nem számolható ki. Az utolsó születésnap óta tartott számlálás év nélkül is működik: az alábbi gomb megcsinálja. Add meg az évet is, ha a korodat is látnád: /date"
+    no_year:
+      - "A dátumban nincs év, így a születés óta eltelt napok teljes száma nem számolható ki. Az utolsó születésnap óta tartott számlálás év nélkül is működik: az alábbi gomb megcsinálja."
+      - "  Add meg az évet is, ha a korodat is látnád: /date"
     not_set: "Még nincs születésnap megadva. Kezdjük? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Emlékeztetők: {notify}"
       - "Nyelv: {lang}"
     not_set: "nincs megadva"
-    "on": "bekapcsolva"
-    "off": "kikapcsolva"
+    "on": "Bekapcsolva"
+    "off": "Kikapcsolva"
   lang:
     choose: "Válassz nyelvet:"
     set: "Nyelv átváltva: {lang}"

@@ -34,6 +34,7 @@ message:
       - "Au mai rămas {days} {days|plural:one=zi|few=zile|other=de zile} până la ziua ta. Mementourile vor ajunge la {time} în fusul tău {zone}."
     invalid:
       - "Nu am putut citi data. Exemple: `05.03.1998`, `05.03`, `5 martie 1998`, `1998-03-05`. Mai încearcă."
+    year_range: "Anul pare o greșeală de tastare: {year}. Accept date de naștere de la 1900 până azi inclusiv."
   time:
     set:
       - "Ora mementoului: *{time}* (ora ta locală)"
@@ -52,7 +53,9 @@ message:
     days_to: "Au mai rămas {days} {days|plural:one=zi|few=zile|other=de zile} până la ziua ta. Felicitarea ajunge pe {date} la {time} în fusul tău {zone}."
     days_since: "Au trecut {days} {days|plural:one=zi|few=zile|other=de zile} de la nașterea ta. Ai {age} {age|plural:one=an|few=ani|other=de ani}."
     days_since_last: "Au trecut {days} {days|plural:one=zi|few=zile|other=de zile} de la ultima ta zi de naștere."
-    no_year: "Data nu are an, deci numărul total de zile de la naștere nu poate fi calculat. Numărătoarea de la ultima zi de naștere funcționează și fără an: butonul de mai jos o face. Adaugă un an pentru a vedea și vârsta: /date"
+    no_year:
+      - "Data nu are an, deci numărul total de zile de la naștere nu poate fi calculat. Numărătoarea de la ultima zi de naștere funcționează și fără an: butonul de mai jos o face."
+      - "  Adaugă un an pentru a vedea și vârsta: /date"
     not_set: "Încă nu există o dată de naștere. Începem? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Mementouri: {notify}"
       - "Limbă: {lang}"
     not_set: "nesetat"
-    "on": "pornite"
-    "off": "oprite"
+    "on": "Pornite"
+    "off": "Oprite"
   lang:
     choose: "Alege limba:"
     set: "Limba a fost schimbată: {lang}"

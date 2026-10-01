@@ -34,6 +34,7 @@ message:
       - "Do urodzin zostało {days} {days|plural:one=dzień|few=dni|many=dni}. Przypomnienia będą przychodzić o {time} w Twojej strefie {zone}."
     invalid:
       - "Nie przeczytałem daty. Przykłady: `05.03.1998`, `05.03`, `5 marca 1998`, `1998-03-05`. Spróbuj ponownie."
+    year_range: "Ten rok wygląda jak literówka: {year}. Przyjmuję daty urodzenia od 1900 do dziś włącznie."
   time:
     set:
       - "Godzina przypomnienia: *{time}* (Twój czas lokalny)"
@@ -52,7 +53,9 @@ message:
     days_to: "Do urodzin zostało {days} {days|plural:one=dzień|few=dni|many=dni}. Życzenia przyjdą {date} o {time} w Twojej strefie {zone}."
     days_since: "Od urodzenia minęło {days} {days|plural:one=dzień|few=dni|many=dni}. Masz {age} {age|plural:one=rok|few=lata|many=lat}."
     days_since_last: "Od ostatnich urodzin minęło {days} {days|plural:one=dzień|few=dni|many=dni}."
-    no_year: "Data nie ma roku, więc nie policzę łącznej liczby dni od urodzenia. Liczenie od ostatnich urodzin działa bez roku: robi to przycisk poniżej. Dodaj rok, aby widzieć też wiek: /date"
+    no_year:
+      - "Data nie ma roku, więc nie policzę łącznej liczby dni od urodzenia. Liczenie od ostatnich urodzin działa bez roku: robi to przycisk poniżej."
+      - "  Dodaj rok, aby widzieć też wiek: /date"
     not_set: "Nie ma jeszcze daty urodzenia. Zaczynamy? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Przypomnienia: {notify}"
       - "Język: {lang}"
     not_set: "nie ustawiono"
-    "on": "włączone"
-    "off": "wyłączone"
+    "on": "Włączone"
+    "off": "Wyłączone"
   lang:
     choose: "Wybierz język:"
     set: "Język przełączony: {lang}"

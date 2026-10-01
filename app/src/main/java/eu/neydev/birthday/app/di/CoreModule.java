@@ -15,6 +15,7 @@ import eu.neydev.birthday.core.config.AppConfig;
 import eu.neydev.birthday.core.conversation.ConversationStore;
 import eu.neydev.birthday.core.i18n.LocaleResolver;
 import eu.neydev.birthday.core.i18n.MessageBundleHolder;
+import eu.neydev.birthday.core.i18n.ZoneCityNames;
 import eu.neydev.birthday.core.metrics.MetricsRegistry;
 import eu.neydev.birthday.core.metrics.PlatformHealth;
 import eu.neydev.birthday.core.pipeline.InboundRouter;
@@ -106,10 +107,16 @@ public final class CoreModule extends AbstractModule {
 
     @Provides
     @Singleton
-    MenuFactory menuFactory(MessageBundleHolder holder, AppConfig config) {
+    ZoneCityNames zoneCityNames(AppConfig config) {
+        return ZoneCityNames.load(config.locale().supported());
+    }
+
+    @Provides
+    @Singleton
+    MenuFactory menuFactory(MessageBundleHolder holder, AppConfig config, ZoneCityNames zoneCities) {
         return new MenuFactory(holder,
                 config.community().hasGithub() ? config.community().githubUrl() : null,
-                config.locale());
+                config.locale(), zoneCities);
     }
 
     @Provides
@@ -159,8 +166,9 @@ public final class CoreModule extends AbstractModule {
 
     @Provides
     @Singleton
-    ReplyBuilder replyBuilder(MessageBundleHolder holder, MenuFactory menuFactory, AppConfig config) {
-        return new ReplyBuilder(holder, menuFactory, config);
+    ReplyBuilder replyBuilder(MessageBundleHolder holder, MenuFactory menuFactory, AppConfig config,
+                              Clock clock) {
+        return new ReplyBuilder(holder, menuFactory, config, clock);
     }
 
     @Provides

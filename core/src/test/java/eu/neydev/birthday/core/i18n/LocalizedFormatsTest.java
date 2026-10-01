@@ -114,4 +114,20 @@ class LocalizedFormatsTest {
         assertThat(LocalizedFormats.dateFull(DATE, Locale.FRENCH)).isEqualTo("11 février 2006");
     }
 
+    @Test
+    void zoneNamesFollowTheLanguageChosenInBotNotTheMessengerOne() {
+
+        // The locale argument is the bot language (/lang, the picker, the Mini App):
+        // a messenger profile in English with the bot switched to Russian gets
+        // "Moskva" in Cyrillic, and the mirror case stays Latin.
+        ZoneId moscow = ZoneId.of("Europe/Moscow");
+
+        assertThat(LocalizedFormats.zone(moscow, Locale.forLanguageTag("ru")))
+                .startsWith("Москва (UTC+03:00)");
+        assertThat(LocalizedFormats.zone(moscow, Locale.forLanguageTag("kk")))
+                .startsWith("Мәскеу уақыты (UTC+03:00)");
+        assertThat(LocalizedFormats.zone(moscow, Locale.ENGLISH))
+                .startsWith("Moscow Time (UTC+03:00)");
+
+    }
 }

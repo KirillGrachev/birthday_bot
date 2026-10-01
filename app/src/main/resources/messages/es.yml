@@ -34,6 +34,7 @@ message:
       - "Quedan {days} {days|plural:one=día|other=días} hasta tu cumpleaños. Los recordatorios llegarán a las {time} en tu zona horaria: {zone}."
     invalid:
       - "No pude leer la fecha. Ejemplos: `05.03.1998`, `05.03`, `5 de marzo de 1998`, `1998-03-05`. Inténtalo de nuevo."
+    year_range: "Ese año parece una errata: {year}. Acepto fechas de nacimiento desde 1900 hasta hoy incluido."
   time:
     set:
       - "Hora del recordatorio: *{time}* (tu hora local)"
@@ -52,7 +53,9 @@ message:
     days_to: "Quedan {days} {days|plural:one=día|other=días} hasta tu cumpleaños. La felicitación llegará el {date} a las {time} en tu zona horaria: {zone}."
     days_since: "Han pasado {days} {days|plural:one=día|other=días} desde tu nacimiento. Tienes {age} {age|plural:one=año|other=años}."
     days_since_last: "Han pasado {days} {days|plural:one=día|other=días} desde tu último cumpleaños."
-    no_year: "La fecha no tiene año, así que no puedo contar el total de días desde tu nacimiento. Contar desde el último cumpleaños funciona sin año: el botón de abajo lo hace. Indica la fecha con año para ver también tu edad: /date"
+    no_year:
+      - "La fecha no tiene año, así que no puedo contar el total de días desde tu nacimiento. Contar desde el último cumpleaños funciona sin año: el botón de abajo lo hace."
+      - "  Indica la fecha con año para ver también tu edad: /date"
     not_set: "Aún no hay fecha de nacimiento. ¿Empezamos? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Recordatorios: {notify}"
       - "Idioma: {lang}"
     not_set: "sin indicar"
-    "on": "activados"
-    "off": "desactivados"
+    "on": "Activados"
+    "off": "Desactivados"
   lang:
     choose: "Elige tu idioma:"
     set: "Idioma cambiado: {lang}"

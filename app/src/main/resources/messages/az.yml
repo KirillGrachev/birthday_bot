@@ -34,6 +34,7 @@ message:
       - "Ad gününə {days} {days|plural:one=gün|other=gün} qalıb. Xatırlatmalar {time} vaxtında {zone} qurşağında gələcək."
     invalid:
       - "Tarixi oxuya bilmədim. Misallar: `05.03.1998`, `05.03`, `5 mart 1998`, `1998-03-05`. Yenə cəhd et."
+    year_range: "Bu il yazış səhvinə bənzəyir: {year}. Doğum tarixlərini 1900-dan bu günə daxil olmaqla qəbul edirəm."
   time:
     set:
       - "Xatırlatma vaxtı: *{time}* (sənin yerli vaxtın)"
@@ -52,7 +53,9 @@ message:
     days_to: "Ad gününə {days} {days|plural:one=gün|other=gün} qalıb. Təbrik {date} tarixində {time} vaxtında {zone} qurşağında gələcək."
     days_since: "Doğumdan bəri {days} {days|plural:one=gün|other=gün} keçib. Sən {age} {age|plural:one=yaş|other=yaş}ındasan."
     days_since_last: "Son ad günündən bəri {days} {days|plural:one=gün|other=gün} keçib."
-    no_year: "Tarixdə il yoxdur, ona görə doğumdan bəri ümumi günləri hesablaya bilmirəm. Son ad günündən saymaq ilsiz də işləyir: aşağıdakı düymə bunu edir. Yaşı da görmək üçün il əlavə et: /date"
+    no_year:
+      - "Tarixdə il yoxdur, ona görə doğumdan bəri ümumi günləri hesablaya bilmirəm. Son ad günündən saymaq ilsiz də işləyir: aşağıdakı düymə bunu edir."
+      - "  Yaşı da görmək üçün il əlavə et: /date"
     not_set: "Hələ doğum tarixi yoxdur. Başlayırıq? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Xatırlatmalar: {notify}"
       - "Dil: {lang}"
     not_set: "qurulmayıb"
-    "on": "açıq"
-    "off": "sönülü"
+    "on": "Açıq"
+    "off": "Sönülü"
   lang:
     choose: "Dil seç:"
     set: "Dil dəyişdirildi: {lang}"

@@ -34,6 +34,7 @@ message:
       - "Do rojstnega dne je še {days} {days|plural:one=dan|two=dneva|few=dnevi|other=dni}. Opomniki bodo prihajali ob {time} v tvojem pasu {zone}."
     invalid:
       - "Datuma nisem prebral. Primeri: `05.03.1998`, `05.03`, `5. marec 1998`, `1998-03-05`. Poskusi znova."
+    year_range: "To leto je videti kot tipkarska napaka: {year}. Sprejemam datume rojstva od 1900 do danes vključno."
   time:
     set:
       - "Ura opomnika: *{time}* (tvoj krajevni čas)"
@@ -52,7 +53,9 @@ message:
     days_to: "Do rojstnega dne je še {days} {days|plural:one=dan|two=dneva|few=dnevi|other=dni}. Voščilo pride {date} ob {time} v tvojem pasu {zone}."
     days_since: "Od rojstva je minilo {days} {days|plural:one=dan|two=dneva|few=dnevi|other=dni}. Star si {age} {age|plural:one=leto|two=leti|few=leta|other=let}."
     days_since_last: "Od zadnjega rojstnega dne je minilo {days} {days|plural:one=dan|two=dneva|few=dnevi|other=dni}."
-    no_year: "Datum nima leta, zato skupnega števila dni od rojstva ni mogoče izračunati. Štetje od zadnjega rojstnega dne deluje tudi brez leta: to naredi gumb spodaj. Dodaj leto, da vidiš tudi starost: /date"
+    no_year:
+      - "Datum nima leta, zato skupnega števila dni od rojstva ni mogoče izračunati. Štetje od zadnjega rojstnega dne deluje tudi brez leta: to naredi gumb spodaj."
+      - "  Dodaj leto, da vidiš tudi starost: /date"
     not_set: "Datuma rojstva še ni. Začnemo? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Opomniki: {notify}"
       - "Jezik: {lang}"
     not_set: "ni nastavljeno"
-    "on": "vklopljeni"
-    "off": "izklopljeni"
+    "on": "Vklopljeni"
+    "off": "Izklopljeni"
   lang:
     choose: "Izberi jezik:"
     set: "Jezik je preklopljen: {lang}"

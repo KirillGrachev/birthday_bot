@@ -34,6 +34,7 @@ message:
       - "Tug'ilgan kunga {days} {days|plural:one=kun|other=kun} qoldi. Eslatmalar {time} vaqtida {zone} mintaqasida keladi."
     invalid:
       - "Sanani o'qiy olmadim. Misollar: `05.03.1998`, `05.03`, `5-mart, 1998`, `1998-03-05`. Yana urinib ko'ring."
+    year_range: "Bu yil xatoga o'xshaydi: {year}. Tug'ilgan sanalarni 1900-yildan bugungacha qabul qilaman."
   time:
     set:
       - "Eslatma vaqti: *{time}* (sizning mahalliy vaqtingiz)"
@@ -52,7 +53,9 @@ message:
     days_to: "Tug'ilgan kunga {days} {days|plural:one=kun|other=kun} qoldi. Tabrik {date} sanasida {time} vaqtida {zone} mintaqasida keladi."
     days_since: "Tug'ilgan kundan beri {days} {days|plural:one=kun|other=kun} o'tdi. Siz {age} {age|plural:one=yosh|other=yosh}dasiz."
     days_since_last: "Oxirgi tug'ilgan kundan beri {days} {days|plural:one=kun|other=kun} o'tdi."
-    no_year: "Sanada yil yo'q, shuning uchun tug'ilgan kundan beri jami kunlarni hisoblay olmayman. Oxirgi tug'ilgan kundan sanash yilsiz ham ishlaydi: quyidagi tugma buni bajaradi. Yoshni ham ko'rish uchun yilni qo'shing: /date"
+    no_year:
+      - "Sanada yil yo'q, shuning uchun tug'ilgan kundan beri jami kunlarni hisoblay olmayman. Oxirgi tug'ilgan kundan sanash yilsiz ham ishlaydi: quyidagi tugma buni bajaradi."
+      - "  Yoshni ham ko'rish uchun yilni qo'shing: /date"
     not_set: "Tug'ilgan sana hali ko'rsatilmagan. Boshlaymizmi? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Eslatmalar: {notify}"
       - "Til: {lang}"
     not_set: "ko'rsatilmagan"
-    "on": "yoniq"
-    "off": "o'chiq"
+    "on": "Yoniq"
+    "off": "O'chiq"
   lang:
     choose: "Tilni tanlang:"
     set: "Til almashtirildi: {lang}"

@@ -40,12 +40,8 @@ public final class ZoneCatalog {
      * "Moscow UTC+3", "Kolkata UTC+5:30". The offset is read at render time and
      * is display-only: a DST shift changes a caption, never a stored zone.
      */
-    public static String label(@NotNull ZoneId zone) {
-        String city = zone.getId().substring(zone.getId().lastIndexOf('/') + 1).replace('_', ' ');
-        return city + " " + offset(zone);
-    }
-
-    private static String offset(ZoneId zone) {
+    /** "UTC+3", "UTC-5", "UTC+5:30": the current offset, half-hours included. */
+    public static String offset(@NotNull ZoneId zone) {
 
         int totalSeconds = zone.getRules().getOffset(Instant.now()).getTotalSeconds();
         int minutes = Math.abs(totalSeconds) / 60;

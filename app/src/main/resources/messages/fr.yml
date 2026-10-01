@@ -34,6 +34,7 @@ message:
       - "Il reste {days} {days|plural:one=jour|other=jours} avant ton anniversaire. Les rappels arriveront à {time} dans ton fuseau {zone}."
     invalid:
       - "Je n'ai pas réussi à lire la date. Exemples : `05.03.1998`, `05.03`, `5 mars 1998`, `1998-03-05`. Réessaie."
+    year_range: "Cette année ressemble à une coquille : {year}. J'accepte les dates de naissance de 1900 à aujourd'hui inclus."
   time:
     set:
       - "Heure du rappel : *{time}* (ton heure locale)"
@@ -52,7 +53,9 @@ message:
     days_to: "Il reste {days} {days|plural:one=jour|other=jours} avant ton anniversaire. Le message arrivera le {date} à {time} dans ton fuseau {zone}."
     days_since: "{days} {days|plural:one=jour|other=jours} se sont écoulés depuis ta naissance. Tu as {age} {age|plural:one=an|other=ans}."
     days_since_last: "{days} {days|plural:one=jour|other=jours} se sont écoulés depuis ton dernier anniversaire."
-    no_year: "La date n'a pas d'année, donc le total des jours depuis ta naissance est impossible à calculer. Le compte depuis le dernier anniversaire fonctionne sans année : le bouton ci-dessous le fait. Ajoute une année pour voir aussi ton âge : /date"
+    no_year:
+      - "La date n'a pas d'année, donc le total des jours depuis ta naissance est impossible à calculer. Le compte depuis le dernier anniversaire fonctionne sans année : le bouton ci-dessous le fait."
+      - "  Ajoute une année pour voir aussi ton âge : /date"
     not_set: "Pas encore de date de naissance. On commence ? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Rappels : {notify}"
       - "Langue : {lang}"
     not_set: "non défini"
-    "on": "activés"
-    "off": "désactivés"
+    "on": "Activés"
+    "off": "Désactivés"
   lang:
     choose: "Choisis ta langue :"
     set: "Langue changée : {lang}"

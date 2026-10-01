@@ -34,6 +34,7 @@ message:
       - "Sünnipäevani on {days} {days|plural:one=päev|other=päeva}. Meeldetuletused saabuvad kell {time} sinu vööndis {zone}."
     invalid:
       - "Ei saanud kuupäevast aru. Näited: `05.03.1998`, `05.03`, `5. märts 1998`, `1998-03-05`. Proovi uuesti."
+    year_range: "See aasta paistab kirjaveana: {year}. Võtan sünnikuupäevi 1900-st kuni tänaseni kaasa arvatud."
   time:
     set:
       - "Meeldetuletuse kellaaeg: *{time}* (sinu kohalik aeg)"
@@ -52,7 +53,9 @@ message:
     days_to: "Sünnipäevani on {days} {days|plural:one=päev|other=päeva}. Õnnesoov saabub {date} kell {time} sinu vööndis {zone}."
     days_since: "Sünnist on möödunud {days} {days|plural:one=päev|other=päeva}. Sa oled {age} {age|plural:one=aasta|other=aastat} vana."
     days_since_last: "Viimasest sünnipäevast on möödunud {days} {days|plural:one=päev|other=päeva}."
-    no_year: "Kuupäeval puudub aasta, seega sünnist möödunud päevade koguarvu ei saa arvutada. Viimasest sünnipäevast loendamine töötab ka ilma aastata: allolev nupp teeb seda. Lisa aasta, et näha ka vanust: /date"
+    no_year:
+      - "Kuupäeval puudub aasta, seega sünnist möödunud päevade koguarvu ei saa arvutada. Viimasest sünnipäevast loendamine töötab ka ilma aastata: allolev nupp teeb seda."
+      - "  Lisa aasta, et näha ka vanust: /date"
     not_set: "Sünnikuupäeva pole veel. Alustame? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Meeldetuletused: {notify}"
       - "Keel: {lang}"
     not_set: "määramata"
-    "on": "sees"
-    "off": "väljas"
+    "on": "Sees"
+    "off": "Väljas"
   lang:
     choose: "Vali keel:"
     set: "Keel vahetatud: {lang}"

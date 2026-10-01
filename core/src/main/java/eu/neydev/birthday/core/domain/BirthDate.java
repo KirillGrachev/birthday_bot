@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.Year;
 
 /**
- * A birth date with an OPTIONAL year: users often do not want to give the year,
+ * A birthdate with an OPTIONAL year: users often do not want to give the year,
  * and for countdown reminders it is not needed at all. The year is required only for
  * "how many days SINCE the birthday" and the age in the greeting.
  *
@@ -76,7 +76,7 @@ public record BirthDate(int month, int day, @Nullable Integer year) {
 
         LocalDate full = fullDate();
         if (full == null) {
-            throw new IllegalStateException("Birth date has no year: " + this);
+            throw new IllegalStateException("Birthdate has no year: " + this);
         }
 
         return full;

@@ -4,8 +4,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 import java.util.Collection;
@@ -18,7 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Human-tolerant parsing of a birth date, reminder time and time zone.
+ * Human-tolerant parsing of a birthdate, reminder time and time zone.
  *
  * <p>Dates: ISO, {@code dd.mm.yyyy}, {@code dd-mm-yyyy}, {@code dd/mm/yyyy},
  * "5 марта 1998", "5 марта", "March 5, 1998", "March 5" - month names are understood
@@ -60,13 +62,44 @@ public final class DateParsers {
     }
 
     /**
-     * Parsing a birth date. Returns {@link Optional#empty()} instead of an exception:
+     * Parsing a birthdate. Returns {@link Optional#empty()} instead of an exception:
      * the caller decides which friendly message to show.
      */
+    /**
+     * The oldest believable birth year. The newest one is not a constant: nobody is born
+     * in the future, so the upper bound is the reader's today, passed in by the caller.
+     */
+    private static final int MIN_YEAR = 1900;
+
+    /**
+     * A birthdate parse with its failure reason: either a date, or the out-of-range year
+     * that made the parse refuse, or nothing at all when the input is not a date. The
+     * caller owes the user a different sentence for "I cannot read this" and "I can read
+     * it, but 1889 is not a birth year".
+     */
+    public record BirthDateParse(@Nullable BirthDate date, @Nullable Integer yearOutOfRange) {
+
+        public boolean parsed() {
+            return date != null;
+        }
+
+        public Optional<BirthDate> result() {
+            return Optional.ofNullable(date);
+        }
+    }
+
     public static Optional<BirthDate> parseBirthDate(@NotNull String raw, @NotNull Locale locale) {
+        return parseBirthDateDetailed(raw, locale).result();
+    }
 
-        return parseInLocale(raw, locale);
+    public static BirthDateParse parseBirthDateDetailed(@NotNull String raw, @NotNull Locale locale) {
+        return parseBirthDateDetailed(raw, locale, LocalDate.now(ZoneOffset.UTC));
+    }
 
+    /** The detailed parse with an explicit today: the upper bound of a birthdate. */
+    public static BirthDateParse parseBirthDateDetailed(@NotNull String raw, @NotNull Locale locale,
+                                                        @NotNull LocalDate today) {
+        return parseInLocale(raw, locale, today);
     }
 
     /**
@@ -75,13 +108,20 @@ public final class DateParsers {
      * configured. The profile language goes first, the rest in a sorted order so a
      * parse never depends on iteration luck.
      */
-    public static Optional<BirthDate> parseBirthDateInAnyLanguage(@NotNull String raw,
-                                                                  @NotNull Locale preferred,
-                                                                  @NotNull Collection<String> languages) {
+    public static BirthDateParse parseBirthDateInAnyLanguage(@NotNull String raw,
+                                                             @NotNull Locale preferred,
+                                                             @NotNull Collection<String> languages) {
+        return parseBirthDateInAnyLanguage(raw, preferred, languages, LocalDate.now(ZoneOffset.UTC));
+    }
 
-        Optional<BirthDate> own = parseInLocale(raw, preferred);
+    public static BirthDateParse parseBirthDateInAnyLanguage(@NotNull String raw,
+                                                             @NotNull Locale preferred,
+                                                             @NotNull Collection<String> languages,
+                                                             @NotNull LocalDate today) {
 
-        if (own.isPresent()) {
+        BirthDateParse own = parseInLocale(raw, preferred, today);
+
+        if (own.parsed() || own.yearOutOfRange() != null) {
             return own;
         }
 
@@ -91,24 +131,24 @@ public final class DateParsers {
                 continue;
             }
 
-            Optional<BirthDate> parsed = parseInLocale(raw, Locale.forLanguageTag(language));
+            BirthDateParse parsed = parseInLocale(raw, Locale.forLanguageTag(language), today);
 
-            if (parsed.isPresent()) {
+            if (parsed.parsed() || parsed.yearOutOfRange() != null) {
                 return parsed;
             }
 
         }
 
-        return Optional.empty();
+        return new BirthDateParse(null, null);
 
     }
 
-    private static Optional<BirthDate> parseInLocale(String raw, Locale locale) {
+    private static BirthDateParse parseInLocale(String raw, Locale locale, LocalDate today) {
 
         String input = raw.trim().toLowerCase(locale);
 
         if (input.isEmpty()) {
-            return Optional.empty();
+            return new BirthDateParse(null, null);
         }
 
         Matcher numeric = NUMERIC.matcher(input);
@@ -119,32 +159,28 @@ public final class DateParsers {
             int month = Integer.parseInt(numeric.group(2));
             Integer year = parseYear(numeric.group(3));
 
-            if (year != null && (year < 1900 || year > 2100)) {
-                return Optional.empty();
-            }
-
-            return tryBirthDate(month, day, year);
+            return tryBirthDate(month, day, year, today);
 
         }
 
         for (String pattern : NUMERIC_PATTERNS) {
-            Optional<BirthDate> parsed = tryFormatter(input, pattern, locale, true);
-            if (parsed.isPresent()) return parsed;
+            BirthDateParse parsed = tryFormatter(input, pattern, locale, true, today);
+            if (parsed.parsed() || parsed.yearOutOfRange() != null) return parsed;
         }
 
         for (String pattern : MONTH_NAME_PATTERNS) {
 
-            Optional<BirthDate> parsed = tryFormatter(input, pattern, locale, false);
-            if (parsed.isPresent()) return parsed;
+            BirthDateParse parsed = tryFormatter(input, pattern, locale, false, today);
+            if (parsed.parsed() || parsed.yearOutOfRange() != null) return parsed;
 
         }
 
-        return Optional.empty();
+        return new BirthDateParse(null, null);
 
     }
 
-    private static Optional<BirthDate> tryFormatter(String input, String pattern,
-                                                    Locale locale, boolean numericOnly) {
+    private static BirthDateParse tryFormatter(String input, String pattern,
+                                               Locale locale, boolean numericOnly, LocalDate today) {
 
         try {
 
@@ -162,21 +198,33 @@ public final class DateParsers {
                     : null;
 
             if (numericOnly && pattern.contains("MMM")) {
-                return Optional.empty();
+                return new BirthDateParse(null, null);
             }
 
-            return tryBirthDate(month, day, year);
+            return tryBirthDate(month, day, year, today);
 
         } catch (DateTimeException e) {
-            return Optional.empty();
+            return new BirthDateParse(null, null);
         }
     }
 
-    private static Optional<BirthDate> tryBirthDate(int month, int day, @Nullable Integer year) {
+    private static BirthDateParse tryBirthDate(int month, int day, @Nullable Integer year,
+                                               LocalDate today) {
         try {
-            return Optional.of(new BirthDate(month, day, year));
-        } catch (IllegalArgumentException e) {
-            return Optional.empty();
+
+            BirthDate date = new BirthDate(month, day, year);
+
+            if (year != null && (year < MIN_YEAR || date.requireFullDate().isAfter(today))) {
+
+                // A readable date with an impossible year: a typo, or a birthday
+                // from a future that has not happened yet.
+                return new BirthDateParse(null, year);
+            }
+
+            return new BirthDateParse(date, null);
+
+        } catch (RuntimeException e) {
+            return new BirthDateParse(null, null);
         }
     }
 

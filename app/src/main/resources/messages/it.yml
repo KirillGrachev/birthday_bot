@@ -34,6 +34,7 @@ message:
       - "Mancano {days} {days|plural:one=giorno|other=giorni} al compleanno. I promemoria arriveranno alle {time} nel tuo fuso {zone}."
     invalid:
       - "Non sono riuscito a leggere la data. Esempi: `05.03.1998`, `05.03`, `5 marzo 1998`, `1998-03-05`. Riprova."
+    year_range: "Quell'anno sembra un refuso: {year}. Accetto date di nascita dal 1900 a oggi inclusa."
   time:
     set:
       - "Orario del promemoria: *{time}* (la tua ora locale)"
@@ -52,7 +53,9 @@ message:
     days_to: "Mancano {days} {days|plural:one=giorno|other=giorni} al compleanno. Gli auguri arriveranno il {date} alle {time} nel tuo fuso {zone}."
     days_since: "Sono passati {days} {days|plural:one=giorno|other=giorni} dalla tua nascita. Hai {age} {age|plural:one=anno|other=anni}."
     days_since_last: "Sono passati {days} {days|plural:one=giorno|other=giorni} dal tuo ultimo compleanno."
-    no_year: "La data non ha l'anno, quindi il totale dei giorni dalla nascita non si può calcolare. Il conto dall'ultimo compleanno funziona anche senza anno: lo fa il pulsante qui sotto. Aggiungi l'anno per vedere anche l'età: /date"
+    no_year:
+      - "La data non ha l'anno, quindi il totale dei giorni dalla nascita non si può calcolare. Il conto dall'ultimo compleanno funziona anche senza anno: lo fa il pulsante qui sotto."
+      - "  Aggiungi l'anno per vedere anche l'età: /date"
     not_set: "Nessuna data di nascita ancora. Cominciamo? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Promemoria: {notify}"
       - "Lingua: {lang}"
     not_set: "non impostata"
-    "on": "attivi"
-    "off": "disattivati"
+    "on": "Attivi"
+    "off": "Disattivati"
   lang:
     choose: "Scegli la lingua:"
     set: "Lingua cambiata: {lang}"

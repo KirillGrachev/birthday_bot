@@ -34,6 +34,7 @@ message:
       - "Det är {days} {days|plural:one=dag|other=dagar} kvar till din födelsedag. Påminnelserna kommer klockan {time} i din tidszon {zone}."
     invalid:
       - "Jag kunde inte läsa datumet. Exempel: `05.03.1998`, `05.03`, `5 mars 1998`, `1998-03-05`. Försök igen."
+    year_range: "Det året ser ut som ett skrivfel: {year}. Jag tar emot födelsedatum från 1900 till och med i dag."
   time:
     set:
       - "Tid för påminnelsen: *{time}* (din lokala tid)"
@@ -52,7 +53,9 @@ message:
     days_to: "Det är {days} {days|plural:one=dag|other=dagar} kvar till din födelsedag. Hälsningen kommer {date} klockan {time} i din tidszon {zone}."
     days_since: "Det har gått {days} {days|plural:one=dag|other=dagar} sedan din födelse. Du är {age} {age|plural:one=år|other=år} gammal."
     days_since_last: "Det har gått {days} {days|plural:one=dag|other=dagar} sedan din senaste födelsedag."
-    no_year: "Datumet har inget år, så det totala antalet dagar sedan födelsen kan inte räknas ut. Räkningen från den senaste födelsedagen fungerar utan år: knappen nedan gör den. Lägg till ett år för att också se din ålder: /date"
+    no_year:
+      - "Datumet har inget år, så det totala antalet dagar sedan födelsen kan inte räknas ut. Räkningen från den senaste födelsedagen fungerar utan år: knappen nedan gör den."
+      - "  Lägg till ett år för att också se din ålder: /date"
     not_set: "Inget födelsedatum ännu. Ska vi börja? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Påminnelser: {notify}"
       - "Språk: {lang}"
     not_set: "inte angivet"
-    "on": "på"
-    "off": "av"
+    "on": "På"
+    "off": "Av"
   lang:
     choose: "Välj språk:"
     set: "Språket bytt: {lang}"

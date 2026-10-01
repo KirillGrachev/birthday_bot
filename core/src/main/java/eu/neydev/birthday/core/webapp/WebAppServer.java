@@ -7,7 +7,6 @@ import eu.neydev.birthday.core.api.Platform;
 import eu.neydev.birthday.core.api.PlatformUser;
 import eu.neydev.birthday.core.config.AppConfig;
 import eu.neydev.birthday.core.http.WebhookHandler;
-import eu.neydev.birthday.core.domain.BirthDate;
 import eu.neydev.birthday.core.domain.BirthdayMath;
 import eu.neydev.birthday.core.domain.DateParsers;
 import eu.neydev.birthday.core.domain.Profile;
@@ -353,15 +352,23 @@ public final class WebAppServer implements AutoCloseable {
                 profile = profileService.setBirthDate(profile, null);
             } else {
 
-                Optional<BirthDate> parsed = DateParsers.parseBirthDateInAnyLanguage(
-                        raw, profile.locale(), appConfig.locale().supported());
+                DateParsers.BirthDateParse parsed = DateParsers.parseBirthDateInAnyLanguage(
+                        raw, profile.locale(), appConfig.locale().supported(),
+                        profile.todayAt(clock.instant()));
 
-                if (parsed.isEmpty()) {
+                if (!parsed.parsed()) {
+
+                    // The Mini App owes the same honesty as the chat: a readable date
+                    // with an impossible year is not "invalid", it is out of range.
+                    if (parsed.yearOutOfRange() != null) {
+                        respond(exchange, 400, "application/json", "{\"error\":\"year out of range\"}");
+                        return;
+                    }
                     respond(exchange, 400, "application/json", "{\"error\":\"invalid date\"}");
                     return;
                 }
 
-                profile = profileService.setBirthDate(profile, parsed.get());
+                profile = profileService.setBirthDate(profile, parsed.date());
 
             }
 

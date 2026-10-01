@@ -3,6 +3,7 @@ package eu.neydev.birthday.core.command;
 import eu.neydev.birthday.core.api.InlineKeyboard;
 import eu.neydev.birthday.core.config.AppConfig;
 import eu.neydev.birthday.core.i18n.MessageBundleHolder;
+import eu.neydev.birthday.core.i18n.ZoneCityNames;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,15 +19,22 @@ import java.util.Map;
  of buttons in the business logic.
  */
 public record MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl,
-                          List<String> languages, Map<String, String> languageNames) {
+                          List<String> languages, Map<String, String> languageNames,
+                          ZoneCityNames zoneCities) {
+
+    public MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl, AppConfig.Locale locale,
+                       ZoneCityNames zoneCities) {
+        this(holder, githubUrl, List.copyOf(locale.supported()), locale.displayNames(), zoneCities);
+    }
 
     public MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl, AppConfig.Locale locale) {
-        this(holder, githubUrl, List.copyOf(locale.supported()), locale.displayNames());
+        this(holder, githubUrl, locale, ZoneCityNames.empty());
     }
 
     /** Shorthand without explicit locale config: bundle languages, codes as captions. */
     public MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl) {
-        this(holder, githubUrl, List.copyOf(holder.bundle().languages()), Map.of());
+        this(holder, githubUrl, List.copyOf(holder.bundle().languages()), Map.of(),
+                ZoneCityNames.empty());
     }
 
     /**
@@ -242,7 +250,8 @@ public record MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl
              index < Math.min(available.size(), (shown + 1) * LANGUAGES_PER_PAGE); index++) {
 
             String zone = available.get(index);
-            String caption = ZoneCatalog.label(ZoneId.of(zone));
+            ZoneId id = ZoneId.of(zone);
+            String caption = zoneCities.city(zone, locale) + " " + ZoneCatalog.offset(id);
 
             if (zone.equals(current.getId())) {
                 caption = CURRENT_MARK + caption;

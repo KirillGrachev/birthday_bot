@@ -3,6 +3,7 @@ package eu.neydev.birthday.core.command;
 import eu.neydev.birthday.core.api.InlineKeyboard;
 import eu.neydev.birthday.core.config.AppConfig;
 import eu.neydev.birthday.core.i18n.MessageBundleHolder;
+import eu.neydev.birthday.core.i18n.ZoneCityNames;
 import org.junit.jupiter.api.Test;
 
 import java.time.ZoneId;
@@ -153,6 +154,21 @@ class MenuFactoryTest {
         assertThat(menus.zonePageOf("UTC")).isEqualTo(5);
         assertThat(menus.zonePageOf("Mars/Olympus_Mons")).isZero();
         assertThat(menus.zones(RU, 99, ZoneId.of("UTC")).rows()).hasSize(9);
+
+    }
+
+    @Test
+    void zonePickerSpeaksTheReadersScriptForCataloguedCities() {
+
+        MenuFactory menus = new MenuFactory(holder(), null,
+                new AppConfig.Locale("ru", new LinkedHashSet<>(List.of("ru", "en"))),
+                ZoneCityNames.load(Set.of("ru", "en")));
+
+        InlineKeyboard russian = menus.zones(RU, 0, ZoneId.of("Europe/Moscow"));
+        assertThat(russian.rows().get(0).get(0).label()).startsWith("• Москва UTC+3");
+
+        InlineKeyboard english = menus.zones(Locale.ENGLISH, 0, ZoneId.of("Europe/Moscow"));
+        assertThat(english.rows().get(0).get(0).label()).startsWith("• Moscow UTC+3");
 
     }
 

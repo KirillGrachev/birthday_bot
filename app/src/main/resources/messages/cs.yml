@@ -34,6 +34,7 @@ message:
       - "Do narozenin zbývá {days} {days|plural:one=den|few=dny|many=dnů}. Připomínky budou chodit v {time} ve tvém pásmu {zone}."
     invalid:
       - "Datum jsem nepřečetl. Příklady: `05.03.1998`, `05.03`, `5. března 1998`, `1998-03-05`. Zkus to znovu."
+    year_range: "Tento rok vypadá jako překlep: {year}. Přijímám data narození od 1900 do dneška včetně."
   time:
     set:
       - "Čas připomínky: *{time}* (tvůj místní čas)"
@@ -52,7 +53,9 @@ message:
     days_to: "Do narozenin zbývá {days} {days|plural:one=den|few=dny|many=dnů}. Přání přijde {date} v {time} ve tvém pásmu {zone}."
     days_since: "Od narození uplynulo {days} {days|plural:one=den|few=dny|many=dnů}. Je ti {age} {age|plural:one=rok|few=roky|many=let}."
     days_since_last: "Od posledních narozenin uplynulo {days} {days|plural:one=den|few=dny|many=dnů}."
-    no_year: "Datum nemá rok, takže celkový počet dní od narození spočítat nelze. Počítání od posledních narozenin funguje i bez roku: tlačítko níže to umí. Přidej rok a uvidíš i věk: /date"
+    no_year:
+      - "Datum nemá rok, takže celkový počet dní od narození spočítat nelze. Počítání od posledních narozenin funguje i bez roku: tlačítko níže to umí."
+      - "  Přidej rok a uvidíš i věk: /date"
     not_set: "Datum narození zatím není zadané. Začneme? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Připomínky: {notify}"
       - "Jazyk: {lang}"
     not_set: "nenastaveno"
-    "on": "zapnuté"
-    "off": "vypnuté"
+    "on": "Zapnuté"
+    "off": "Vypnuté"
   lang:
     choose: "Vyber jazyk:"
     set: "Jazyk přepnut: {lang}"

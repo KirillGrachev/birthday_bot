@@ -34,6 +34,7 @@ message:
       - "Faltam {days} {days|plural:one=dia|other=dias} para o teu aniversário. Os lembretes chegam às {time} no teu fuso {zone}."
     invalid:
       - "Não consegui ler a data. Exemplos: `05.03.1998`, `05.03`, `5 de março de 1998`, `1998-03-05`. Tenta outra vez."
+    year_range: "Esse ano parece um erro de digitação: {year}. Aceito datas de nascimento de 1900 até hoje incluído."
   time:
     set:
       - "Hora do lembrete: *{time}* (a tua hora local)"
@@ -52,7 +53,9 @@ message:
     days_to: "Faltam {days} {days|plural:one=dia|other=dias} para o teu aniversário. Os parabéns chegam a {date} às {time} no teu fuso {zone}."
     days_since: "Passaram {days} {days|plural:one=dia|other=dias} desde o teu nascimento. Tens {age} {age|plural:one=ano|other=anos}."
     days_since_last: "Passaram {days} {days|plural:one=dia|other=dias} desde o teu último aniversário."
-    no_year: "A data não tem ano, por isso o total de dias desde o nascimento não pode ser calculado. A contagem desde o último aniversário funciona sem ano: o botão abaixo faz isso. Acrescenta um ano para veres também a idade: /date"
+    no_year:
+      - "A data não tem ano, por isso o total de dias desde o nascimento não pode ser calculado. A contagem desde o último aniversário funciona sem ano: o botão abaixo faz isso."
+      - "  Acrescenta um ano para veres também a idade: /date"
     not_set: "Ainda não há data de nascimento. Começamos? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Lembretes: {notify}"
       - "Idioma: {lang}"
     not_set: "não definido"
-    "on": "ativados"
-    "off": "desativados"
+    "on": "Ativados"
+    "off": "Desativados"
   lang:
     choose: "Escolhe o teu idioma:"
     set: "Idioma alterado: {lang}"

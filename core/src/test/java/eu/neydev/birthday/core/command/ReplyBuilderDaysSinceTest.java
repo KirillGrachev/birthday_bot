@@ -10,6 +10,7 @@ import eu.neydev.birthday.core.i18n.MessageBundleHolder;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
+import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -48,7 +49,8 @@ class ReplyBuilderDaysSinceTest {
         MessageBundleHolder holder = new MessageBundleHolder("messages", null,
                 Set.of("ru", "en"), "ru");
 
-        return new ReplyBuilder(holder, new MenuFactory(holder, null), config);
+        return new ReplyBuilder(holder, new MenuFactory(holder, null), config,
+                Clock.fixed(Instant.parse("2026-09-30T12:00:00Z"), ZoneId.of("UTC")));
 
     }
 

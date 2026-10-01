@@ -2,11 +2,11 @@ message:
   start:
     - "*Hi there!* I keep track of birthdays and never miss an important date."
     - ""
-    - "Set your birth date, and I will send the countdown and a greeting right on time, in your timezone and your language."
+    - "Set your birthdate, and I will send the countdown and a greeting right on time, in your timezone and your language."
   help:
     - "*What I can do*"
     - ""
-    - "/date: set or change your birth date"
+    - "/date: set or change your birthdate"
     - "/notify: turn reminders on or off"
     - "/daysto: days until your birthday"
     - "/dayssince: days since your birthday"
@@ -18,7 +18,7 @@ message:
     - "Reminders arrive daily at your chosen time, and on the day itself you get a greeting. Nothing is missed, even after a restart."
   prompt:
     date:
-      - "Enter your birth date in any convenient format:"
+      - "Enter your birthdate in any convenient format:"
       - ""
       - "`05.03.1998`, `05.03`, `March 5, 1998`, `1998-03-05`"
       - ""
@@ -34,6 +34,7 @@ message:
       - "{days} {days|plural:one=day|other=days} left until your birthday. Reminders will arrive at {time} in your timezone: {zone}."
     invalid:
       - "Could not parse the date. Examples: `05.03.1998`, `05.03`, `March 5, 1998`, `1998-03-05`. Try again."
+    year_range: "That year looks like a typo: {year}. I support birthdates from 1900 up to and including today."
   time:
     set:
       - "Reminder time: *{time}* (your local time)"
@@ -52,20 +53,22 @@ message:
     days_to: "{days} {days|plural:one=day|other=days} left until your birthday. The greeting arrives on {date} at {time} in your timezone: {zone}."
     days_since: "{days} {days|plural:one=day|other=days} have passed since your birth. You are {age} {age|plural:one=year|other=years} old."
     days_since_last: "{days} {days|plural:one=day|other=days} have passed since your last birthday."
-    no_year: "The date has no year, so the total count of days since your birth is impossible. Counting from the last birthday works without a year: the button below does it. Add a year to see your age too: /date"
-    not_set: "No birth date yet. Shall we start? /date"
+    no_year:
+      - "The date has no year, so the total count of days since your birth is impossible. Counting from the last birthday works without a year: the button below does it."
+      - "  Add a year to see your age too: /date"
+    not_set: "No birthdate yet. Shall we start? /date"
   settings:
     view:
       - "*Your settings*"
       - ""
-      - "Birth date: {date}"
+      - "Birthdate: {date}"
       - "Reminder time: {time}"
       - "Timezone: {zone}"
       - "Reminders: {notify}"
       - "Language: {lang}"
     not_set: "not set"
-    "on": "on"
-    "off": "off"
+    "on": "On"
+    "off": "Off"
   lang:
     choose: "Choose your language:"
     set: "Language switched: {lang}"
@@ -107,7 +110,7 @@ reminder:
 
 webapp:
   title: "My birthday"
-  date: "Birth date"
+  date: "Birthdate"
   time: "Reminder time"
   zone: "Timezone"
   lang: "Language"
@@ -151,7 +154,7 @@ command:
   desc:
     start: "Start using the bot"
     help: "Help"
-    date: "Set your birth date"
+    date: "Set your birthdate"
     notify: "Toggle reminders"
     daysto: "Days until your birthday"
     dayssince: "Days since your birthday"

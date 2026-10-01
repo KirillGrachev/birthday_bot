@@ -34,6 +34,7 @@ message:
       - "Nog {days} {days|plural:one=dag|other=dagen} tot je verjaardag. Herinneringen komen om {time} in jouw tijdzone {zone}."
     invalid:
       - "Ik kon de datum niet lezen. Voorbeelden: `05.03.1998`, `05.03`, `5 maart 1998`, `1998-03-05`. Probeer opnieuw."
+    year_range: "Dat jaar lijkt een typefout: {year}. Ik accepteer geboortedata van 1900 tot en met vandaag."
   time:
     set:
       - "Tijdstip van de herinnering: *{time}* (jouw lokale tijd)"
@@ -52,7 +53,9 @@ message:
     days_to: "Nog {days} {days|plural:one=dag|other=dagen} tot je verjaardag. De felicitatie komt op {date} om {time} in jouw tijdzone {zone}."
     days_since: "Er zijn {days} {days|plural:one=dag|other=dagen} verstreken sinds je geboorte. Je bent {age} {age|plural:one=jaar|other=jaar} oud."
     days_since_last: "Er zijn {days} {days|plural:one=dag|other=dagen} verstreken sinds je vorige verjaardag."
-    no_year: "De datum heeft geen jaar, dus het totaal aantal dagen sinds je geboorte kan niet worden berekend. Tellen vanaf je laatste verjaardag werkt wel zonder jaar: de knop hieronder doet dat. Voeg een jaar toe om ook je leeftijd te zien: /date"
+    no_year:
+      - "De datum heeft geen jaar, dus het totaal aantal dagen sinds je geboorte kan niet worden berekend. Tellen vanaf je laatste verjaardag werkt wel zonder jaar: de knop hieronder doet dat."
+      - "  Voeg een jaar toe om ook je leeftijd te zien: /date"
     not_set: "Nog geen geboortedatum. Zullen we beginnen? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Herinneringen: {notify}"
       - "Taal: {lang}"
     not_set: "niet ingesteld"
-    "on": "aan"
-    "off": "uit"
+    "on": "Aan"
+    "off": "Uit"
   lang:
     choose: "Kies je taal:"
     set: "Taal gewijzigd: {lang}"

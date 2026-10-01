@@ -34,6 +34,7 @@ message:
       - "Tá {days} {days|plural:one=lá|two=lá|few=lá|many=lá|other=lá} fágtha go dtí do bhreithlá. Tiocfaidh na meabhrúcháin ag {time} i do chrios {zone}."
     invalid:
       - "Níor éirigh liom an dáta a léamh. Samplaí: `05.03.1998`, `05.03`, `5 Márta 1998`, `1998-03-05`. Bain triail eile as."
+    year_range: "Breathnaíonn an bhliain sin mar bhotún cló: {year}. Glacaim dátaí breithe ó 1900 go dtí inniu san áireamh."
   time:
     set:
       - "Am an mheabhrúcháin: *{time}* (do chlog áitiúil)"
@@ -52,7 +53,9 @@ message:
     days_to: "Tá {days} {days|plural:one=lá|two=lá|few=lá|many=lá|other=lá} fágtha go dtí do bhreithlá. Tiocfaidh an bheannacht ar {date} ag {time} i do chrios {zone}."
     days_since: "Tá {days} {days|plural:one=lá|two=lá|few=lá|many=lá|other=lá} caite ó rugadh thú. Tá tú {age} {age|plural:one=bliain|two=bliain|few=bliana|many=mbliana|other=bliain} d'aois."
     days_since_last: "Tá {days} {days|plural:one=lá|two=lá|few=lá|many=lá|other=lá} caite ó do bhreithlá deireanach."
-    no_year: "Níl bliain sa dáta, mar sin ní féidir líon iomlán na laethanta ó do bhreith a ríomh. Oibríonn an t-áireamh ó do bhreithlá deireanach gan bhliain: déanann an cnaipe thíos é. Cuir bliain leis chun d'aois a fheiceáil freisin: /date"
+    no_year:
+      - "Níl bliain sa dáta, mar sin ní féidir líon iomlán na laethanta ó do bhreith a ríomh. Oibríonn an t-áireamh ó do bhreithlá deireanach gan bhliain: déanann an cnaipe thíos é."
+      - "  Cuir bliain leis chun d'aois a fheiceáil freisin: /date"
     not_set: "Níl dáta breithe socraithe fós. An dtosaímid? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Meabhrúcháin: {notify}"
       - "Teanga: {lang}"
     not_set: "gan socrú"
-    "on": "ar siúl"
-    "off": "as"
+    "on": "Ar siúl"
+    "off": "As"
   lang:
     choose: "Roghnaigh teanga:"
     set: "Athraíodh an teanga: {lang}"

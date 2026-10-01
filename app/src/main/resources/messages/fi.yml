@@ -34,6 +34,7 @@ message:
       - "Syntymäpäivään on {days} {days|plural:one=päivä|other=päivää}. Muistutukset tulevat kello {time} vyöhykkeelläsi {zone}."
     invalid:
       - "En saanut päivämäärää selvitettyä. Esimerkkejä: `05.03.1998`, `05.03`, `5. maaliskuuta 1998`, `1998-03-05`. Yritä uudelleen."
+    year_range: "Vuosi näyttää kirjoitusvirheeltä: {year}. Hyväksyn syntymäpäivät 1900:sta tähän päivään mukaan lukien."
   time:
     set:
       - "Muistutuksen kellonaika: *{time}* (oma paikallinen aikasi)"
@@ -52,7 +53,9 @@ message:
     days_to: "Syntymäpäivään on {days} {days|plural:one=päivä|other=päivää}. Onnittelu saapuu {date} kello {time} vyöhykkeelläsi {zone}."
     days_since: "Syntymästäsi on kulunut {days} {days|plural:one=päivä|other=päivää}. Olet {age} {age|plural:one=vuoden|other=vuotta} vanha."
     days_since_last: "Viime syntymäpäivästäsi on kulunut {days} {days|plural:one=päivä|other=päivää}."
-    no_year: "Päivämäärässä ei ole vuotta, joten syntymästä kuluneiden päivien kokonaismäärää ei voi laskea. Laskenta viime syntymäpäivästä toimii ilman vuotta: alla oleva painike tekee sen. Lisää vuosi, niin näet myös iän: /date"
+    no_year:
+      - "Päivämäärässä ei ole vuotta, joten syntymästä kuluneiden päivien kokonaismäärää ei voi laskea. Laskenta viime syntymäpäivästä toimii ilman vuotta: alla oleva painike tekee sen."
+      - "  Lisää vuosi, niin näet myös iän: /date"
     not_set: "Syntymäpäivää ei ole vielä asetettu. Aloitetaanko? /date"
   settings:
     view:
@@ -64,8 +67,8 @@ message:
       - "Muistutukset: {notify}"
       - "Kieli: {lang}"
     not_set: "ei asetettu"
-    "on": "päällä"
-    "off": "pois päältä"
+    "on": "Päällä"
+    "off": "Pois päältä"
   lang:
     choose: "Valitse kieli:"
     set: "Kieli vaihdettu: {lang}"

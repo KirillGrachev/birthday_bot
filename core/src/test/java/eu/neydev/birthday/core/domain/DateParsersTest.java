@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Set;
 
@@ -89,22 +90,66 @@ class DateParsersTest {
         Set<String> shipped = Set.of("ru", "en", "de", "es", "el", "kk");
 
         // a Russian month typed into an English profile (the production complaint)
-        assertThat(DateParsers.parseBirthDateInAnyLanguage("11 Февраля 2006", Locale.ENGLISH, shipped))
+        assertThat(DateParsers.parseBirthDateInAnyLanguage("11 Февраля 2006", Locale.ENGLISH, shipped).result())
                 .contains(new BirthDate(2, 11, 2006));
         // and the mirror case: an English month typed into a Russian profile
-        assertThat(DateParsers.parseBirthDateInAnyLanguage("March 5, 1998", RU, shipped))
+        assertThat(DateParsers.parseBirthDateInAnyLanguage("March 5, 1998", RU, shipped).result())
                 .contains(new BirthDate(3, 5, 1998));
         // a Greek and a Kazakh month reach the same place
-        assertThat(DateParsers.parseBirthDateInAnyLanguage("5 Μαρτίου 1998", Locale.ENGLISH, shipped))
+        assertThat(DateParsers.parseBirthDateInAnyLanguage("5 Μαρτίου 1998", Locale.ENGLISH, shipped).result())
                 .contains(new BirthDate(3, 5, 1998));
-        assertThat(DateParsers.parseBirthDateInAnyLanguage("5 наурыз 1998", Locale.ENGLISH, shipped))
+        assertThat(DateParsers.parseBirthDateInAnyLanguage("5 наурыз 1998", Locale.ENGLISH, shipped).result())
                 .contains(new BirthDate(3, 5, 1998));
         // numeric input never needed a language and still does not
-        assertThat(DateParsers.parseBirthDateInAnyLanguage("05.03.1998", Locale.ENGLISH, shipped))
+        assertThat(DateParsers.parseBirthDateInAnyLanguage("05.03.1998", Locale.ENGLISH, shipped).result())
                 .contains(new BirthDate(3, 5, 1998));
         // and nonsense stays nonsense in all of them
-        assertThat(DateParsers.parseBirthDateInAnyLanguage("hello spring 1998", Locale.ENGLISH, shipped))
+        assertThat(DateParsers.parseBirthDateInAnyLanguage("hello spring 1998", Locale.ENGLISH, shipped).result())
                 .isEmpty();
+
+    }
+
+    @Test
+    void anImpossibleYearGetsItsOwnReasonInsteadOfAGenericFailure() {
+
+        DateParsers.BirthDateParse legacy = DateParsers.parseBirthDateDetailed("20.04.1889", RU);
+        assertThat(legacy.parsed()).isFalse();
+        assertThat(legacy.yearOutOfRange()).isEqualTo(1889);
+
+        DateParsers.BirthDateParse future = DateParsers.parseBirthDateDetailed("20.04.2101", RU);
+        assertThat(future.yearOutOfRange()).isEqualTo(2101);
+
+        // month-name forms go through the same window, in any shipped language
+        DateParsers.BirthDateParse named = DateParsers.parseBirthDateDetailed("5 марта 1889", RU);
+        assertThat(named.yearOutOfRange()).isEqualTo(1889);
+
+        DateParsers.BirthDateParse fine = DateParsers.parseBirthDateDetailed("20.04.1998", RU);
+        assertThat(fine.parsed()).isTrue();
+        assertThat(fine.yearOutOfRange()).isNull();
+
+    }
+
+    @Test
+    void theUpperBoundIsTodayNotAConstant() {
+
+        LocalDate today = LocalDate.of(2026, 10, 1);
+
+        // December of the reader's own year is still the future: nobody is born there
+        DateParsers.BirthDateParse future =
+                DateParsers.parseBirthDateDetailed("05.12.2026", RU, today);
+        assertThat(future.parsed()).isFalse();
+        assertThat(future.yearOutOfRange()).isEqualTo(2026);
+
+        // the same date becomes a birthday once today reaches it
+        DateParsers.BirthDateParse present =
+                DateParsers.parseBirthDateDetailed("05.12.2026", RU, LocalDate.of(2026, 12, 5));
+        assertThat(present.parsed()).isTrue();
+        assertThat(present.result()).contains(new BirthDate(12, 5, 2026));
+
+        // and 1900 stays the floor
+        DateParsers.BirthDateParse old =
+                DateParsers.parseBirthDateDetailed("01.01.1899", RU, today);
+        assertThat(old.yearOutOfRange()).isEqualTo(1899);
 
     }
 }

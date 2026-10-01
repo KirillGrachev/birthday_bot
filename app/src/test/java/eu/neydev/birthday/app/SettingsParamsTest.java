@@ -12,6 +12,7 @@ import eu.neydev.birthday.core.i18n.MessageBundleHolder;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
+import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -51,7 +52,8 @@ class SettingsParamsTest {
         MessageBundleHolder holder = new MessageBundleHolder("messages", null,
                 Set.of("ru", "en", "de", "es"), "ru");
 
-        return new ReplyBuilder(holder, new MenuFactory(holder, null, localeConfig), config);
+        return new ReplyBuilder(holder, new MenuFactory(holder, null, localeConfig), config,
+                Clock.fixed(NOW, ZoneId.of("UTC")));
 
     }
 
@@ -71,7 +73,7 @@ class SettingsParamsTest {
                 .containsEntry("date", "11 февраля 2006 года")
                 .containsEntry("time", "12:00")
                 .containsEntry("zone", "Москва (UTC+03:00)")
-                .containsEntry("notify", "включены")
+                .containsEntry("notify", "Включены")
                 .containsEntry("lang", "Русский");
 
     }
@@ -84,7 +86,7 @@ class SettingsParamsTest {
         assertThat(params)
                 .containsEntry("date", "February 11, 2006")
                 .containsEntry("zone", "Moscow Time (UTC+03:00)")
-                .containsEntry("notify", "on")
+                .containsEntry("notify", "On")
                 .containsEntry("lang", "English");
 
     }

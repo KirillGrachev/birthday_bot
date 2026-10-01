@@ -83,7 +83,8 @@ class CommandRouterTest {
 
         ConversationStore conversationStore = new ConversationStore(Duration.ofMinutes(5));
         MenuFactory menuFactory = new MenuFactory(holder, "https://github.com/example/repo");
-        ReplyBuilder replies = new ReplyBuilder(holder, menuFactory, config);
+        ReplyBuilder replies = new ReplyBuilder(holder, menuFactory, config,
+                Clock.fixed(NOW, ZoneId.of("UTC")));
         ConversationFlow flow = new ConversationFlow(conversationStore, profileService, replies);
 
         router = new CommandRouter(profileService, flow, replies,

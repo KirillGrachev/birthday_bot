@@ -13,6 +13,7 @@ import eu.neydev.birthday.core.text.RichText;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.HashMap;
@@ -24,7 +25,8 @@ import java.util.Map;
  * placeholder parameters. All core outbound messages pass through this class,
  * so the platform type and chatId are set in one place.
  */
-public record ReplyBuilder(MessageBundleHolder holder, MenuFactory menuFactory, AppConfig config) {
+public record ReplyBuilder(MessageBundleHolder holder, MenuFactory menuFactory, AppConfig config,
+                           Clock clock) {
 
     public OutboundMessage send(Profile profile, String key, Map<String, Object> params,
                                 InlineKeyboard keyboard) {
@@ -132,7 +134,7 @@ public record ReplyBuilder(MessageBundleHolder holder, MenuFactory menuFactory, 
             return Map.of();
         }
 
-        LocalDate today = profile.today();
+        LocalDate today = profile.todayAt(clock.instant());
 
         if (sinceLast) {
             // Month and day are enough: no year in the profile is not an obstacle here.
@@ -161,7 +163,7 @@ public record ReplyBuilder(MessageBundleHolder holder, MenuFactory menuFactory, 
             return Map.of();
         }
 
-        LocalDate today = profile.today();
+        LocalDate today = profile.todayAt(clock.instant());
         Map<String, Object> params = new HashMap<>();
         params.put("days", BirthdayMath.daysUntil(profile.birthDate(), today, leapPolicy()));
         params.put("date", LocalizedFormats.dateFull(
@@ -195,7 +197,7 @@ public record ReplyBuilder(MessageBundleHolder holder, MenuFactory menuFactory, 
 
         Map<String, Object> params = new HashMap<>();
         params.put("date", formatBirthDate(date, profile.locale()));
-        params.put("days", BirthdayMath.daysUntil(date, profile.today(), leapPolicy()));
+        params.put("days", BirthdayMath.daysUntil(date, profile.todayAt(clock.instant()), leapPolicy()));
         params.putAll(scheduleParams(profile));
 
         return params;
