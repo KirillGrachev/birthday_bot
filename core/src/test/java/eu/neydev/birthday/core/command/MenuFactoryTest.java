@@ -158,6 +158,19 @@ class MenuFactoryTest {
     }
 
     @Test
+    void proactiveMessagesCarryOnlyTheMenuButton() {
+
+        MenuFactory menus = new MenuFactory(holder(), null);
+        InlineKeyboard quiet = menus.menuButton(RU);
+
+        assertThat(quiet.rows()).hasSize(1);
+        assertThat(quiet.rows().get(0)).hasSize(1);
+        assertThat(quiet.rows().get(0).get(0).label()).isEqualTo("Меню");
+        assertThat(quiet.rows().get(0).get(0).actionId()).isEqualTo(Actions.MENU_OPEN);
+
+    }
+
+    @Test
     void zonePickerSpeaksTheReadersScriptForCataloguedCities() {
 
         MenuFactory menus = new MenuFactory(holder(), null,

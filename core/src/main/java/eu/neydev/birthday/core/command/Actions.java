@@ -21,6 +21,8 @@ public final class Actions {
     public static final String LANG_MENU = "lm";
     /** A page of the language picker: {@code lp:3} is the fourth page (zero-based). */
     public static final String LANG_PAGE_PREFIX = "lp:";
+    /** Opens the full menu as a fresh message: the quiet keyboard's only button. */
+    public static final String MENU_OPEN = "mo";
     /** Opens the zone picker with the text prompt instead of buttons. */
     public static final String ZONE_MANUAL = "zi";
     /** A zone choice: {@code zp:Europe/Moscow}. */

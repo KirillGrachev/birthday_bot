@@ -144,6 +144,7 @@ button:
   language: "Тил"
   about: "Долбоор тууралуу"
   github: "GitHub-та жылдызча"
+  menu: "Меню"
   page_prev: "←"
   page_next: "→"
   delete: "Маалыматты өчүрүү"

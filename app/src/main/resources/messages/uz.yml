@@ -144,6 +144,7 @@ button:
   language: "Til"
   about: "Loyiha haqida"
   github: "GitHub'da yulduzcha"
+  menu: "Menyu"
   page_prev: "←"
   page_next: "→"
   delete: "Ma'lumotlarni o'chirish"

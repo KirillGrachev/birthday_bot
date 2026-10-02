@@ -144,6 +144,7 @@ button:
   language: "Тіл"
   about: "Жоба туралы"
   github: "GitHub-та жұлдызша"
+  menu: "Мәзір"
   page_prev: "←"
   page_next: "→"
   delete: "Деректерді жою"

@@ -42,6 +42,7 @@ button:
   days_since: "Дней со"
   settings: "Настройки"
   back: "Назад"
+  menu: "Меню"
   time: "Время"
   zone: "Пояс"
   zone_manual: "Ввести свой пояс"

@@ -144,6 +144,7 @@ button:
   language: "Teanga"
   about: "Faoi"
   github: "Réalta ar GitHub"
+  menu: "Roghchlár"
   page_prev: "←"
   page_next: "→"
   delete: "Scrios mo chuid sonraí"

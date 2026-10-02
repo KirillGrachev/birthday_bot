@@ -144,6 +144,7 @@ button:
   language: "Limbă"
   about: "Despre"
   github: "Stea pe GitHub"
+  menu: "Meniu"
   page_prev: "←"
   page_next: "→"
   delete: "Șterge datele"

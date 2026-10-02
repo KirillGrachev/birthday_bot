@@ -144,6 +144,7 @@ button:
   language: "Kalba"
   about: "Apie projektą"
   github: "Žvaigždutė GitHub"
+  menu: "Meniu"
   page_prev: "←"
   page_next: "→"
   delete: "Ištrinti duomenis"

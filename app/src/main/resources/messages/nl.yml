@@ -144,6 +144,7 @@ button:
   language: "Taal"
   about: "Over"
   github: "Ster op GitHub"
+  menu: "Menu"
   page_prev: "←"
   page_next: "→"
   delete: "Gegevens verwijderen"

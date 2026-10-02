@@ -80,6 +80,10 @@ public record ReplyBuilder(MessageBundleHolder holder, MenuFactory menuFactory, 
         return menuFactory.zonePageOf(zoneId);
     }
 
+    public InlineKeyboard menuButton(Locale locale) {
+        return menuFactory.menuButton(locale);
+    }
+
     public InlineKeyboard back(Locale locale) {
         return menuFactory.back(locale);
     }

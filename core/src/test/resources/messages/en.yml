@@ -42,6 +42,7 @@ button:
   days_since: "Days since"
   settings: "Settings"
   back: "Back"
+  menu: "Menu"
   time: "Time"
   zone: "Zone"
   zone_manual: "Enter my own"

@@ -62,10 +62,6 @@ public final class DateParsers {
     }
 
     /**
-     * Parsing a birthdate. Returns {@link Optional#empty()} instead of an exception:
-     * the caller decides which friendly message to show.
-     */
-    /**
      * The oldest believable birth year. The newest one is not a constant: nobody is born
      * in the future, so the upper bound is the reader's today, passed in by the caller.
      */
@@ -88,6 +84,10 @@ public final class DateParsers {
         }
     }
 
+    /**
+     * Parsing a birthdate. Returns {@link Optional#empty()} instead of an exception:
+     * the caller decides which friendly message to show.
+     */
     public static Optional<BirthDate> parseBirthDate(@NotNull String raw, @NotNull Locale locale) {
         return parseBirthDateDetailed(raw, locale).result();
     }

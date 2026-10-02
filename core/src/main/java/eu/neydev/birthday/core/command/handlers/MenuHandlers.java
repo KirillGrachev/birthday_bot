@@ -19,6 +19,15 @@ public record MenuHandlers(ReplyBuilder replies) {
                 Map.of(), replies.mainMenu(interaction.profile())));
     }
 
+    /**
+     * The quiet keyboard's button: the full menu arrives as a FRESH message, not an edit,
+     * so the reminder text the reader was re-reading stays on the screen above it.
+     */
+    public CommandHandler openMenu() {
+        return interaction -> List.of(replies.send(interaction.profile(), "message.start",
+                Map.of(), replies.mainMenu(interaction.profile())));
+    }
+
     public CommandHandler back() {
         return interaction -> {
 

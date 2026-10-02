@@ -144,6 +144,7 @@ button:
   language: "Լեզու"
   about: "Նախագծի մասին"
   github: "Աստղ GitHub-ում"
+  menu: "Մենյու"
   page_prev: "←"
   page_next: "→"
   delete: "Ջնջել տվյալները"

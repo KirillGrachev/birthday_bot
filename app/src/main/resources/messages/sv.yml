@@ -144,6 +144,7 @@ button:
   language: "Språk"
   about: "Om projektet"
   github: "Stjärna på GitHub"
+  menu: "Meny"
   page_prev: "←"
   page_next: "→"
   delete: "Radera uppgifter"

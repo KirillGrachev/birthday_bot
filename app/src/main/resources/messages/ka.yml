@@ -144,6 +144,7 @@ button:
   language: "ენა"
   about: "პროექტის შესახებ"
   github: "ვარსკვლავი GitHub-ზე"
+  menu: "მენიუ"
   page_prev: "←"
   page_next: "→"
   delete: "მონაცემების წაშლა"

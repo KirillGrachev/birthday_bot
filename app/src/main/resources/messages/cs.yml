@@ -144,6 +144,7 @@ button:
   language: "Jazyk"
   about: "O projektu"
   github: "Hvězdička na GitHubu"
+  menu: "Menu"
   page_prev: "←"
   page_next: "→"
   delete: "Smazat data"

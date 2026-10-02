@@ -144,6 +144,7 @@ button:
   language: "Язык"
   about: "О проекте"
   github: "Звезда на GitHub"
+  menu: "Меню"
   page_prev: "←"
   page_next: "→"
   delete: "Удалить данные"

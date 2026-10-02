@@ -144,6 +144,7 @@ button:
   language: "Idioma"
   about: "Sobre"
   github: "Estrela no GitHub"
+  menu: "Menu"
   page_prev: "←"
   page_next: "→"
   delete: "Apagar os meus dados"

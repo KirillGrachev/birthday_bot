@@ -100,6 +100,7 @@ public final class CommandRouter implements Consumer<IncomingUpdate> {
         actions.put(Actions.DAYS_SINCE_LAST, profile.daysSince());
         actions.put(Actions.SETTINGS, profile.settings());
         actions.put(Actions.BACK, menu.back());
+        actions.put(Actions.MENU_OPEN, menu.openMenu());
         actions.put(Actions.SET_TIME, profile.beginTime());
         actions.put(Actions.SET_ZONE, profile.zoneMenu());
         actions.put(Actions.ZONE_MANUAL, profile.beginZone());

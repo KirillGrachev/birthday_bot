@@ -144,6 +144,7 @@ button:
   language: "Dil"
   about: "Layihə haqqında"
   github: "GitHub-da ulduz"
+  menu: "Menyu"
   page_prev: "←"
   page_next: "→"
   delete: "Məlumatları sil"

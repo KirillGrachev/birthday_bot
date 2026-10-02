@@ -312,6 +312,16 @@ public record MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl
 
     }
 
+    /**
+     * The quiet keyboard for proactive messages: one button that summons the full menu
+     * as a fresh message. A daily reminder is content, not navigation; the navigation
+     * arrives when the reader asks for it.
+     */
+    public InlineKeyboard menuButton(@NotNull Locale locale) {
+        return new InlineKeyboard(List.of(List.of(InlineKeyboard.KeyboardButton.callback(
+                label(locale, "button.menu"), Actions.MENU_OPEN))));
+    }
+
     public InlineKeyboard back(@NotNull Locale locale) {
         return new InlineKeyboard(List.of(List.of(
                 InlineKeyboard.KeyboardButton.callback(label(locale, "button.back"), Actions.BACK))));

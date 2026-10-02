@@ -144,6 +144,7 @@ button:
   language: "Мова"
   about: "Про проєкт"
   github: "Зірочка на GitHub"
+  menu: "Меню"
   page_prev: "←"
   page_next: "→"
   delete: "Видалити дані"

@@ -144,6 +144,7 @@ button:
   language: "Język"
   about: "O projekcie"
   github: "Gwiazdka na GitHubie"
+  menu: "Menu"
   page_prev: "←"
   page_next: "→"
   delete: "Usuń dane"

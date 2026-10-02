@@ -96,6 +96,21 @@ class CommandRouterTest {
 
     }
 
+    @Test
+    void theQuietMenuButtonSummonsTheFullMenuAsAFreshMessage() throws InterruptedException {
+
+        router.accept(new IncomingUpdate.Callback(USER, CHAT, Actions.MENU_OPEN,
+                "42", "cb1", "ru"));
+        awaitSent(2);
+
+        List<OutboundMessage.Send> sends = adapter.sentOfType(OutboundMessage.Send.class);
+        assertThat(sends).hasSize(1);
+        // the reminder-sized text stays on the screen: the menu is a NEW message, not an edit
+        assertThat(sends.get(0).text().toPlainText()).contains("Старт");
+        assertThat(sends.get(0).keyboard().rows()).hasSizeGreaterThan(3);
+
+    }
+
     @AfterEach
     void tearDown() {
         dispatcher.close();

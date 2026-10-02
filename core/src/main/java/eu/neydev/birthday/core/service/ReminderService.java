@@ -225,7 +225,7 @@ public final class ReminderService {
                 profile.user().platform(),
                 profile.chatId(),
                 renderer.rich(key, profile.locale(), params),
-                menuFactory.mainMenu(profile.locale(), profile.notifyEnabled(), webAppUrl));
+                menuFactory.menuButton(profile.locale()));
 
     }
 

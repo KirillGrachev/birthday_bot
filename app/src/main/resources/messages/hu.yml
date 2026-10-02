@@ -144,6 +144,7 @@ button:
   language: "Nyelv"
   about: "A projektről"
   github: "Csillag a GitHubon"
+  menu: "Menü"
   page_prev: "←"
   page_next: "→"
   delete: "Adatok törlése"
