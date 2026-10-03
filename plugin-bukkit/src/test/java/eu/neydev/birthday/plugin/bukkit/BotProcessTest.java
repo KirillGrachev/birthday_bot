@@ -43,10 +43,17 @@ class BotProcessTest {
                 log, new RestartPolicy(clock::get), clock::get);
     }
 
+    /** Fails loud on timeout: a silently expired await turns the rest of the test into a coin flip. */
     private static void await(BooleanSupplier condition) throws InterruptedException {
-        for (int i = 0; i < 200 && !condition.getAsBoolean(); i++) {
+
+        for (int i = 0; i < 400 && !condition.getAsBoolean(); i++) {
             Thread.sleep(25);
         }
+
+        assertThat(condition.getAsBoolean())
+                .as("condition met within ten seconds")
+                .isTrue();
+
     }
 
     @Test
