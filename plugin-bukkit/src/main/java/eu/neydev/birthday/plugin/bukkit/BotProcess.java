@@ -423,29 +423,49 @@ public final class BotProcess {
                     new InputStreamReader(stream, StandardCharsets.UTF_8))) {
 
                 String line;
+                List<String> record = new ArrayList<>();
+                int recordLevel = level;
+
+                RepeatCoalescer coalescer = new RepeatCoalescer(this::emit);
 
                 while ((line = in.readLine()) != null) {
 
                     Matcher matcher = CHILD_LEVEL.matcher(line);
+                    boolean newRecord;
 
                     if (matcher.find()) {
                         level = levelOf(matcher.group(1));
+                        newRecord = true;
                     } else if (!isTraceContinuation(line)) {
+
                         // An unprefixed line that is not part of a stack trace (a JVM notice,
                         // a launcher banner) is informational on its own. Keeping the previous
                         // level would promote every JVM warning to the level of the line above.
                         level = LEVEL_INFO;
-                    }
+                        newRecord = true;
 
-                    int heartbeatLevel = heartbeatLevel(line);
-
-                    if (heartbeatLevel == NOT_A_HEARTBEAT) {
-                        emit(level, line);
                     } else {
-                        emit(heartbeatLevel, line);
+                        newRecord = false;
                     }
+
+                    int heartbeatLevel = newRecord ? heartbeatLevel(line) : NOT_A_HEARTBEAT;
+                    int emitLevel = heartbeatLevel == NOT_A_HEARTBEAT ? level : heartbeatLevel;
+
+                    if (newRecord && !record.isEmpty()) {
+                        coalescer.accept(recordLevel, record);
+                        record = new ArrayList<>();
+                    }
+
+                    if (newRecord) {
+                        recordLevel = emitLevel;
+                    }
+
+                    record.add(line);
 
                 }
+
+                coalescer.accept(recordLevel, record);
+                coalescer.drain();
 
             } catch (IOException e) {
                 // the child is gone, the pipe is closed - nothing to report
@@ -455,6 +475,81 @@ public final class BotProcess {
 
         thread.setDaemon(true);
         thread.start();
+
+    }
+
+    /**
+     * Collapses a storm of identical log records into one: a Telegram 502 blip prints an
+     * ERROR line plus a raw stack the library dumps to stdout, and a retry loop turns that
+     * into eleven host-log lines per second. The first record prints in full, its clones
+     * count silently, and a single summary line says how many; every twenty-fifth repeat
+     * prints a progress note, so a real outage still speaks while it lasts.
+     *
+     * <p>Records are compared with digits masked, so "retrying in 529 millis" and
+     * "retrying in 972 millis" are the same record. DEBUG records never coalesce:
+     * quiet debug noise is the logger's job, not the pump's.
+     */
+    static final class RepeatCoalescer {
+
+        private static final int PROGRESS_EVERY = 25;
+
+        private final java.util.function.BiConsumer<Integer, String> emit;
+        private String lastKey = "";
+        private int lastLevel = LEVEL_INFO;
+        private int repeats;
+
+        RepeatCoalescer(java.util.function.BiConsumer<Integer, String> emit) {
+            this.emit = emit;
+        }
+
+        void accept(int level, List<String> record) {
+
+            if (record.isEmpty()) {
+                return;
+            }
+
+            if (level == LEVEL_DEBUG) {
+
+                drain();
+                record.forEach(line -> emit.accept(level, line));
+
+                return;
+
+            }
+
+            String key = level + ":" + normalize(String.join("\n", record));
+
+            if (key.equals(lastKey)) {
+
+                repeats++;
+
+                if (repeats % PROGRESS_EVERY == 0) {
+                    emit.accept(level, "(still failing: identical record number " + repeats + ")");
+                }
+
+                return;
+
+            }
+
+            drain();
+            lastKey = key;
+            lastLevel = level;
+
+            record.forEach(line -> emit.accept(level, line));
+
+        }
+
+        /** The trailing summary for the record that just stopped repeating. */
+        void drain() {
+            if (repeats > 0) {
+                emit.accept(lastLevel, "(the record above repeated " + repeats + " more times)");
+                repeats = 0;
+            }
+        }
+
+        private static String normalize(String record) {
+            return record.replaceAll("\\d+", "#");
+        }
 
     }
 
@@ -500,6 +595,7 @@ public final class BotProcess {
         String summary = line.substring(at + HEARTBEAT_MARKER.length()).trim();
         String platforms = platformsSegment(summary);
         boolean stateChanged = !platforms.equals(lastPlatformsSegment);
+
         lastPlatformsSegment = platforms;
         lastHeartbeat = summary;
         lastHeartbeatMillis = millis.getAsLong();

@@ -242,4 +242,59 @@ class ConfigLoaderTest {
 
     }
 
+    @Test
+    void ownersComeFromTheEnvironmentAsACommaSeparatedString() throws IOException {
+
+        Path file = write("""
+                storage:
+                  type: sqlite
+                  sqlite-path: data/test.db
+                scheduler:
+                  tick-interval: 15s
+                  default-zone: Europe/Moscow
+                pipeline: {}
+                webapp: {}
+                locale:
+                  default: ru
+                  supported: [ru, en]
+                platforms:
+                  telegram:
+                    enabled: true
+                    token: ${TG_TOKEN:secret-token}
+                owners: ${OWNERS:}
+                """);
+
+        AppConfig config = new ConfigLoader(name ->
+                "OWNERS".equals(name) ? "telegram:1, vk:2 , discord:3" : null).load(file);
+
+        assertThat(config.ownerKeys()).containsExactly("telegram:1", "vk:2", "discord:3");
+
+    }
+
+    @Test
+    void anEmptyOwnersEnvironmentMeansNobodyOwnsTheBot() throws IOException {
+
+        Path file = write("""
+                storage:
+                  type: sqlite
+                  sqlite-path: data/test.db
+                scheduler:
+                  tick-interval: 15s
+                  default-zone: Europe/Moscow
+                pipeline: {}
+                webapp: {}
+                locale:
+                  default: ru
+                  supported: [ru, en]
+                platforms:
+                  telegram:
+                    enabled: true
+                    token: ${TG_TOKEN:secret-token}
+                owners: ${OWNERS:}
+                """);
+
+        AppConfig config = new ConfigLoader(name -> "").load(file);
+        assertThat(config.ownerKeys()).isEmpty();
+
+    }
 }

@@ -1,12 +1,3 @@
-# =============================================================================
-#  Birthday Bot — default configuration.
-#
-#  An external config/application.yml (if present) overrides this file entirely.
-#  Secrets are NOT stored here: ${VAR:} values come from environment
-#  variables, and when those are missing — from config/.env or .env (see README).
-#  Unknown keys = startup failure (typos become visible immediately).
-# =============================================================================
-
 storage:
   # sqlite  — file-based storage: WAL mode, HikariCP pool, zero infrastructure.
   # postgres — for growth: set jdbc-url / username / password.
@@ -173,5 +164,8 @@ platforms:
     token: ${VIBER_BOT_TOKEN:}
     secret: ${WEBHOOK_SECRET:}
 
-# Owner keys in platform:id format — for /reload and admin actions.
-owners: []
+# Owner keys in platform:id format - for /reload and admin actions.
+# A YAML list (owners: [telegram:123]) or a comma-separated string from the
+# environment: OWNERS=telegram:123,vk:777 in the shell, docker -e, or config/.env.
+# An empty value means no owners at all: /reload then refuses everyone.
+owners: ${OWNERS:}

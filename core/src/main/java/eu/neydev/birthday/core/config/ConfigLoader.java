@@ -3,7 +3,6 @@ package eu.neydev.birthday.core.config;
 import eu.neydev.birthday.core.api.Platform;
 import eu.neydev.birthday.core.domain.DateParsers;
 import eu.neydev.birthday.core.domain.LeapDayPolicy;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.yaml.snakeyaml.Yaml;
 
@@ -121,7 +120,13 @@ public record ConfigLoader(Function<String, String> environment) {
         AppConfig.WebApp webAppConfig = parseWebApp(webApp);
         AppConfig.Locale localeConfig = parseLocale(locale);
         Map<Platform, AppConfig.PlatformSection> platformSections = parsePlatforms(platforms);
-        List<String> owners = stringList(get(root, "owners"), List.of());
+        // Owners may live in the environment (OWNERS=telegram:1,vk:2) as a comma string:
+        // a deployment secret-keeper hands them over without touching the YAML list.
+        Object ownersNode = get(root, "owners");
+        if (ownersNode instanceof String scalar) {
+            ownersNode = substitute(scalar, "owners");
+        }
+        List<String> owners = stringList(ownersNode, List.of());
 
         return new AppConfig(storageConfig, communityConfig, schedulerConfig, pipelineConfig,
                 webAppConfig, localeConfig, platformSections, owners, parseStatus(status));
@@ -609,7 +614,10 @@ public record ConfigLoader(Function<String, String> environment) {
             return list.stream().map(String::valueOf).map(String::trim).toList();
         }
 
-        return List.of(String.valueOf(value).split(","));
+        return java.util.Arrays.stream(String.valueOf(value).split(","))
+                .map(String::trim)
+                .filter(item -> !item.isEmpty())
+                .toList();
 
     }
 
