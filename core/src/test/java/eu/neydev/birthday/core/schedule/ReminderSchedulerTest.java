@@ -59,7 +59,7 @@ class ReminderSchedulerTest {
             ReminderService reminderService = new ReminderService(
                     storage.profiles(), storage.deliveryLog(), dispatcher, holder,
                     new MenuFactory(holder, null), new NextReminderCalculator(schedulerConfig),
-                    schedulerConfig, null, new MetricsRegistry(),
+                    schedulerConfig, new MetricsRegistry(),
                     Clock.fixed(NOW, ZoneId.of("UTC")));
 
             ReminderScheduler scheduler = new ReminderScheduler(

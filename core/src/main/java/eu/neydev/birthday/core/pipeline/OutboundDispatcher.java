@@ -37,6 +37,7 @@ public final class OutboundDispatcher implements AutoCloseable {
 
     private record Pending(OutboundMessage message, int attempt, long notBeforeMillis,
                            CompletableFuture<Void> future) {
+
         Pending with(int newAttempt) {
             return new Pending(message, newAttempt, notBeforeMillis, future);
         }
@@ -44,6 +45,7 @@ public final class OutboundDispatcher implements AutoCloseable {
         Pending delayedUntil(long millis) {
             return new Pending(message, attempt, millis, future);
         }
+
     }
 
     private final Map<Platform, PlatformAdapter> adapters = new EnumMap<>(Platform.class);
@@ -63,6 +65,7 @@ public final class OutboundDispatcher implements AutoCloseable {
     public OutboundDispatcher(int workersPerPlatform, int maxAttempts, long backoffMillis,
                               double globalPerSecond, int perChatPerMinute,
                               MetricsRegistry metrics) {
+
         this.workersPerPlatform = workersPerPlatform;
         this.maxAttempts = maxAttempts;
         this.backoffMillis = backoffMillis;
@@ -72,7 +75,9 @@ public final class OutboundDispatcher implements AutoCloseable {
             queues.put(platform, new LinkedBlockingQueue<>());
             globalBuckets.put(platform, new TokenBucket(globalPerSecond, 1.0));
             chatWindows.put(platform, new ChatWindow(perChatPerMinute));
+
         }
+
     }
 
     public void register(PlatformAdapter adapter) {
@@ -211,6 +216,14 @@ public final class OutboundDispatcher implements AutoCloseable {
                 requeue(queue, pending.with(pending.attempt() + 1),
                         e.retryAfterMillis());
             }
+
+        } catch (PlatformException.InvalidMessageException e) {
+
+            metrics.increment("outbound_invalid_total", "platform", platform.id());
+            log.error("Invalid payload for {} (not retrying, the chat is healthy): {}",
+                    platform.id(), e.getMessage());
+
+            pending.future().completeExceptionally(e);
 
         } catch (PlatformException.PermanentDeliveryException e) {
 

@@ -160,7 +160,6 @@ public final class CoreModule extends AbstractModule {
                                     AppConfig config, MetricsRegistry metrics, Clock clock) {
         return new ReminderService(profiles, deliveryLog, dispatcher, holder, menuFactory,
                 calculator, config.scheduler(),
-                config.webApp().enabled() ? config.webApp().publicUrl() : null,
                 metrics, clock);
     }
 

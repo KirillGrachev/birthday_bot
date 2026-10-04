@@ -51,6 +51,17 @@ public class PlatformException extends RuntimeException {
 
     }
 
+    /**
+     * The payload itself is invalid (a keyboard the platform refuses, a bad block):
+     * no retry can ever succeed, yet the chat is healthy, so unlike a permanent
+     * delivery failure this must NOT disable the user's reminders - the bug is ours.
+     */
+    public static class InvalidMessageException extends PlatformException {
+        public InvalidMessageException(String message) {
+            super(message, null, 0);
+        }
+    }
+
     /** The message can never be delivered (bot deleted, chat blocked). Retries are pointless. */
     public static class PermanentDeliveryException extends PlatformException {
 

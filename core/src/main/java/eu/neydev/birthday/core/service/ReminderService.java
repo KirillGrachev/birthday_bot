@@ -51,7 +51,6 @@ public final class ReminderService {
     private final MenuFactory menuFactory;
     private final NextReminderCalculator calculator;
     private final AppConfig.Scheduler schedulerConfig;
-    private final String webAppUrl;
     private final MetricsRegistry metrics;
     private final Clock clock;
 
@@ -62,7 +61,6 @@ public final class ReminderService {
                            MenuFactory menuFactory,
                            NextReminderCalculator calculator,
                            AppConfig.Scheduler schedulerConfig,
-                           String webAppUrl,
                            MetricsRegistry metrics,
                            Clock clock) {
         this.profiles = profiles;
@@ -72,7 +70,6 @@ public final class ReminderService {
         this.menuFactory = menuFactory;
         this.calculator = calculator;
         this.schedulerConfig = schedulerConfig;
-        this.webAppUrl = webAppUrl;
         this.metrics = metrics;
         this.clock = clock;
     }
@@ -141,6 +138,13 @@ public final class ReminderService {
             }
 
             Throwable cause = unwrap(error);
+
+            if (cause instanceof PlatformException.InvalidMessageException) {
+                // Our bug, not the user's: the day is lost, the subscription stays.
+                metrics.increment("reminders_invalid_payload_total",
+                        "platform", profile.user().platform().id());
+                return;
+            }
 
             if (cause instanceof PlatformException.PermanentDeliveryException) {
                 metrics.increment("reminders_dead_chat_total",

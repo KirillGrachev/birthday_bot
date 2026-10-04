@@ -37,9 +37,13 @@ public final class VkKeyboardMapper {
                 ObjectNode buttonNode = rowNode.addObject();
                 ObjectNode action = buttonNode.putObject("action");
 
+                action.put("label", truncate(button.label(), 40));
+
                 if (button.url() != null) {
                     action.put("type", "open_link");
                     action.put("link", button.url());
+                    // VK rejects a color on open_link with error 911: the tint is
+                    // a property of the pressable button, and a link button is not one.
                 } else {
 
                     action.put("type", "callback");
@@ -47,14 +51,13 @@ public final class VkKeyboardMapper {
                     payload.put("a", button.actionId());
                     action.set("payload", payload);
 
-                }
+                    buttonNode.put("color", switch (button.style()) {
+                        case PRIMARY -> "primary";
+                        case DANGER -> "negative";
+                        case SECONDARY -> "secondary";
+                    });
 
-                action.put("label", truncate(button.label(), 40));
-                buttonNode.put("color", switch (button.style()) {
-                    case PRIMARY -> "primary";
-                    case DANGER -> "negative";
-                    case SECONDARY -> "secondary";
-                });
+                }
 
             }
 

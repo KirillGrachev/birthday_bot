@@ -28,6 +28,27 @@ class VkRenderersTest {
 
     }
 
+    /**
+     * VK answers a colored open_link button with error 911 and the message never
+     * arrives: the tint belongs to callback buttons alone. The regression came from
+     * the main menu, whose GitHub star button sits at row four, column one.
+     */
+    @Test
+    void linkButtonsCarryNoColor() throws Exception {
+
+        InlineKeyboard keyboard = new InlineKeyboard(List.of(
+                List.of(InlineKeyboard.KeyboardButton.callback("About", "ab"),
+                        InlineKeyboard.KeyboardButton.url("Star on GitHub", "https://github.com/x/y"))));
+        JsonNode json = new ObjectMapper().readTree(VkKeyboardMapper.map(keyboard));
+
+        JsonNode callback = json.path("buttons").path(0).path(0);
+        JsonNode link = json.path("buttons").path(0).path(1);
+        assertThat(callback.path("color").asText()).isEqualTo("secondary");
+        assertThat(link.path("action").path("type").asText()).isEqualTo("open_link");
+        assertThat(link.has("color")).isFalse();
+
+    }
+
     @Test
     void longLabelsTruncatedToVkLimit() throws Exception {
 

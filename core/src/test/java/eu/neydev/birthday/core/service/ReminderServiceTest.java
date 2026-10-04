@@ -61,7 +61,7 @@ class ReminderServiceTest {
         service = new ReminderService(
                 storage.profiles(), storage.deliveryLog(), dispatcher, holder,
                 new MenuFactory(holder, null), new NextReminderCalculator(schedulerConfig),
-                schedulerConfig, null, new MetricsRegistry(), Clock.fixed(NOW, ZoneId.of("UTC")));
+                schedulerConfig, new MetricsRegistry(), Clock.fixed(NOW, ZoneId.of("UTC")));
 
     }
 
@@ -135,7 +135,7 @@ class ReminderServiceTest {
         ReminderService windowedService = new ReminderService(
                 storage.profiles(), storage.deliveryLog(), dispatcher, holder,
                 new MenuFactory(holder, null), new NextReminderCalculator(windowed),
-                windowed, null, new MetricsRegistry(), Clock.fixed(NOW, ZoneId.of("UTC")));
+                windowed, new MetricsRegistry(), Clock.fixed(NOW, ZoneId.of("UTC")));
 
         Profile profile = dueProfile("3", new BirthDate(6, 15, 1990)); // ~258 days
         storage.profiles().save(profile);
@@ -185,7 +185,7 @@ class ReminderServiceTest {
             ReminderService failingService = new ReminderService(
                     storage.profiles(), storage.deliveryLog(), failingDispatcher, holder,
                     new MenuFactory(holder, null), new NextReminderCalculator(schedulerConfig),
-                    schedulerConfig, null, new MetricsRegistry(),
+                    schedulerConfig, new MetricsRegistry(),
                     Clock.fixed(NOW, ZoneId.of("UTC")));
 
             Profile profile = dueProfile("6", new BirthDate(6, 15, 1990));
@@ -218,7 +218,7 @@ class ReminderServiceTest {
         ReminderService skipService = new ReminderService(
                 storage.profiles(), storage.deliveryLog(), dispatcher, holder,
                 new MenuFactory(holder, null), new NextReminderCalculator(skip),
-                skip, null, new MetricsRegistry(), Clock.fixed(NOW, ZoneId.of("UTC")));
+                skip, new MetricsRegistry(), Clock.fixed(NOW, ZoneId.of("UTC")));
 
         Profile late = dueProfile("4", new BirthDate(6, 15, 1990))
                 .withNextReminderAt(NOW.minus(2, java.time.temporal.ChronoUnit.DAYS), NOW);

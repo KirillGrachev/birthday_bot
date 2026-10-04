@@ -93,7 +93,7 @@ public final class VkApiClient {
 
     }
 
-    private RuntimeException classify(JsonNode error, String method) {
+    static RuntimeException classify(JsonNode error, String method) {
 
         int code = error.path("error_code").asInt(0);
         String message = error.path("error_msg").asText("");
@@ -102,6 +102,12 @@ public final class VkApiClient {
 
             case 6, 9, 29 -> {
                 return new PlatformException.RateLimitedException("VK " + code + ": " + message, 1_000);
+            }
+
+            // A keyboard or payload the platform refuses: retrying burns the ladder
+            // on a payload that can never succeed, and the chat is not at fault.
+            case 911 -> {
+                return new PlatformException.InvalidMessageException("VK " + code + ": " + message);
             }
 
             case 201, 204, 900, 901, 902 -> {
