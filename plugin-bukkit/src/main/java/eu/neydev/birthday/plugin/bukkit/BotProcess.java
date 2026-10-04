@@ -357,7 +357,9 @@ public final class BotProcess {
                 log.info("birthday bot exited on its own with code 0 after "
                         + uptimeMillis / 1000 + " s");
             }
+
             return;
+
         }
 
         log.warn("birthday bot crashed with exit code " + code + " after "
