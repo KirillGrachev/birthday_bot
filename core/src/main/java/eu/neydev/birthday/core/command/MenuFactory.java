@@ -15,8 +15,8 @@ import java.util.Map;
 
 /**
  * Keyboards are built by the core from YAML captions (i18n) and platform-independent
- * actionId. Platforms only translate the structure - no platform
- of buttons in the business logic.
+ * actionId. Platforms only translate the structure - no platform-specific geometry
+ * of buttons in the business logic.
  */
 public record MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl,
                           List<String> languages, Map<String, String> languageNames,
