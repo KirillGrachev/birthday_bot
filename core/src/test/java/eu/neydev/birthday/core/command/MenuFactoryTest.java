@@ -1,6 +1,8 @@
 package eu.neydev.birthday.core.command;
 
 import eu.neydev.birthday.core.api.InlineKeyboard;
+import eu.neydev.birthday.core.api.KeyboardLimits;
+import eu.neydev.birthday.core.api.Platform;
 import eu.neydev.birthday.core.config.AppConfig;
 import eu.neydev.birthday.core.i18n.MessageBundleHolder;
 import eu.neydev.birthday.core.i18n.ZoneCityNames;
@@ -253,6 +255,105 @@ class MenuFactoryTest {
                 }
             }
         }
+
+    }
+
+    /**
+     * A platform that cannot carry ten choices pages fewer of them. WhatsApp hides a
+     * keyboard behind a list of ten rows, and the navigation around the choices spends
+     * that same budget, so a page there is five choices instead of ten.
+     */
+    @Test
+    void aTightPlatformGetsAShorterPageInsideItsOwnBudget() {
+
+        MenuFactory menus = pagedMenus();
+        KeyboardLimits whatsapp = KeyboardLimits.of(Platform.WHATSAPP);
+
+        InlineKeyboard first = menus.languages(RU, 0, whatsapp);
+
+        assertThat(first.callbacks())
+                .filteredOn(button -> button.actionId().startsWith(Actions.LANG_PREFIX))
+                .hasSize(whatsapp.pickerItemsPerPage());
+        assertThat(first.callbacks()).hasSizeLessThanOrEqualTo(whatsapp.maxRows());
+
+        // the same reader on Telegram reaches "fi" one page earlier
+        assertThat(menus.pageOf("fi", whatsapp)).isEqualTo(2);
+        assertThat(menus.pageOf("fi")).isOne();
+
+        InlineKeyboard zones = new MenuFactory(holder(), null)
+                .zones(RU, 0, ZoneId.of("Europe/Moscow"), whatsapp);
+        assertThat(zones.callbacks()).hasSizeLessThanOrEqualTo(whatsapp.maxRows());
+        assertThat(zones.callbacks())
+                .filteredOn(button -> button.actionId().startsWith(Actions.ZONE_PICK_PREFIX))
+                .hasSize(whatsapp.pickerItemsPerPage());
+
+    }
+
+    /**
+     * VK counts buttons rather than rows: an inline keyboard carries ten of them whole,
+     * and the eleventh costs the message with error 911 ("keyboard contains too much
+     * buttons"). No fold repairs a count, so the pickers page to the budget instead - six
+     * languages and five zones, once the counter, the arrows and the way back are paid for.
+     */
+    @Test
+    void vkPagesItsPickersInsideTheTenButtonsOfAnInlineKeyboard() {
+
+        MenuFactory menus = pagedMenus();
+        KeyboardLimits vk = KeyboardLimits.of(Platform.VK);
+
+        assertThat(vk.pickerItems(MenuFactory.LANGUAGE_PAGE_CHROME)).isEqualTo(6);
+        assertThat(vk.pickerItems(MenuFactory.ZONE_PAGE_CHROME)).isEqualTo(5);
+
+        // the same picker drawn for Telegram is thirteen buttons and would not arrive
+        assertThat(menus.languages(RU, 0).callbacks().size())
+                .as("a Telegram-shaped page overflows the VK budget")
+                .isGreaterThan(vk.maxButtons());
+
+        int languagePages = pages(menus.availableLanguages().size(),
+                vk.pickerItems(MenuFactory.LANGUAGE_PAGE_CHROME));
+        int zonePages = pages(ZoneCatalog.POPULAR.size(),
+                vk.pickerItems(MenuFactory.ZONE_PAGE_CHROME));
+
+        assertThat(languagePages).isEqualTo(2);
+        assertThat(zonePages).isEqualTo(12);
+
+        for (int page = 0; page < languagePages; page++) {
+            assertThat(menus.languages(RU, page, vk).callbacks())
+                    .as("languages page " + page)
+                    .hasSizeLessThanOrEqualTo(vk.maxButtons());
+        }
+
+        for (int page = 0; page < zonePages; page++) {
+            assertThat(menus.zones(RU, page, ZoneId.of("Europe/Moscow"), vk).callbacks())
+                    .as("zones page " + page)
+                    .hasSizeLessThanOrEqualTo(vk.maxButtons());
+        }
+
+        // and the page a language is looked up on is the page that carries it
+        assertThat(menus.languages(RU, menus.pageOf("fi", vk), vk).callbacks())
+                .extracting(InlineKeyboard.KeyboardButton::actionId)
+                .contains(Actions.LANG_PREFIX + "fi");
+
+    }
+
+    private static int pages(int items, int perPage) {
+        return Math.max(1, (items + perPage - 1) / perPage);
+    }
+
+    /**
+     * The platforms that cannot show a keyboard at all hide it behind one control, and
+     * that control needs a caption. It comes from the reader's own language like every
+     * other caption: a mapper has no business inventing one.
+     */
+    @Test
+    void everyKeyboardCarriesTheCaptionOfItsCollapsedControl() {
+
+        MenuFactory menus = pagedMenus();
+
+        assertThat(menus.languages(RU, 0).listLabel()).isEqualTo("Выбрать");
+        assertThat(menus.zones(RU, 0, ZoneId.of("Europe/Moscow")).listLabel()).isEqualTo("Выбрать");
+        assertThat(menus.mainMenu(RU, true, null).listLabel()).isEqualTo("Меню");
+        assertThat(menus.settings(RU).listLabel()).isEqualTo("Меню");
 
     }
 

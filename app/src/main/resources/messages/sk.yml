@@ -145,6 +145,7 @@ button:
   about: "O projekte"
   github: "Hviezdička na GitHube"
   menu: "Menu"
+  choose: "Vybrať"
   page_prev: "←"
   page_next: "→"
   delete: "Zmazať údaje"

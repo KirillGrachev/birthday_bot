@@ -104,6 +104,12 @@ public final class SlackApiClient {
             return new PlatformException.RateLimitedException("Slack ratelimited", retry * 1000);
         }
 
+        if (error.startsWith("invalid_blocks") || "invalid_arguments".equals(error)) {
+            // The payload is ours and Slack read it: a block it cannot parse never
+            // becomes parseable on a second attempt, and the channel is healthy.
+            return new PlatformException.InvalidMessageException("Slack: " + error);
+        }
+
         boolean permanent = switch (error) {
             case "channel_not_found", "not_in_channel", "is_archived", "user_not_found" -> true;
             default -> false;

@@ -1,4 +1,6 @@
 button:
   back: "Back"
+  menu: "Меню"
+  choose: "Выбрать"
   page_prev: "←"
   page_next: "→"

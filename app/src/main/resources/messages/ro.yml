@@ -145,6 +145,7 @@ button:
   about: "Despre"
   github: "Stea pe GitHub"
   menu: "Meniu"
+  choose: "Alege"
   page_prev: "←"
   page_next: "→"
   delete: "Șterge datele"

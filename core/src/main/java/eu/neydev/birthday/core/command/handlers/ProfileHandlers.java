@@ -92,8 +92,7 @@ public record ProfileHandlers(ProfileService profileService, ConversationFlow fl
     }
 
     public CommandHandler zoneMenu() {
-        return interaction -> zonePicker(interaction,
-                replies.zonePage(interaction.profile().zone().getId()));
+        return interaction -> zonePicker(interaction, replies.zonePage(interaction.profile()));
     }
 
     /** A page button of the zone picker: same screen, another page of zones. */
@@ -108,11 +107,11 @@ public record ProfileHandlers(ProfileService profileService, ConversationFlow fl
         if (interaction.isCallback()) {
             return List.of(replies.edit((IncomingUpdate.Callback) interaction.update(), profile,
                     "message.zone.choose", Map.of(),
-                    replies.zones(profile.locale(), page, profile.zone())));
+                    replies.zones(profile, page)));
         }
 
         return List.of(replies.send(profile, "message.zone.choose", Map.of(),
-                replies.zones(profile.locale(), page, profile.zone())));
+                replies.zones(profile, page)));
 
     }
 
@@ -126,16 +125,16 @@ public record ProfileHandlers(ProfileService profileService, ConversationFlow fl
 
             if (zone.isEmpty()) {
 
-                int page = replies.zonePage(zoneRaw);
+                int page = replies.zonePage(profile, zoneRaw);
 
                 if (interaction.isCallback()) {
                     return List.of(replies.edit((IncomingUpdate.Callback) interaction.update(), profile,
                             "message.zone.invalid", Map.of(),
-                            replies.zones(profile.locale(), page, profile.zone())));
+                            replies.zones(profile, page)));
                 }
 
                 return List.of(replies.send(profile, "message.zone.invalid", Map.of(),
-                        replies.zones(profile.locale(), page, profile.zone())));
+                        replies.zones(profile, page)));
 
             }
 
@@ -154,8 +153,7 @@ public record ProfileHandlers(ProfileService profileService, ConversationFlow fl
     }
 
     public CommandHandler langMenu() {
-        return interaction -> langPicker(interaction,
-                replies.languagePage(interaction.profile().locale().getLanguage()));
+        return interaction -> langPicker(interaction, replies.languagePage(interaction.profile()));
     }
 
     /** A picker page button: same screen, another page of languages. */
@@ -171,15 +169,16 @@ public record ProfileHandlers(ProfileService profileService, ConversationFlow fl
         // picker instead of stacking one more message in the chat.
         if (interaction.isCallback()) {
             return List.of(replies.edit((IncomingUpdate.Callback) interaction.update(), profile,
-                    "message.lang.choose", Map.of(), replies.languages(profile.locale(), page)));
+                    "message.lang.choose", Map.of(), replies.languages(profile, page)));
         }
 
         return List.of(replies.send(profile, "message.lang.choose", Map.of(),
-                replies.languages(profile.locale(), page)));
+                replies.languages(profile, page)));
 
     }
 
     public CommandHandler langApply(String language) {
+
         return interaction -> {
 
             Profile profile = interaction.profile();
@@ -202,6 +201,7 @@ public record ProfileHandlers(ProfileService profileService, ConversationFlow fl
                         Map.of("lang", replies.languageName(Locale.forLanguageTag(language))),
                         replies.mainMenu(updated)));
             }
+
             return repliesOut;
 
         };
@@ -280,6 +280,7 @@ public record ProfileHandlers(ProfileService profileService, ConversationFlow fl
 
     private List<OutboundMessage> answer(Interaction interaction, String key,
                                          Map<String, Object> params, InlineKeyboard keyboard) {
+
         Profile profile = interaction.profile();
 
         if (interaction.isCallback()) {

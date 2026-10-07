@@ -145,6 +145,7 @@ button:
   about: "Par projektu"
   github: "Zvaigznīte vietnē GitHub"
   menu: "Izvēlne"
+  choose: "Izvēlēties"
   page_prev: "←"
   page_next: "→"
   delete: "Dzēst datus"

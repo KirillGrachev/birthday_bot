@@ -145,6 +145,7 @@ button:
   about: "Apie projektą"
   github: "Žvaigždutė GitHub"
   menu: "Meniu"
+  choose: "Pasirinkti"
   page_prev: "←"
   page_next: "→"
   delete: "Ištrinti duomenis"

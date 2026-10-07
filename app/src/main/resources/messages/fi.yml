@@ -145,6 +145,7 @@ button:
   about: "Tietoa projektista"
   github: "Tähti GitHubissa"
   menu: "Valikko"
+  choose: "Valitse"
   page_prev: "←"
   page_next: "→"
   delete: "Poista tiedot"

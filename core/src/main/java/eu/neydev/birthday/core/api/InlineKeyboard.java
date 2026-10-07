@@ -9,13 +9,26 @@ import java.util.List;
  * A platform-independent inline keyboard: rows of buttons, each button has
  * an already localized caption (the core substitutes it via i18n) and either an action
  * (actionId from YAML), or a url. The adapter only translates the structure into its own format.
+ *
+ * <p>{@link #listLabel} is for the platforms that cannot show a keyboard at all and hide
+ * the whole thing behind one control (WhatsApp puts it on the button that opens a list
+ * message). It is a caption, not a command: the buttons themselves stay the content.
  */
-public record InlineKeyboard(@NotNull List<List<KeyboardButton>> rows) {
+public record InlineKeyboard(@NotNull List<List<KeyboardButton>> rows, @Nullable String listLabel) {
 
     private static final InlineKeyboard EMPTY = new InlineKeyboard(List.of());
 
     public InlineKeyboard {
         rows = List.copyOf(rows);
+    }
+
+    public InlineKeyboard(@NotNull List<List<KeyboardButton>> rows) {
+        this(rows, null);
+    }
+
+    /** The same keyboard, with a caption for the control a platform collapses it into. */
+    public InlineKeyboard withListLabel(@Nullable String listLabel) {
+        return new InlineKeyboard(rows, listLabel);
     }
 
     public static InlineKeyboard empty() {
@@ -30,6 +43,16 @@ public record InlineKeyboard(@NotNull List<List<KeyboardButton>> rows) {
 
         return new InlineKeyboard(copy);
 
+    }
+
+    /** Every callback button, flattened: what a list-shaped platform has to work with. */
+    public List<KeyboardButton> callbacks() {
+        return rows.stream().flatMap(List::stream).filter(b -> b.actionId() != null).toList();
+    }
+
+    /** Every link button, flattened: platforms without url buttons render them as text. */
+    public List<KeyboardButton> links() {
+        return rows.stream().flatMap(List::stream).filter(b -> b.url() != null).toList();
     }
 
     public boolean isEmpty() {

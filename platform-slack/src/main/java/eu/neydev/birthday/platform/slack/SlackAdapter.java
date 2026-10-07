@@ -2,13 +2,16 @@ package eu.neydev.birthday.platform.slack;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import eu.neydev.birthday.core.api.InlineKeyboard;
 import eu.neydev.birthday.core.api.OutboundMessage;
 import eu.neydev.birthday.core.api.Platform;
 import eu.neydev.birthday.core.api.PlatformAdapter;
 import eu.neydev.birthday.core.api.PlatformContext;
 import eu.neydev.birthday.core.api.PlatformException;
 import eu.neydev.birthday.core.api.UpdateSink;
+import eu.neydev.birthday.core.text.RichText;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +19,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.WebSocket;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.CountDownLatch;
@@ -220,18 +224,13 @@ public final class SlackAdapter implements PlatformAdapter {
 
         switch (message) {
 
-            case OutboundMessage.Send send -> client.call("chat.postMessage", Map.of(
-                    "channel", send.chatId(),
-                    "text", SlackRenderers.mrkdwn(send.text()),
-                    "blocks", SlackRenderers.blocks(send.keyboard()).toString()));
+            case OutboundMessage.Send send -> client.call("chat.postMessage",
+                    messageParams(send.chatId(), null, send.text(), send.keyboard()));
 
             case OutboundMessage.Edit edit -> {
                 String[] parts = edit.messageId().split("\\|", 2);
-                client.call("chat.update", Map.of(
-                        "channel", parts[0],
-                        "ts", parts.length > 1 ? parts[1] : "0",
-                        "text", SlackRenderers.mrkdwn(edit.text()),
-                        "blocks", SlackRenderers.blocks(edit.keyboard()).toString()));
+                client.call("chat.update", messageParams(parts[0],
+                        parts.length > 1 ? parts[1] : "0", edit.text(), edit.keyboard()));
             }
 
             case OutboundMessage.Delete delete -> {
@@ -251,6 +250,32 @@ public final class SlackAdapter implements PlatformAdapter {
             }
 
         }
+
+    }
+
+    /**
+     * The parameters of a chat.postMessage / chat.update call. The blocks go along only
+     * when there is a keyboard: an empty blocks array is a payload Slack refuses, and a
+     * message without buttons needs the text alone.
+     */
+    private static Map<String, String> messageParams(String channel, String ts, RichText text,
+                                                     InlineKeyboard keyboard) {
+
+        Map<String, String> params = new HashMap<>();
+        params.put("channel", channel);
+        params.put("text", SlackRenderers.mrkdwn(text));
+
+        if (ts != null) {
+            params.put("ts", ts);
+        }
+
+        ArrayNode blocks = SlackRenderers.blocks(keyboard);
+
+        if (!blocks.isEmpty()) {
+            params.put("blocks", blocks.toString());
+        }
+
+        return params;
 
     }
 

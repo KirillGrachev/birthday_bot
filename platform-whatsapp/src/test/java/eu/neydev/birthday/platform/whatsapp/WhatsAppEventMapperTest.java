@@ -2,12 +2,9 @@ package eu.neydev.birthday.platform.whatsapp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.neydev.birthday.core.api.IncomingUpdate;
-import eu.neydev.birthday.core.api.InlineKeyboard;
 import eu.neydev.birthday.core.api.Platform;
-import eu.neydev.birthday.core.text.RichText;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,22 +31,33 @@ class WhatsAppEventMapperTest {
 
     }
 
+    /**
+     * A row of a list message arrives under another field than a reply button, and on the
+     * newer clients under a third one. All three carry the id we put on the control, so a
+     * picker press and a button press look the same to the core.
+     */
     @Test
-    void payloadWithButtonsAndDegradation() {
+    void mapsListRepliesFromBothFlows() throws Exception {
 
-        var withButtons = WhatsAppPayloadBuilder.buildSend("7999", RichText.plain("text"),
-                InlineKeyboard.of(List.of(
-                        InlineKeyboard.KeyboardButton.callback("a", "a"),
-                        InlineKeyboard.KeyboardButton.callback("b", "b"))));
-        assertThat(withButtons.path("type").asText()).isEqualTo("interactive");
+        var list = MAPPER.readTree("""
+                {"from":"7999","id":"w3","interactive":{"list_reply":{"id":"zp:Europe/Moscow","title":"Moscow"}}}
+                """);
 
-        var many = WhatsAppPayloadBuilder.buildSend("7999", RichText.plain("text"),
-                InlineKeyboard.of(List.of(
-                        InlineKeyboard.KeyboardButton.callback("a", "a"),
-                        InlineKeyboard.KeyboardButton.callback("b", "b"),
-                        InlineKeyboard.KeyboardButton.callback("c", "c"),
-                        InlineKeyboard.KeyboardButton.callback("d", "d"))));
-        assertThat(many.path("type").asText()).isEqualTo("text");
+        var fromList = (IncomingUpdate.Callback) WhatsAppEventMapper.mapMessage(list).orElseThrow();
+        assertThat(fromList.actionId()).isEqualTo("zp:Europe/Moscow");
+
+        var nfm = MAPPER.readTree("""
+                {"from":"7999","id":"w4","interactive":{"nfm_reply":{"id":"lg:ru","title":"Russian"}}}
+                """);
+
+        var fromNfm = (IncomingUpdate.Callback) WhatsAppEventMapper.mapMessage(nfm).orElseThrow();
+        assertThat(fromNfm.actionId()).isEqualTo("lg:ru");
+
+        var empty = MAPPER.readTree("""
+                {"from":"7999","id":"w5","interactive":{}}
+                """);
+
+        assertThat(WhatsAppEventMapper.mapMessage(empty)).isEmpty();
 
     }
 

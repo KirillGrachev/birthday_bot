@@ -65,4 +65,19 @@ class ViberContractTest {
 
     }
 
+    /** Viber requires a non-empty Buttons array, so a message with nothing to press carries no keyboard. */
+    @Test
+    void aMessageWithoutButtonsCarriesNoKeyboard() {
+
+        ViberAdapter adapter = new ViberAdapter("token", "https://example.org", "sec",
+                "http://127.0.0.1:" + server.getAddress().getPort() + "/pa/");
+        adapter.execute(new OutboundMessage.Send(Platform.VIBER, "user1",
+                RichText.plain("hello"), InlineKeyboard.empty()));
+
+        assertThat(bodies).hasSize(1);
+        assertThat(bodies.get(0)).contains("\"text\":\"hello\"");
+        assertThat(bodies.get(0)).doesNotContain("keyboard");
+
+    }
+
 }

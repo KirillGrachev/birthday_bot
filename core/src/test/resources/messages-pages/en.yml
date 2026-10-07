@@ -1,4 +1,6 @@
 button:
   back: "Back"
+  menu: "Menu"
+  choose: "Choose"
   page_prev: "←"
   page_next: "→"

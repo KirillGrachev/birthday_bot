@@ -145,6 +145,7 @@ button:
   about: "Жоба туралы"
   github: "GitHub-та жұлдызша"
   menu: "Мәзір"
+  choose: "Таңдау"
   page_prev: "←"
   page_next: "→"
   delete: "Деректерді жою"

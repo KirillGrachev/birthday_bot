@@ -145,6 +145,7 @@ button:
   about: "Over"
   github: "Ster op GitHub"
   menu: "Menu"
+  choose: "Kiezen"
   page_prev: "←"
   page_next: "→"
   delete: "Gegevens verwijderen"

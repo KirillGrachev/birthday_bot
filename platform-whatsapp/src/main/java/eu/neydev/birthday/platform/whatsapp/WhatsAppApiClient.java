@@ -86,6 +86,14 @@ public final class WhatsAppApiClient {
             return new PlatformException.RateLimitedException("WhatsApp rate limit " + code, 2_000);
         }
 
+        if (code == 100) {
+            // "Invalid parameter": Meta read the payload and refused it, a row title too
+            // long or a button too many. Retrying the same bytes cannot help, and the
+            // chat itself is healthy, so this must not cost the reader their reminders.
+            return new PlatformException.InvalidMessageException(
+                    "WhatsApp 100: " + error.path("message").asText());
+        }
+
         if (code == 131047 || code == 131049 || subcode == 2388088) {
             return new PlatformException.PermanentDeliveryException("WhatsApp: " + code);
         }

@@ -145,6 +145,7 @@ button:
   about: "За проекта"
   github: "Звезда в GitHub"
   menu: "Меню"
+  choose: "Избери"
   page_prev: "←"
   page_next: "→"
   delete: "Изтрий данните ми"

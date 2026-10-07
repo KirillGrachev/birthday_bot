@@ -145,6 +145,7 @@ button:
   about: "A projektről"
   github: "Csillag a GitHubon"
   menu: "Menü"
+  choose: "Kiválasztás"
   page_prev: "←"
   page_next: "→"
   delete: "Adatok törlése"

@@ -145,6 +145,7 @@ button:
   about: "Faoi"
   github: "Réalta ar GitHub"
   menu: "Roghchlár"
+  choose: "Roghnaigh"
   page_prev: "←"
   page_next: "→"
   delete: "Scrios mo chuid sonraí"

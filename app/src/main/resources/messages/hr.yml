@@ -145,6 +145,7 @@ button:
   about: "O projektu"
   github: "Zvjezdica na GitHubu"
   menu: "Izbornik"
+  choose: "Odaberi"
   page_prev: "←"
   page_next: "→"
   delete: "Obriši podatke"

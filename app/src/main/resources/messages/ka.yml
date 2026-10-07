@@ -145,6 +145,7 @@ button:
   about: "პროექტის შესახებ"
   github: "ვარსკვლავი GitHub-ზე"
   menu: "მენიუ"
+  choose: "არჩევა"
   page_prev: "←"
   page_next: "→"
   delete: "მონაცემების წაშლა"

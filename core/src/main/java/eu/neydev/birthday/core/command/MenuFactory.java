@@ -1,6 +1,7 @@
 package eu.neydev.birthday.core.command;
 
 import eu.neydev.birthday.core.api.InlineKeyboard;
+import eu.neydev.birthday.core.api.KeyboardLimits;
 import eu.neydev.birthday.core.config.AppConfig;
 import eu.neydev.birthday.core.i18n.MessageBundleHolder;
 import eu.neydev.birthday.core.i18n.ZoneCityNames;
@@ -17,6 +18,13 @@ import java.util.Map;
  * Keyboards are built by the core from YAML captions (i18n) and platform-independent
  * actionId. Platforms only translate the structure - no platform-specific geometry
  * of buttons in the business logic.
+ *
+ * <p>The one exception is the size of a picker page, and it is an exception by necessity:
+ * a mapper can fold rows that overflow, but it cannot decide how many choices a page
+ * holds, because the navigation around them spends the same budget - and on VK the budget
+ * is a count of buttons, which no fold can shrink. The pickers therefore take the
+ * {@link KeyboardLimits} of the platform they travel to, and everything else here stays
+ * platform-blind.
  */
 public record MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl,
                           List<String> languages, Map<String, String> languageNames,
@@ -68,6 +76,22 @@ public record MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl
 
     }
 
+    /**
+     * A keyboard with its list caption attached: the platforms that hide a keyboard
+     * behind one control (WhatsApp) put this text on that control. Every keyboard carries
+     * one, so no mapper has to invent a caption of its own.
+     */
+    private InlineKeyboard keyboard(@NotNull Locale locale,
+                                    List<List<InlineKeyboard.KeyboardButton>> rows) {
+        return keyboard(locale, rows, "button.choose");
+    }
+
+    private InlineKeyboard keyboard(@NotNull Locale locale,
+                                    List<List<InlineKeyboard.KeyboardButton>> rows,
+                                    String listLabelKey) {
+        return new InlineKeyboard(rows).withListLabel(label(locale, listLabelKey));
+    }
+
     /** Main menu: the same items as competitors, plus subscription and web app. */
     public InlineKeyboard mainMenu(@NotNull Locale locale, boolean notifyEnabled,
                                @Nullable String webAppUrl) {
@@ -96,7 +120,7 @@ public record MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl
                 githubUrl == null ? null
                         : InlineKeyboard.KeyboardButton.url(label(locale, "button.github"), githubUrl));
 
-        return new InlineKeyboard(rows);
+        return keyboard(locale, rows, "button.menu");
 
     }
 
@@ -109,7 +133,7 @@ public record MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl
         }
 
         rows.add(List.of(InlineKeyboard.KeyboardButton.callback(label(locale, "button.back"), Actions.BACK)));
-        return new InlineKeyboard(rows);
+        return keyboard(locale, rows);
 
     }
 
@@ -126,15 +150,22 @@ public record MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl
                 InlineKeyboard.KeyboardButton.Style.DANGER)));
         rows.add(List.of(InlineKeyboard.KeyboardButton.callback(label(locale, "button.back"), Actions.BACK)));
 
-        return new InlineKeyboard(rows);
+        return keyboard(locale, rows, "button.menu");
 
     }
 
-    /** Languages per picker page: five rows of two, so thirty-five languages stay tappable. */
-    public static final int LANGUAGES_PER_PAGE = 10;
-
     /** The bullet prefix that marks the language the profile already uses. */
     private static final String CURRENT_MARK = "• ";
+
+    /**
+     * The buttons a picker page carries around its choices, and they are paid for out of
+     * the same budget as the choices themselves: a page counter and two arrows, plus the
+     * way back, and the zone picker's free-text prompt on top of that. The count is the
+     * widest a navigation row gets, so the first and the last page simply come out
+     * lighter than the platform allows.
+     */
+    public static final int LANGUAGE_PAGE_CHROME = 4;
+    public static final int ZONE_PAGE_CHROME = 5;
 
     /**
      * Language picker: one button per configured language that actually has a
@@ -144,20 +175,32 @@ public record MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl
      * <p>The list is long enough to need pages: two columns of five, a navigation row
      * with the page counter, and the current language marked with a bullet. The picker
      * opens on the page that holds the reader's own language ({@link #pageOf}).
+     *
+     * <p>How many languages a page holds is the platform's business, not the reader's.
+     * Ten of them are seven rows, which Telegram renders and a WhatsApp list would
+     * refuse, so WhatsApp pages five at a time. VK counts buttons rather than rows: an
+     * inline keyboard carries ten of them whole, and a page of ten languages is fourteen,
+     * so VK pages six and reaches the reader with a keyboard that arrives at all.
      */
     public InlineKeyboard languages(@NotNull Locale locale, int page) {
+        return languages(locale, page, KeyboardLimits.WIDEST);
+    }
+
+    public InlineKeyboard languages(@NotNull Locale locale, int page,
+                                    @NotNull KeyboardLimits limits) {
 
         List<String> available = availableLanguages();
+        int perPage = limits.pickerItems(LANGUAGE_PAGE_CHROME);
 
-        int pages = Math.max(1, (available.size() + LANGUAGES_PER_PAGE - 1) / LANGUAGES_PER_PAGE);
+        int pages = Math.max(1, (available.size() + perPage - 1) / perPage);
         int current = Math.clamp(page, 0, pages - 1);
         String currentLanguage = locale.getLanguage();
 
         List<List<InlineKeyboard.KeyboardButton>> rows = new ArrayList<>();
         List<InlineKeyboard.KeyboardButton> row = new ArrayList<>(2);
 
-        for (int index = current * LANGUAGES_PER_PAGE;
-             index < Math.min(available.size(), (current + 1) * LANGUAGES_PER_PAGE); index++) {
+        for (int index = current * perPage;
+             index < Math.min(available.size(), (current + 1) * perPage); index++) {
 
             String language = available.get(index);
             String caption = languageNames.getOrDefault(language, language);
@@ -184,14 +227,19 @@ public record MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl
         }
 
         rows.add(List.of(InlineKeyboard.KeyboardButton.callback(label(locale, "button.back"), Actions.BACK)));
-        return new InlineKeyboard(rows);
+        return keyboard(locale, rows);
 
     }
 
     /** The page that holds a language: the picker opens on the reader's own language. */
     public int pageOf(@NotNull String language) {
+        return pageOf(language, KeyboardLimits.WIDEST);
+    }
+
+    /** The page that holds a language on a platform that pages its own way. */
+    public int pageOf(@NotNull String language, @NotNull KeyboardLimits limits) {
         int index = availableLanguages().indexOf(language);
-        return index < 0 ? 0 : index / LANGUAGES_PER_PAGE;
+        return index < 0 ? 0 : index / limits.pickerItems(LANGUAGE_PAGE_CHROME);
     }
 
     /** Configured languages that actually ship a bundle, in the configured order. */
@@ -237,17 +285,27 @@ public record MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl
      * current zone marked with a bullet, and a way out into the free-text prompt for
      * everything outside the list. Captions carry the city and the live offset, so a
      * half-row stays readable: "Moscow UTC+3", not "Europe/Moscow".
+     *
+     * <p>Ten is what a row-based platform takes. A platform that counts buttons pages
+     * fewer zones, because the prompt and the way back are buttons too: VK's inline
+     * keyboard stops at ten of them, which leaves five zones a page.
      */
     public InlineKeyboard zones(@NotNull Locale locale, int page, @NotNull ZoneId current) {
+        return zones(locale, page, current, KeyboardLimits.WIDEST);
+    }
+
+    public InlineKeyboard zones(@NotNull Locale locale, int page, @NotNull ZoneId current,
+                                @NotNull KeyboardLimits limits) {
 
         List<String> available = ZoneCatalog.POPULAR;
-        int pages = Math.max(1, (available.size() + LANGUAGES_PER_PAGE - 1) / LANGUAGES_PER_PAGE);
+        int perPage = limits.pickerItems(ZONE_PAGE_CHROME);
+        int pages = Math.max(1, (available.size() + perPage - 1) / perPage);
         int shown = Math.clamp(page, 0, pages - 1);
 
-        List<InlineKeyboard.KeyboardButton> pageButtons = new ArrayList<>(LANGUAGES_PER_PAGE);
+        List<InlineKeyboard.KeyboardButton> pageButtons = new ArrayList<>(perPage);
 
-        for (int index = shown * LANGUAGES_PER_PAGE;
-             index < Math.min(available.size(), (shown + 1) * LANGUAGES_PER_PAGE); index++) {
+        for (int index = shown * perPage;
+             index < Math.min(available.size(), (shown + 1) * perPage); index++) {
 
             String zone = available.get(index);
             ZoneId id = ZoneId.of(zone);
@@ -278,18 +336,23 @@ public record MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl
                         Actions.ZONE_MANUAL),
                 InlineKeyboard.KeyboardButton.callback(label(locale, "button.back"), Actions.BACK));
 
-        return new InlineKeyboard(rows);
+        return keyboard(locale, rows);
 
     }
 
     /** The page that holds a zone, so the picker opens on the reader's own. */
     public int zonePageOf(@NotNull String zoneId) {
+        return zonePageOf(zoneId, KeyboardLimits.WIDEST);
+    }
+
+    /** The page that holds a zone on a platform that pages its own way. */
+    public int zonePageOf(@NotNull String zoneId, @NotNull KeyboardLimits limits) {
         int index = ZoneCatalog.POPULAR.indexOf(zoneId);
-        return index < 0 ? 0 : index / LANGUAGES_PER_PAGE;
+        return index < 0 ? 0 : index / limits.pickerItems(ZONE_PAGE_CHROME);
     }
 
     public InlineKeyboard confirmDelete(@NotNull Locale locale) {
-        return new InlineKeyboard(List.of(
+        return keyboard(locale, List.of(
                 List.of(InlineKeyboard.KeyboardButton.callback(label(locale, "button.delete_yes"),
                         Actions.DELETE_YES, InlineKeyboard.KeyboardButton.Style.DANGER),
                         InlineKeyboard.KeyboardButton.callback(label(locale, "button.delete_no"),
@@ -305,7 +368,7 @@ public record MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl
         String label = label(locale, sinceLast ? "button.days_since_total" : "button.days_since_last");
         String action = sinceLast ? Actions.DAYS_SINCE : Actions.DAYS_SINCE_LAST;
 
-        return new InlineKeyboard(List.of(
+        return keyboard(locale, List.of(
                 List.of(InlineKeyboard.KeyboardButton.callback(label, action)),
                 List.of(InlineKeyboard.KeyboardButton.callback(label(locale, "button.back"),
                         Actions.BACK))));
@@ -318,12 +381,12 @@ public record MenuFactory(MessageBundleHolder holder, @Nullable String githubUrl
      * arrives when the reader asks for it.
      */
     public InlineKeyboard menuButton(@NotNull Locale locale) {
-        return new InlineKeyboard(List.of(List.of(InlineKeyboard.KeyboardButton.callback(
+        return keyboard(locale, List.of(List.of(InlineKeyboard.KeyboardButton.callback(
                 label(locale, "button.menu"), Actions.MENU_OPEN))));
     }
 
     public InlineKeyboard back(@NotNull Locale locale) {
-        return new InlineKeyboard(List.of(List.of(
+        return keyboard(locale, List.of(List.of(
                 InlineKeyboard.KeyboardButton.callback(label(locale, "button.back"), Actions.BACK))));
     }
 

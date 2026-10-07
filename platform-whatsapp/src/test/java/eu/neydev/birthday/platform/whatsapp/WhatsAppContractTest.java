@@ -118,8 +118,13 @@ class WhatsAppContractTest {
 
     }
 
+    /**
+     * A keyboard wider than three buttons becomes a list message instead of losing its
+     * buttons: WhatsApp hides the rows behind one control, and every choice stays
+     * tappable. It used to arrive as text with nothing on it to press.
+     */
     @Test
-    void moreThanThreeButtonsDegradeToText() {
+    void moreThanThreeButtonsBecomeAList() {
 
         adapter().execute(new OutboundMessage.Send(Platform.WHATSAPP, "7999",
                 RichText.plain("hello"),
@@ -127,9 +132,11 @@ class WhatsAppContractTest {
                         InlineKeyboard.KeyboardButton.callback("a", "a"),
                         InlineKeyboard.KeyboardButton.callback("b", "b"),
                         InlineKeyboard.KeyboardButton.callback("c", "c"),
-                        InlineKeyboard.KeyboardButton.callback("d", "d"))))));
+                        InlineKeyboard.KeyboardButton.callback("d", "d")))).withListLabel("Choose")));
 
-        assertThat(bodies.get(0)).contains("\"type\":\"text\"");
+        assertThat(bodies.get(0)).contains("\"type\":\"list\"");
+        assertThat(bodies.get(0)).contains("\"button\":\"Choose\"");
+        assertThat(bodies.get(0)).contains("\"id\":\"d\"");
 
     }
 

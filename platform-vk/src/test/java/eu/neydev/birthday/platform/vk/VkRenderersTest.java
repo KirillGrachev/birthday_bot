@@ -3,6 +3,8 @@ package eu.neydev.birthday.platform.vk;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.neydev.birthday.core.api.InlineKeyboard;
+import eu.neydev.birthday.core.api.KeyboardLimits;
+import eu.neydev.birthday.core.api.Platform;
 import eu.neydev.birthday.core.text.RichText;
 import org.junit.jupiter.api.Test;
 
@@ -62,54 +64,59 @@ class VkRenderersTest {
     }
 
     /**
-     * VK answers error 911 ("buttons contain too much rows") to an inline keyboard
-     * past six rows, and the language picker arrives with seven: five rows of two,
-     * the page counter and the way back. The mapper folds the counter into the
-     * footer instead of losing the message whole; every button survives the fit.
+     * VK answers error 911 ("buttons contain too much rows") to an inline keyboard past
+     * six rows, and a page of six long language names is eight of them: six singles, the
+     * page counter and the way back. The mapper folds the counter into the footer and
+     * re-pairs the singles, so all ten buttons - VK counts ten, and a page never carries
+     * more - arrive inside six rows of at most five.
      */
     @Test
-    void sevenRowPickerFoldsIntoTheVkInlineLimit() throws Exception {
+    void aTallLanguagePageFoldsIntoTheVkInlineLimit() throws Exception {
 
         List<List<InlineKeyboard.KeyboardButton>> rows = new ArrayList<>();
 
-        for (int pair = 0; pair < 5; pair++) {
-            rows.add(List.of(
-                    InlineKeyboard.KeyboardButton.callback("Language " + pair + "a", "la" + pair),
-                    InlineKeyboard.KeyboardButton.callback("Language " + pair + "b", "lb" + pair)));
+        for (String language : List.of("Португальский", "Нидерландский", "Английский",
+                "Французский", "Итальянский", "Испанский")) {
+            rows.add(List.of(InlineKeyboard.KeyboardButton.callback(language, "l:" + language)));
         }
 
         rows.add(List.of(
                 InlineKeyboard.KeyboardButton.callback("←", "lp0"),
-                InlineKeyboard.KeyboardButton.callback("1/4", "np"),
+                InlineKeyboard.KeyboardButton.callback("2/6", "np"),
                 InlineKeyboard.KeyboardButton.callback("→", "lp1")));
         rows.add(List.of(InlineKeyboard.KeyboardButton.callback("Back", "bk")));
 
         JsonNode json = new ObjectMapper().readTree(VkKeyboardMapper.map(new InlineKeyboard(rows)));
+        JsonNode buttons = json.path("buttons");
 
-        assertThat(json.path("buttons")).hasSize(6);
-        assertThat(payloads(json.path("buttons").path(5))).containsExactly("lp0", "np", "lp1", "bk");
+        assertThat(buttons).hasSize(VkKeyboardMapper.MAX_INLINE_ROWS);
+        assertThat(counted(buttons))
+                .isEqualTo(10)
+                .isLessThanOrEqualTo(KeyboardLimits.of(Platform.VK).maxButtons());
+        assertThat(payloads(buttons.path(5))).containsExactly("lp0", "np", "lp1", "bk");
 
     }
 
     /**
-     * The zone picker puts a caption longer than a phone half-row on a row of its
-     * own, and the Americas page is mostly long captions: nine rows reach the
-     * mapper. The counter folds into the footer, the singles re-pair two by two,
-     * and all eleven actions arrive inside six rows of at most five buttons.
+     * The zone picker puts a caption longer than a phone half-row on a row of its own,
+     * and the Americas page is mostly long captions: seven rows reach the mapper, five
+     * zones plus the counter and the free-text prompt under it. The counter folds into
+     * the footer, and all ten actions arrive inside six rows of at most five buttons.
      */
     @Test
-    void longZoneSinglesRePairIntoSixRows() throws Exception {
+    void longZoneSinglesFoldIntoSixRows() throws Exception {
 
         List<List<InlineKeyboard.KeyboardButton>> rows = new ArrayList<>();
 
         for (String zone : List.of("Los Angeles UTC-7", "Mexico City UTC-6", "Sao Paulo UTC-3",
-                "Buenos Aires UTC-3", "Cairo UTC+2", "Johannesburg UTC+2", "UTC UTC+0")) {
+                "Buenos Aires UTC-3", "New York UTC-4")) {
             rows.add(List.of(InlineKeyboard.KeyboardButton.callback(zone, "zp:" + zone)));
         }
 
         rows.add(List.of(
                 InlineKeyboard.KeyboardButton.callback("←", "zp4"),
-                InlineKeyboard.KeyboardButton.callback("6/6", "np")));
+                InlineKeyboard.KeyboardButton.callback("6/12", "np"),
+                InlineKeyboard.KeyboardButton.callback("→", "zp5")));
         rows.add(List.of(
                 InlineKeyboard.KeyboardButton.callback("Enter my own", "zm"),
                 InlineKeyboard.KeyboardButton.callback("Back", "bk")));
@@ -117,16 +124,28 @@ class VkRenderersTest {
         JsonNode json = new ObjectMapper().readTree(VkKeyboardMapper.map(new InlineKeyboard(rows)));
         JsonNode buttons = json.path("buttons");
 
-        assertThat(buttons).hasSize(6);
+        assertThat(buttons).hasSize(VkKeyboardMapper.MAX_INLINE_ROWS);
 
         for (JsonNode row : buttons) {
             assertThat(row.size()).isLessThanOrEqualTo(VkKeyboardMapper.MAX_BUTTONS_IN_ROW);
         }
 
-        List<String> all = new ArrayList<>();
-        buttons.forEach(row -> all.addAll(payloads(row)));
-        assertThat(all).hasSize(11).contains("np", "zm", "bk");
-        assertThat(payloads(buttons.path(5))).containsExactly("zp4", "np", "zm", "bk");
+        assertThat(counted(buttons))
+                .isEqualTo(10)
+                .isLessThanOrEqualTo(KeyboardLimits.of(Platform.VK).maxButtons());
+        assertThat(payloads(buttons.path(5))).containsExactly("zp4", "np", "zp5", "zm", "bk");
+
+    }
+
+    private static int counted(JsonNode buttons) {
+
+        int total = 0;
+
+        for (JsonNode row : buttons) {
+            total += row.size();
+        }
+
+        return total;
 
     }
 

@@ -2,6 +2,7 @@ package eu.neydev.birthday.core.command;
 
 import eu.neydev.birthday.core.api.InlineKeyboard;
 import eu.neydev.birthday.core.api.IncomingUpdate;
+import eu.neydev.birthday.core.api.KeyboardLimits;
 import eu.neydev.birthday.core.api.OutboundMessage;
 import eu.neydev.birthday.core.config.AppConfig;
 import eu.neydev.birthday.core.domain.BirthDate;
@@ -15,7 +16,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.time.Clock;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -62,22 +62,38 @@ public record ReplyBuilder(MessageBundleHolder holder, MenuFactory menuFactory, 
         return menuFactory.settings(locale);
     }
 
-    public InlineKeyboard languages(Locale locale, int page) {
-        return menuFactory.languages(locale, page);
+    /**
+     * The pickers take the profile rather than a bare locale, because their page size is
+     * the one thing about a keyboard that belongs to the platform: ten languages a page
+     * are seven rows, which Telegram renders and a WhatsApp list refuses. Everything else
+     * here stays platform-blind, so the platform enters through the profile and nowhere
+     * else in the handlers.
+     */
+    public InlineKeyboard languages(Profile profile, int page) {
+        return menuFactory.languages(profile.locale(), page, limits(profile));
     }
 
-    /** The picker page that holds a language, so the menu opens on the reader's own. */
-    public int languagePage(String language) {
-        return menuFactory.pageOf(language);
+    /** The picker page that holds the reader's own language, so the picker opens there. */
+    public int languagePage(Profile profile) {
+        return menuFactory.pageOf(profile.locale().getLanguage(), limits(profile));
     }
 
-    public InlineKeyboard zones(Locale locale, int page, ZoneId current) {
-        return menuFactory.zones(locale, page, current);
+    public InlineKeyboard zones(Profile profile, int page) {
+        return menuFactory.zones(profile.locale(), page, profile.zone(), limits(profile));
     }
 
-    /** The picker page that holds a zone, so the menu opens on the reader's own. */
-    public int zonePage(String zoneId) {
-        return menuFactory.zonePageOf(zoneId);
+    /** The picker page that holds the reader's own zone, so the picker opens there. */
+    public int zonePage(Profile profile) {
+        return menuFactory.zonePageOf(profile.zone().getId(), limits(profile));
+    }
+
+    /** The picker page that holds a zone somebody typed or pressed. */
+    public int zonePage(Profile profile, String zoneId) {
+        return menuFactory.zonePageOf(zoneId, limits(profile));
+    }
+
+    private KeyboardLimits limits(Profile profile) {
+        return KeyboardLimits.of(profile.user().platform());
     }
 
     public InlineKeyboard menuButton(Locale locale) {
@@ -175,7 +191,6 @@ public record ReplyBuilder(MessageBundleHolder holder, MenuFactory menuFactory, 
                 profile.locale()));
 
         params.putAll(scheduleParams(profile));
-
         return params;
 
     }

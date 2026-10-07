@@ -69,13 +69,22 @@ class BotProcessTest {
         BotProcess process = process(java, false, log);
 
         process.start();
+
+        // Each line is awaited by name: stdout and stderr are pumped by two threads, so
+        // "the first line is here" says nothing about the last one, and an assertion that
+        // runs between the two reads a list that is still growing.
+        await(() -> log.info.stream().anyMatch(line -> line.contains("INFO Bot - hello")));
+        await(() -> log.warn.stream().anyMatch(line -> line.contains("WARN Bot - careful")));
+        await(() -> log.info.stream().anyMatch(line -> line.contains("sun.misc.Unsafe")));
         await(() -> log.error.stream().anyMatch(line -> line.contains("boom")));
-        await(() -> !log.info.isEmpty() && log.warn.size() >= 1);
 
         // The child's own levels are respected...
         assertThat(log.info).anyMatch(line -> line.contains("INFO Bot - hello"));
         assertThat(log.warn).anyMatch(line -> line.contains("WARN Bot - careful"));
         assertThat(log.error).anyMatch(line -> line.contains("ERROR Bot - boom"));
+        // ...an INFO line never climbs a level on the way...
+        assertThat(log.warn).noneMatch(line -> line.contains("INFO Bot - hello"));
+        assertThat(log.error).noneMatch(line -> line.contains("INFO Bot - hello"));
         // ...and a JVM notice on stderr stays informational instead of flooding WARN.
         assertThat(log.warn).noneMatch(line -> line.contains("sun.misc.Unsafe"));
         assertThat(log.info).anyMatch(line -> line.contains("sun.misc.Unsafe"));

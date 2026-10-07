@@ -141,7 +141,12 @@ public final class ViberAdapter implements PlatformAdapter, WebhookHandler {
         payload.put("type", "text");
         payload.put("text", send.text().toPlainText());
         payload.put("min_api_version", 2);
-        payload.set("keyboard", ViberKeyboardMapper.map(send.keyboard()));
+
+        ObjectNode keyboard = ViberKeyboardMapper.map(send.keyboard());
+
+        if (keyboard != null) {
+            payload.set("keyboard", keyboard);
+        }
 
         client.call("send_message", payload);
 

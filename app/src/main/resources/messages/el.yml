@@ -145,6 +145,7 @@ button:
   about: "Σχετικά"
   github: "Αστέρι στο GitHub"
   menu: "Μενού"
+  choose: "Επιλογή"
   page_prev: "←"
   page_next: "→"
   delete: "Διαγραφή δεδομένων"

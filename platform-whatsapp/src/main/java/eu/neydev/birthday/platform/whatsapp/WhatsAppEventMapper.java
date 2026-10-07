@@ -9,7 +9,7 @@ import java.util.Optional;
 
 /**
  * Mapping WhatsApp webhook events into core events: text messages
- * and interactive button presses. A pure function of JSON.
+ * and interactive replies. A pure function of JSON.
  */
 public final class WhatsAppEventMapper {
 
@@ -34,8 +34,8 @@ public final class WhatsAppEventMapper {
 
         if (message.has("interactive")) {
 
-            JsonNode reply = message.path("interactive").path("button_reply");
-            String actionId = reply.path("id").asText(null);
+            JsonNode interactive = message.path("interactive");
+            String actionId = replyId(interactive);
 
             if (actionId == null) {
                 return Optional.empty();
@@ -52,6 +52,26 @@ public final class WhatsAppEventMapper {
         }
 
         return Optional.empty();
+
+    }
+
+    /**
+     * The id we put on the control the reader pressed. A reply button arrives as
+     * {@code button_reply}; a row of a list message arrives as {@code list_reply}, and as
+     * {@code nfm_reply} on the clients that render lists through the newer flow. All three
+     * carry the same id, so the core never learns which control it was.
+     */
+    private static String replyId(JsonNode interactive) {
+
+        for (String field : new String[] {"button_reply", "list_reply", "nfm_reply"}) {
+
+            if (interactive.hasNonNull(field)) {
+                return interactive.path(field).path("id").asText(null);
+            }
+
+        }
+
+        return null;
 
     }
 

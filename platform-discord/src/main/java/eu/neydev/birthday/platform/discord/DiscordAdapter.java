@@ -20,7 +20,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.components.actionrow.ActionRow;
-import net.dv8tion.jda.api.components.buttons.Button;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -178,40 +177,33 @@ public final class DiscordAdapter implements PlatformAdapter {
 
     }
 
-    private PrivateChannel openDm(String chatId) {
-        return jda.openPrivateChannelById(chatId).complete();
-    }
+    /**
+     * JDA checks components before a request leaves the process, so a keyboard it cannot
+     * build surfaces as an argument failure instead of an error response. Retrying it
+     * cannot help: the payload is ours, the chat is healthy.
+     */
+    private static List<ActionRow> components(InlineKeyboard keyboard) {
 
-    static List<ActionRow> components(InlineKeyboard keyboard) {
-
-        List<ActionRow> rows = new ArrayList<>();
-
-        for (List<InlineKeyboard.KeyboardButton> row : keyboard.rows()) {
-            List<Button> buttons = new ArrayList<>();
-
-            for (InlineKeyboard.KeyboardButton button : row) {
-                if (button.url() != null) {
-                    buttons.add(Button.link(button.url(), button.label()));
-                } else {
-                    buttons.add(switch (button.style()) {
-                        case PRIMARY -> Button.primary(button.actionId(), button.label());
-                        case DANGER -> Button.danger(button.actionId(), button.label());
-                        case SECONDARY -> Button.secondary(button.actionId(), button.label());
-                    });
-                }
-            }
-
-            rows.add(ActionRow.of(buttons));
-
+        try {
+            return DiscordKeyboardMapper.components(keyboard);
+        } catch (IllegalArgumentException e) {
+            throw new PlatformException.InvalidMessageException("Discord: " + e.getMessage());
         }
 
-        return rows;
+    }
 
+    private PrivateChannel openDm(String chatId) {
+        return jda.openPrivateChannelById(chatId).complete();
     }
 
     private RuntimeException classify(ErrorResponseException e) {
 
         int code = e.getErrorResponse().getCode();
+
+        if (code == 50035) {
+            // "Invalid form body": the payload, not the chat. No retry can fix it.
+            return new PlatformException.InvalidMessageException("Discord 50035: " + e.getMessage());
+        }
 
         if (code == 50007 || code == 40003 || code == 10001) {
             return new PlatformException.PermanentDeliveryException("Discord: " + code, e);

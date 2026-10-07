@@ -145,6 +145,7 @@ button:
   about: "Om projektet"
   github: "Stjerne på GitHub"
   menu: "Menu"
+  choose: "Vælg"
   page_prev: "←"
   page_next: "→"
   delete: "Slet mine data"

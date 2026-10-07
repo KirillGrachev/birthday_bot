@@ -145,6 +145,7 @@ button:
   about: "O projekcie"
   github: "Gwiazdka na GitHubie"
   menu: "Menu"
+  choose: "Wybierz"
   page_prev: "←"
   page_next: "→"
   delete: "Usuń dane"
